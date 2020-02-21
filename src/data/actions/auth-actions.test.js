@@ -1,23 +1,18 @@
-import { fetchUser, LOGIN, setLogin, SET_LOGIN } from './loginActions';
+import { login, } from './auth-actions';
+import { LOGIN, SIGNUP } from '../action-types/action-types';
 
 jest.mock('../../services/auth.js');
 
 describe('login actions', () => {
   it('creates a fetch user action', () => {
-    const action = fetchUser('drmeloy', '1234');
+    const action = login('drmeloy', '1234');
 
     expect(action).toEqual({ 
-      type: FETCH_USER,
+      type: LOGIN,
       payload: Promise.resolve('path: /drmeloy')
     });
   });
-  it('creates a setLogin action', () => {
-    const action = setLogin(true);
-    expect(action).toEqual({
-      type: SET_LOGIN,
-      payload: true
-    });
-  });
+
 
   it('creates a signup action', () => {
     const body = {
@@ -27,7 +22,7 @@ describe('login actions', () => {
     };
     const action = signUp(body);
     expect(action).toEqual({
-      type: SIGN_UP,
+      type: SIGNUP,
       payload: body
     });
   });

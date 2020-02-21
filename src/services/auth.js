@@ -1,4 +1,4 @@
-export const login = (email, password) => {
+export const getLogin = (email, password) => {
   return fetch('/api/v1/auth/login')
     .send(email, password)
     .then(res => Promise.all([res.ok, res.json()]))
@@ -8,7 +8,7 @@ export const login = (email, password) => {
     });
 };
 
-export const signUp = (username, email, password) => {
+export const getSignUp = (username, email, password) => {
   return fetch('/api/v1/auth/signup')
     .send(username, email, password)
     .then(res => Promise.all([res.ok, res.json()]))
