@@ -18,7 +18,7 @@ export const authReducer = (state = initialState, action) => {
     case LOGIN_REJECTED:
       return { ...state, loginLoading: false, user: null, error: action.payload };
     case SIGNUP_PENDING:
-      return { ...state, signupLoading: true, user: null, error: null,  };
+      return { ...state, signupLoading: true, user: null, error: null };
     case SIGNUP_FULFILLED:
       return { ...state, signupLoading: false, user: action.payload, error: null };
     case SIGNUP_REJECTED:
