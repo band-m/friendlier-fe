@@ -8,7 +8,7 @@ export const initialState = {
   error: null
 };
 
-export const userReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
   switch(action.type) {
     // Note: middleware handles LOGIN and SIGNUP for us, and gives us the other actions 
     case LOGIN_PENDING:
