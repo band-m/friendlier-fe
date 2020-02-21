@@ -28,17 +28,17 @@ describe('auth reducer module', () => {
       .toEqual(initialState);
   });
 
-  it('SIGNUP_PENDING sets loginLoading, unsets user and error', () => {
+  it('SIGNUP_PENDING sets signupLoading, unsets user and error', () => {
     expect(authReducer(initialState, { type: SIGNUP_PENDING }))
       .toEqual({ ...initialState, signupLoading: true, user: null, error: null });
   });
 
-  it('SIGNUP_FULFILLED unsets loginLoading and error, sets user', () => {
+  it('SIGNUP_FULFILLED unsets signupLoading and error, sets user', () => {
     expect(authReducer(initialState, { type: SIGNUP_FULFILLED, payload: 'user data' }))
       .toEqual({ ...initialState, signupLoading: false, user: 'user data', error: null });
   });
 
-  it('SIGNUP_REJECTED unsets loginLoading and user, sets error', () => {
+  it('SIGNUP_REJECTED unsets signupLoading and user, sets error', () => {
     expect(authReducer(initialState, { type: SIGNUP_REJECTED, payload: 'error data' }))
       .toEqual({ ...initialState, signupLoading: false, user: null, error: 'error data' });
   });
