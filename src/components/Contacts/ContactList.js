@@ -29,6 +29,9 @@ export default function ContactList(){
       <ul>
         {contactList}
       </ul>
+      <Link to='contacts/add'>
+        <img src='PLUS_ICON'></img>
+      </Link>
     </>
   )
 }
