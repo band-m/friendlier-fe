@@ -8,10 +8,9 @@ const Header = () => (
     </Link>
     <nav className={styles.Nav}>
       <Link to="/contacts"><span>Contact List</span></Link>
-      <Link to="/contacts/add"><span>Add Contact</span></Link>
       <Link to="/about"><span>About</span></Link>
       <Link to="/settings"><span>Settings</span></Link>
-      <Link to="#"><span>Logout</span></Link>
+      {/* <Link to="#"><span>Logout</span></Link> */}
     </nav>
   </header>
 );

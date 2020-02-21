@@ -1,6 +1,8 @@
 .logo{
   background: midnightblue;
   color: white;
+  height: 20px;
+  width: 50px;
 }
 
 .Nav{
@@ -9,4 +11,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+}
+
+
+.Nav{
+  background-color: salmon;
 }
