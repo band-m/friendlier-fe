@@ -1,6 +1,14 @@
 import React from 'react';
+import MenuList from './commons/menu/Header';
 
+const menu = [
+  { label: 'Home', url: '#' },
+  { label: 'Contact List', url: '#' },
+  { label: 'Add Contact', url: '#' },
+  { label: 'About', url: '#' },
+  { label: 'Settings', url: '#' },
+  { label: 'Logout', url: '#' },
+];
 export default function App() {
-  return <h1>Hello World</h1>;
+  return <MenuList menuItems={menu} />;
 }
-  
