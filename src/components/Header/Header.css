@@ -5,4 +5,8 @@
 
 .Nav{
   background-color: salmon;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 }
