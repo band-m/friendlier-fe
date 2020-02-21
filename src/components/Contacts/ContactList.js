@@ -9,17 +9,17 @@ export default function ContactList(){
   const contacts = selectContactsList(state);
 
   const contactList = contacts.map(contact => {
-    const deadline = contact.commFreq - contact.lastContact;
+    const ratio = 1 - ((contact.commFreq - contact.lastContact) / contact.commFreq);
     const commStatus = 
-      deadline < contact.yellowZone ? 'green' :
-      deadline > contact.yellowZone && deadline < contact.redZone ? 'yellow' :
-      deadline > contact.redZone < 1 ? 'red' :
+      ratio < contact.yellowZone ? 'green' :
+      ratio > contact.yellowZone && ratio < contact.redZone ? 'yellow' :
+      ratio > contact.redZone < 1 ? 'red' :
       'overdue';
       
-
-    <Link to=''>
-      <li key={contact.id}>
-        {contact.name}{statusIcon}
+    <Link to={`/contacts/${contact._id}`}>
+      <li className={commStatus} key={contact._id}>
+        <span>{contact.firstName} {contact.lastName}</span>
+        <span>{statusIcon}</span>
       </li>
     </Link>
   });

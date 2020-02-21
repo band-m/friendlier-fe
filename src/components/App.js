@@ -16,6 +16,7 @@ export default function App() {
         <Route path="/about" component={About} />
         <Route path="/settings" component={Settings} />
       </Switch>
+        <Route path='/contacts/:id' component={ContactDetail} />
     </Router>
   );
 }
