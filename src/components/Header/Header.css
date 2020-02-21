@@ -1,9 +1,22 @@
-.logo{
-  background: midnightblue;
-  height: 20px;
-  width: 50px;
-}
-
-.Nav{
-  background-color: salmon;
+.Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .Logo{
+    background: midnightblue;
+    color: white;
+    height: 20px;
+    width: 50px;
+  }
+  .Nav{
+    background-color: salmon;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 1rem;
+    a {
+      padding: 0 1rem;
+    }
+  }
 }

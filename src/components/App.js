@@ -17,6 +17,5 @@ export default function App() {
         <Route path="/settings" component={Settings} />
       </Switch>
     </Router>
-  )
+  );
 }
-
