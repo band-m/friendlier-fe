@@ -1,5 +1,5 @@
 import { FETCH_CONTACTS } from '../action-types/action-types';
-import { fetchContacts } from './contact-actions';
+import { fetchContacts } from './contacts-actions';
 
 jest.mock('../../services/contacts.js');
 
