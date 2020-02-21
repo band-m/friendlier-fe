@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuList from './commons/menu/Header';
+import MenuList from './commons/Header/Header';
 
 const menu = [
   { label: 'Home', url: '#' },
