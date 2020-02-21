@@ -18,11 +18,11 @@ export const authReducer = (state = initialState, action) => {
     case LOGIN_REJECTED:
       return { ...state, loginLoading: false, user: null, error: action.payload };
     case SIGNUP_PENDING:
-      return { ...state, signUpLoading: true, user: null, error: null,  };
+      return { ...state, signupLoading: true, user: null, error: null,  };
     case SIGNUP_FULFILLED:
-      return { ...state, signUpLoading: false, user: action.payload, error: null };
+      return { ...state, signupLoading: false, user: action.payload, error: null };
     case SIGNUP_REJECTED:
-      return { ...state, signUpLoading: false, user: null, error: action.payload };
+      return { ...state, signupLoading: false, user: null, error: action.payload };
 
 
     default:
