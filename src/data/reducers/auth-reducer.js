@@ -1,7 +1,7 @@
 import { LOGIN_PENDING, LOGIN_FULFILLED, LOGIN_REJECTED, 
   SIGNUP_PENDING, SIGNUP_FULFILLED, SIGNUP_REJECTED } from '../action-types/action-types';
 
-const initialState = {
+export const initialState = {
   loginLoading: false,
   signUpLoading: false,
   user: null,

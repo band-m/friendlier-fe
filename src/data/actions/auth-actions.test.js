@@ -1,18 +1,17 @@
-import { login, } from './auth-actions';
+import { login, signup } from './auth-actions';
 import { LOGIN, SIGNUP } from '../action-types/action-types';
 
 jest.mock('../../services/auth.js');
 
 describe('login actions', () => {
-  it('creates a fetch user action', () => {
-    const action = login('drmeloy', '1234');
+  it('creates a login action', () => {
+    const action = login('test@test.horse', '1234');
 
     expect(action).toEqual({ 
       type: LOGIN,
-      payload: Promise.resolve('path: /drmeloy')
+      payload: Promise.resolve('email: test@test.horse')
     });
   });
-
 
   it('creates a signup action', () => {
     const body = {
@@ -20,10 +19,10 @@ describe('login actions', () => {
       password: '1234',
       email: 'test@test.com'
     };
-    const action = signUp(body);
+    const action = signup(body);
     expect(action).toEqual({
       type: SIGNUP,
-      payload: body
+      payload: Promise.resolve(body)
     });
   });
 });

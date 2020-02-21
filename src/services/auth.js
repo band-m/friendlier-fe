@@ -8,7 +8,7 @@ export const getLogin = (email, password) => {
     });
 };
 
-export const getSignUp = (username, email, password) => {
+export const getSignup = (username, email, password) => {
   return fetch('/api/v1/auth/signup')
     .send(username, email, password)
     .then(res => Promise.all([res.ok, res.json()]))
