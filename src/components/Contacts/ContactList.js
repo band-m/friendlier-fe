@@ -5,8 +5,7 @@ import { selectContactsList } from '../../data/selectors/contacts-selectors';
 
 
 export default function ContactList(){
-  const state = useSelector(state => state);
-  const contacts = selectContactsList(state);
+  const contacts = useSelector(selectContactsList);
 
   const contactList = contacts.map(contact => {
     const ratio = 1 - ((contact.commFreq - contact.lastContact) / contact.commFreq);
