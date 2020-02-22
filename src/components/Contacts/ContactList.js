@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectContactsList } from '../../data/selectors/contacts-selectors';
 
-
 export default function ContactList(){
   const contacts = useSelector(selectContactsList);
 
