@@ -8,12 +8,13 @@ export default function Slider(){
   const [num, setNum] = useState(1);
   const [numOfDays, setNumOfDays] = useState(30);
   const [deadline, setDeadline] = useState('months');
+  const [notificationOption, setNotificationOption] = useState(1);
 
   const update = (render, handle, value, un, percent) => {    
     if(handle === 0){
-      setSlider1(value[0].toFixed(0))
+      setSlider1(Math.floor(value[0]))
     } else {
-      setSlider2(value[1].toFixed(0))
+      setSlider2(Math.floor(value[1]))
     }
   }
 
@@ -42,9 +43,21 @@ export default function Slider(){
   }
 
   useEffect(() => {
-    setSlider1((numOfDays / 3).toFixed(0));
-    setSlider2(((2 * numOfDays) / 3).toFixed(0));
-  }, [numOfDays])
+    switch(notificationOption){
+      case 1:
+      setSlider1(Math.floor(numOfDays / 3));
+      setSlider2(Math.floor((2 * numOfDays) / 3));
+      return;
+    case 2:
+      setSlider1(Math.floor(numOfDays / 2));
+      setSlider2(Math.floor((3 * numOfDays) / 4));
+      return;
+    case 3:
+      setSlider1(Math.floor((3 * numOfDays) / 4));
+      setSlider2(Math.floor((7 * numOfDays) / 8));
+      return;
+    }
+  }, [notificationOption, numOfDays])
 
   return (
     <>
@@ -56,11 +69,20 @@ export default function Slider(){
       <label htmlFor='weeks'>Weeks</label>
       <input type='radio' id='weeks' name='deadline' checked={deadline === 'weeks'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
       <label htmlFor='months'>Months</label>
-      <input type='radio' id='months' name='deadline' checked={deadline === 'months'} onChange={({target}) => changeNumOfDaysRadio(target)}/><br/>
+      <input type='radio' id='months' name='deadline' checked={deadline === 'months'} onChange={({target}) => changeNumOfDaysRadio(target)}/><br/><br/><br/>
 
-      <input style={{ marginTop: '50px' }} type='number' value={slider1} onChange={({target}) => setSlider1(target.value)} />
+      <p>Choose your notification range for name:</p>
+      <label htmlFor={1}>1</label>
+      <input type='radio' name='notificationOptions' id={1} checked={notificationOption === 1} onChange={({target}) => setNotificationOption(+target.id)} />
+      <label htmlFor={2}>2</label>
+      <input type='radio' name='notificationOptions' id={2} checked={notificationOption === 2} onChange={({target}) => setNotificationOption(+target.id)} />
+      <label htmlFor={3}>3</label>
+      <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({target}) => setNotificationOption(+target.id)} />
+
+
+      {/* <input style={{ marginTop: '50px' }} type='number' value={slider1} onChange={({target}) => setSlider1(target.value)} />
       <input type='number' value={slider2} onChange={({target}) => setSlider2(target.value)} />
-      <input type='number' value={numOfDays} onChange={({target}) => setNumOfDays(+target.value)} />
+      <input type='number' value={numOfDays} onChange={({target}) => setNumOfDays(+target.value)} /> */}
 
       <Nouislider onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect step={1} pips={{ mode: 'steps' }} />
     </>
