@@ -3,13 +3,24 @@ const differenceInDays = require('date-fns/differenceInCalendarDays');
 const isBefore = require('date-fns/isBefore');
 const isAfter = require('date-fns/isAfter');
 
-// on creating contact or connecting with contact
-export const setSliderRange = (deadlineObject, notificationOption) => {
+// on setting their commFrequency, have form create and pass in the deadlineObject
+export const setSliders = deadlineObject => {
   // The day they must connect by before becoming 'overdue'; type: Date
   const deadline = add(new Date(), deadlineObject);
   // The number of days between today and the deadline; type: Number
   const numOfDays = differenceInDays(deadline, new Date());
 
+  const yellowStartSlider = numOfDays / 3;
+  const redStartSlider = (2 * numOfDays) / 3;
+
+  const yellowZone = add(new Date(), { days: yellowStartSlider }); //type: Date
+  const redZone = add(new Date(), { days: redStartSlider }); // type: Date
+
+  return { deadline, numOfDays, yellowStartSlider, redStartSlider, yellowZone, redZone };
+};
+
+// on selecting one of the notification ranges, used to update the slider
+export const changeSliders = (numOfDays, notificationOption) => {
   let yellowStartSlider;
   let redStartSlider;
   switch(notificationOption){
@@ -30,9 +41,10 @@ export const setSliderRange = (deadlineObject, notificationOption) => {
   const yellowZone = add(new Date(), { days: yellowStartSlider }); //type: Date
   const redZone = add(new Date(), { days: redStartSlider }); // type: Date
 
-  return { deadline, numOfDays, yellowStartSlider, redStartSlider, yellowZone, redZone };
+  return { yellowStartSlider, redStartSlider, yellowZone, redZone };
 };
 
+// for use by the CronJob to set the currentZone of the Contact
 export const getCurrentZone = (yellowZone, redZone, deadline) => {
   return isBefore(new Date(), yellowZone) ? 'green' :
     isAfter(new Date(), yellowZone) && isBefore(new Date(), redZone) ? 'yellow' :
