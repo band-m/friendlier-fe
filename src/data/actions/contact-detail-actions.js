@@ -23,3 +23,10 @@ export const fetchContactDetails = contactId => dispatch => {
       });
     });
 };
+
+export const setContactDetails = contactDetails => {
+  return {
+    type: SET_CONTACT_DETAILS,
+    payload: contactDetails
+  };
+};

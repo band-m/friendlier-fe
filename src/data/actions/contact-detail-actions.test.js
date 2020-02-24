@@ -56,4 +56,13 @@ describe('contact detail actions', () => {
         });
       });
   });
+
+  it('should create a set contact details action', () => {
+    const action = setContactDetails('biscuits');
+
+    expect(action).toEqual({
+      type: SET_CONTACT_DETAILS,
+      payload: 'biscuits'
+    });
+  });
 });
