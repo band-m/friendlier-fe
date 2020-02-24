@@ -10,7 +10,10 @@ import {
   SET_COMM_FREQUENCY,
   SET_BIRTHDATE,
   SET_SPECIAL_DATES,
-  SET_NOTES
+  SET_NOTES,
+  SET_LAST_CONTACTED,
+  SET_YELLOW_ZONE,
+  SET_RED_ZONE
 } from '../action-types/action-types';
 import { getContactDetails } from '../../services/contacts';
 
@@ -24,30 +27,11 @@ export const fetchContactDetails = contactId => dispatch => {
     });
 };
 
-export const setContactDetails = contactDetails => {
-  return {
-    type: SET_CONTACT_DETAILS,
-    payload: contactDetails
-  };
-};
 
-export const setFirstName = firstName => {
+export const myAction = (type, payload) => {
   return {
-    type: SET_FIRST_NAME,
-    payload: firstName
+    type,
+    payload
   };
-};
-
-export const setLastName = lastName => {
-  return {
-    type: SET_LAST_NAME,
-    payload: lastName
-  };
-};
-
-export const setPhoneNumber = phoneNumber => {
-  return {
-    type: SET_PHONE_NUMBER,
-    payload: phoneNumber
-  };
-};
+}
+  ;
