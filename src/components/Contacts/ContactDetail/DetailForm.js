@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styles from './DetailForm.css';
 // import { getContactDetails } from '../../../services/getContactDetails';
 
-const DetailForm = ({ contactDetail }) => {
+const DetailForm = ({ handleChange, contactDetail }) => {
   const {
     firstName,
     lastName,
@@ -14,26 +15,27 @@ const DetailForm = ({ contactDetail }) => {
     birthdate,
     notes
   } = contactDetail;
+
   const contactDeadline = (comFreq, lastCont) => {
     return (Number(comFreq) - Number(lastCont));
   };
 
   return (
     <>
-      <form>
+      <form className={styles.DetailForm}>
         <div>
-          <input type="text" name="firstName" value={firstName || ''} placeholder="*First Name" />
-          <input type="text" name="lastName" value={lastName || ''} placeholder="Last Name"/>
+          <input type="text" onChange={handleChange} name="firstName" value={firstName || ''} placeholder="First Name" />
+          <input type="text" onChange={handleChange} name="lastName" value={lastName || ''} placeholder="Last Name"/>
         </div>
 
+        {/* <p>How often do you wish to connect?</p>
+        <label htmlFor="frequencyNumber">Every: </label>
+        <input type="number" id="frequencyNumber"></input>
         <label htmlFor="commFrequency">Choose a frequency:
-          <select id="commFrequency" name="commFrequency">
-            <option value="day">Day</option>
-            <option value="week">Week</option>
-            <option value="month">Month</option>
-            <option value="year">Year</option>
-          </select>
-        </label>
+          <input className={styles.frequencyRadios} type="radio" onChange={handleChange} name="frequencyRadios" value="day">Days</input>
+          <input className={styles.frequencyRadios} type="radio" onChange={handleChange} name="frequencyRadios" value="week">Weeks</input>
+          <input className={styles.frequencyRadios} type="radio" onChange={handleChange} name="frequencyRadios" value="month">Months</input>
+        </label> */}
 
         <div>
           <p>Last Contacted <span>{lastContacted}</span></p>
@@ -45,20 +47,22 @@ const DetailForm = ({ contactDetail }) => {
         <section>
           <div>
             <label htmlFor="email">Email</label>
-            <label htmlFor="addres">Address</label>
+            <label htmlFor="address">Address</label>
             <label htmlFor="phoneNumber">Phone Number</label>
             <label htmlFor="birthdate">Birthdate</label>
             <label htmlFor="notes">Notes</label>
           </div>
 
           <div>
-            <input type="text" id="email" name="email" value={email || ''} placeholder="Email address"/>
-            <input type="text" id="address" name="address" value={address || ''} placeholder="Physical Address"/>
-            <input type="text" id="phoneNumber" name="phoneNumber" value={phoneNumber || ''} placeholder="Phone Number"/>
-            {/* <input type="text" id="image" name="image" value={image || ''} placeholder="First Name"/> */}
-            <input type="date" id="birthdate" name="birthdate" value={birthdate || ''} placeholder="Birthdate" />
-            <textarea type="text" id="notes" name="notes" value={notes || ''}></textarea>
-            {/* <input type="date" id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */}
+            <input type="text" onChange={handleChange} id="email" name="email" value={email || ''} placeholder="Email address"/>
+            <input type="text" onChange={handleChange} id="address" name="address" value={address || ''} placeholder="Physical Address"/>
+            <input type="text" onChange={handleChange} id="phoneNumber" name="phoneNumber" value={phoneNumber || ''} placeholder="Phone Number"/>
+            {
+              /* <input type="text" onChange={handleChange} id="image" name="image" value={image || ''} placeholder="First Name"/> */ }
+            <input type="date" onChange={handleChange} id="birthdate" name="birthdate" value={birthdate || ''} placeholder="Birthdate" />
+            <textarea type="text" onChange={handleChange} id="notes" name="notes" value={notes || ''}></textarea>
+            {
+              /* <input type="date" onChange={handleChange} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */ }
           </div>
         </section>
       </form>

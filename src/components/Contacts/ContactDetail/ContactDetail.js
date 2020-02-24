@@ -4,7 +4,7 @@ import DetailForm from './DetailForm';
 
 const ContactDetail = () => {
   const [showForm, setShowForm] = useState(false);
-  const [contactDetail] = useState({
+  const [contactDetail, setContactDetail] = useState({
     userId: 'lhsbkj26785iygkfuyi',
     firstName: 'Norma',
     lastName: 'Sass',
@@ -19,8 +19,24 @@ const ContactDetail = () => {
     notes: 'This is a note'
   });
 
+  const detailFormFactory = {
+    firstName: setContactDetail(contactDetail.firstName),
+    lastName: setLastName,
+    phoneNumber: setPhoneNumber,
+    address: setAddress,
+    email: setEmail,
+    commFrequency: setCommFrequency,
+    lastContacted: setLastContacted,
+    birthdate: setBirthdate,
+    notes: setNotes
+  };
+
+  const handleChange = ({ target }) => {
+    detailFormFactory[target.name](target.value);
+  };
+
   // useEffect(() => {
-  //   getContactDetails()
+  // getContactDetails()
   //     .then(detail => setContactDetail(detail));
   // });
 
@@ -32,7 +48,7 @@ const ContactDetail = () => {
   return (
     <>
       {!showForm && <DetailView contactDetail={contactDetail} />}
-      {showForm && <DetailForm contactDetail={contactDetail} />}
+      {showForm && <DetailForm handleChange={handleChange} contactDetail={contactDetail} />}
       <div onClick={handleClick}>Where the edit icon will eventually go</div>
     </>
   );
