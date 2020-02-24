@@ -9,7 +9,7 @@ export default function contactsReducer(state = initialState, action){
     case FETCH_CONTACTS_FULFILLED:
       return { ...state, contactsLoading: false, contactList: action.payload, error: null };
     case FETCH_CONTACTS_REJECTED:
-      return { ...state, contactsLoading: false, contactList: [], error: action.payload }
+      return { ...state, contactsLoading: false, contactList: [], error: action.payload };
     default:
       return state;
   }
