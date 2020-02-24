@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Nouislider from 'nouislider-react';
 import 'nouislider/distribute/nouislider.css';
 
@@ -33,13 +33,18 @@ export default function Slider(){
     setNum(value);
     switch(deadline){
       case 'days':
-        return setNumOfDays(value)
+        return setNumOfDays(value);
       case 'weeks':
         return setNumOfDays(value * 7)
       case 'months':
         return setNumOfDays(value * 30)
     }
   }
+
+  useEffect(() => {
+    setSlider1((numOfDays / 3).toFixed(0));
+    setSlider2(((2 * numOfDays) / 3).toFixed(0));
+  }, [numOfDays])
 
   return (
     <>
