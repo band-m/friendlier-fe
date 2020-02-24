@@ -65,4 +65,31 @@ describe('contact detail actions', () => {
       payload: 'biscuits'
     });
   });
+
+  it('should create a set first name action', () => {
+    const action = setFirstName('biscuits');
+
+    expect(action).toEqual({
+      type: SET_FIRST_NAME,
+      payload: 'biscuits'
+    });
+  });
+
+  it('should create a set last name action', () => {
+    const action = setLastName('biscuits');
+
+    expect(action).toEqual({
+      type: SET_LAST_NAME,
+      payload: 'biscuits'
+    });
+  });
+
+  it('should create a set phone number action', () => {
+    const action = setPhoneNumber(1234567890);
+
+    expect(action).toEqual({
+      type: SET_PHONE_NUMBER,
+      payload: 1234567890
+    });
+  });
 });

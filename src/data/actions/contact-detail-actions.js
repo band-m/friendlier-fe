@@ -30,3 +30,24 @@ export const setContactDetails = contactDetails => {
     payload: contactDetails
   };
 };
+
+export const setFirstName = firstName => {
+  return {
+    type: SET_FIRST_NAME,
+    payload: firstName
+  };
+};
+
+export const setLastName = lastName => {
+  return {
+    type: SET_LAST_NAME,
+    payload: lastName
+  };
+};
+
+export const setPhoneNumber = phoneNumber => {
+  return {
+    type: SET_PHONE_NUMBER,
+    payload: phoneNumber
+  };
+};
