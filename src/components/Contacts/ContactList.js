@@ -19,7 +19,7 @@ export default function ContactList() {
         <span>{contact.firstName} {contact.lastName}</span>
         <span>{statusIcon}</span>
       </li>
-    </Link>;
+    </Link>
   });
 
   return (
