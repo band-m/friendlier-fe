@@ -2,8 +2,8 @@ import { FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECT
 
 export const initialState = { contactsLoading: false, contactList: [], error: null };
 
-export default function contactsReducer(state = initialState, action){
-  switch(action.type){
+export default function contactsReducer(state = initialState, action) {
+  switch(action.type) {
     case FETCH_CONTACTS_PENDING:
       return { ...state, contactsLoading: true, contactList: [], error: null };
     case FETCH_CONTACTS_FULFILLED:
