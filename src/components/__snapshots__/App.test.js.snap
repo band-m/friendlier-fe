@@ -11,6 +11,10 @@ exports[`App component renders App 1`] = `
     />
     <Route
       component={[Function]}
+      path="/signup"
+    />
+    <Route
+      component={[Function]}
       path="/contacts"
     />
     <Route

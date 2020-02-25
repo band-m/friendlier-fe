@@ -1,6 +1,8 @@
 export const getLogin = (email, password) => {
-  return fetch('/api/v1/auth/login')
-    .send(email, password)
+  return fetch('/api/v1/auth/login', {
+    method: 'POST',
+    body: { email, password }
+  })
     .then(res => Promise.all([res.ok, res.json()]))
     .then(([ok, json]) => {
       if(!ok) throw json;
@@ -8,9 +10,11 @@ export const getLogin = (email, password) => {
     });
 };
 
-export const getSignup = (username, email, password) => {
-  return fetch('/api/v1/auth/signup')
-    .send(username, email, password)
+export const getSignup = (displayName, email, password) => {
+  return fetch('/api/v1/auth/signup', {
+    method: 'POST',
+    body: { displayName, email, password }
+  })
     .then(res => Promise.all([res.ok, res.json()]))
     .then(([ok, json]) => {
       if(!ok) throw json;

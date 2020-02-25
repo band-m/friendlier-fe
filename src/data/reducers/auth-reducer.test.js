@@ -1,6 +1,6 @@
 import { authReducer, initialState } from './auth-reducer';
 import { LOGIN, LOGIN_PENDING, LOGIN_FULFILLED, LOGIN_REJECTED, 
-  SIGNUP, SIGNUP_PENDING, SIGNUP_FULFILLED, SIGNUP_REJECTED} from '../action-types/action-types';
+  SIGNUP, SIGNUP_PENDING, SIGNUP_FULFILLED, SIGNUP_REJECTED } from '../action-types/action-types';
 
 describe('auth reducer module', () => {
   it('LOGIN does nothing', () => {
