@@ -6,7 +6,6 @@ import About from './About/AboutPage';
 import Contacts from './Contacts/ContactDetail/ContactDetail';
 import Settings from './Settings/SettingsPage';
 import Signup from './Login/Signup';
-import Slider from './Slider/Slider';
 
 export default function App() {
   return (

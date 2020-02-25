@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './DetailForm.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
-import { myAction } from '../../../data/actions/contact-detail-actions';
+import { myAction, postContactDetails } from '../../../data/actions/contact-detail-actions';
 import {
   SET_USER_ID,
   SET_FIRST_NAME,
@@ -19,7 +19,6 @@ import {
   SET_SPECIAL_DATES,
   SET_CONTACT_DETAILS
 } from '../../../data/action-types/action-types';
-import { postContactDetails } from '../../../services/contacts';
 import { selectUser } from '../../../data/selectors/auth-selector';
 
 const DetailForm = () => {
@@ -38,7 +37,7 @@ const DetailForm = () => {
   const contactDetails = useSelector(selectContactDetails);
   const handleSubmit = event => {
     event.preventDefault();
-    postContactDetails(contactDetails);
+    dispatch(postContactDetails(contactDetails));
   };
 
   return (

@@ -53,24 +53,7 @@ export default function contactDetailReducer(state = initialState, action) {
     case SET_CONNECTION_HISTORY:
       return { ...state, connectionHistory: [...state.connectionHistory, action.payload] };
     case SET_CONTACT_DETAILS:
-      return {
-        ...state,
-        userId: action.payload.userId,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        phoneNumber: action.payload.phoneNumber,
-        address: action.payload.address,
-        email: action.payload.email,
-        image: action.payload.image,
-        commFrequency: action.payload.commFrequency,
-        lastContacted: action.payload.lastContacted,
-        yellowZone: action.payload.yellowZone,
-        redZone: action.payload.redZone,
-        connHistory: [...state.connectionHistory, action.payload.connectionHistory],
-        birthdate: action.payload,
-        specialDates: [...state.specialDates, action.payload.specialDates],
-        notes: action.payload,
-      };
+      return { ...state };
     default: return state;
   }
 }

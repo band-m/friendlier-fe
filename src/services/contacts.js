@@ -1,61 +1,13 @@
-export const getContacts = userId => {
-  return fetch('/api/v1/contacts')
-    .then(res => Promise.all[res.ok, res.json()])
-    .then(([ok, data]) => {
-      if(!ok) throw data;
-      return data;
-    });
-};
+import request from './request';
 
-export const getContactDetails = contactId => {
-  return fetch(`/api/v1/contacts/${contactId}`)
-    .then(res => Promise.all[res.ok, res.json()])
-    .then(([ok, data]) => {
-      if(!ok) throw data;
-      return data;
-    });
-};
-
-export const postContactDetails = body => {
-  return fetch('/api/v1/contacts/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  })
-    .then(res => Promise.all[res.ok, res.json()])
-    .then(([ok, data]) => {
-      if(!ok) throw data;
-      return data;
-    });
-};
-
-export const updateContactDetails = (contactId, body) => {
-  return fetch(`/api/v1/contacts/${contactId}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  })
-    .then(res => Promise.all[res.ok, res.json()])
-    .then(([ok, data]) => {
-      if(!ok) throw data;
-      return data;
-    });
-};
-
-export const deleteContactDetails = contactId => {
-  return fetch(`/api/v1/contacts/${contactId}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => Promise.all[res.ok, res.json()])
-    .then(([ok, data]) => {
-      if(!ok) throw data;
-      return data;
-    });
-};
+export const getContacts = () => 
+  request('/api/v1/contacts');
+export const getContactDetails = (contactId) => 
+  request(`/api/v1/contacts/${contactId}`);
+export const setContactDetails = body =>
+  request('/api/v1/contacts', 'POST', body);
+export const updateContactDetails = (contactId, body) => 
+  request(`/api/v1/contacts/${contactId}`, 'PATCH', body);
+export const deleteContactDetails = (contactId) => 
+  request(`/api/v1/contacts/${contactId}`, 'DELETE');
+  

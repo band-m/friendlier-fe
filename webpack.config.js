@@ -12,10 +12,11 @@ module.exports = {
     publicPath: '/'
   },
   devServer: {
-    port: 7891,
+    port: 7890,
     historyApiFallback: true
   },
   plugins: [
+    new webpack.EnvironmentPlugin({ API_URL: 'http://localhost:7891' }),
     new HtmlPlugin({ template: './src/index.html' }),
     new CleanWebpackPlugin(),
     new Dotenv({

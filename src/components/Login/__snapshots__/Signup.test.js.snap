@@ -10,33 +10,45 @@ exports[`Signup component renders Signup 1`] = `
   <form
     onSubmit={[Function]}
   >
-    <label>
-      Username
+    <div>
+      <label
+        htmlFor="username"
+      >
+        Username
+      </label>
       <input
         name="username"
         onChange={[Function]}
         type="text"
         value=""
       />
-    </label>
-    <label>
-      Email
+    </div>
+    <div>
+      <label
+        htmlFor="email"
+      >
+        Email
+      </label>
       <input
         name="email"
         onChange={[Function]}
         type="email"
         value=""
       />
-    </label>
-    <label>
-      Password
+    </div>
+    <div>
+      <label
+        htmlFor="password"
+      >
+        Password
+      </label>
       <input
         name="password"
         onChange={[Function]}
         type="password"
         value=""
       />
-    </label>
+    </div>
     <button>
       Signup
     </button>
