@@ -6,7 +6,7 @@ export const login = (email, password) => ({
   payload: getLogin(email, password)
 });
 
-export const signup = ({ username, email, password }) => ({
+export const signup = (username, email, password) => ({
   type: SIGNUP,
   payload: getSignup(username, email, password)
 });
