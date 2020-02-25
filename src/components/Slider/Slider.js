@@ -68,7 +68,6 @@ export default function Slider(){
 
   // When deadlineObject changes, make new deadline
   useEffect(() => {
-    console.log(deadlineObject);
     setDeadline(format(add(new Date(), deadlineObject), "PPPP"));
   }, [deadlineObject])
 
@@ -92,11 +91,18 @@ export default function Slider(){
 
   // When slider positions change, change yellowZone and redZone
   useEffect(() => {
-    console.log(slider1, slider2);
-    
     setYellowZone(format(add(new Date(), { days: slider1 }), "PPPP"));
     setRedZone(format(add(new Date(), { days: slider2 }), "PPPP"))
   }, [slider1, slider2])
+
+  useEffect(() => {
+    const connectors = document.querySelectorAll('.noUi-connect');
+    const classes = ['c-1-color', 'c-2-color', 'c-3-color'];
+    for(let i = 0; i < connectors.length; i++){
+      connectors[i].classList.add(classes[i]);
+    }
+    
+  }, [])
 
   return (
     <>
@@ -121,7 +127,7 @@ export default function Slider(){
       <p>Your connection deadline with name will be on {deadline}</p>
       <p>Your yellow zone will begin on {yellowZone}</p>
       <p>Your red zone will begin on {redZone}</p>
-      <Nouislider style={{ margin: '25px' }}onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect step={1} pips={{ mode: 'steps', density: 4 }} />
+      <Nouislider style={{ margin: '25px' }} onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
     </>
   )
 }
