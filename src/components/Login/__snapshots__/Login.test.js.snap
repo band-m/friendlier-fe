@@ -1,3 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login component renders Login 1`] = `<Fragment />`;
+exports[`Login component renders Login 1`] = `
+<main
+  className="Login"
+>
+  <h1>
+    Login
+  </h1>
+  <form
+    onSubmit={[Function]}
+  >
+    <label>
+      Email
+      <input
+        name="email"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </label>
+    <label>
+      Password
+      <input
+        name="password"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </label>
+    <button>
+      Login
+    </button>
+  </form>
+</main>
+`;

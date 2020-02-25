@@ -10,9 +10,9 @@ export default function ContactList(){
     const ratio = 1 - ((contact.commFreq - contact.lastContact) / contact.commFreq);
     const commStatus = 
       ratio < contact.yellowZone ? 'green' :
-      ratio > contact.yellowZone && ratio < contact.redZone ? 'yellow' :
-      ratio > contact.redZone < 1 ? 'red' :
-      'overdue';
+        ratio > contact.yellowZone && ratio < contact.redZone ? 'yellow' :
+          ratio > contact.redZone < 1 ? 'red' :
+            'overdue';
       
     <Link to={`/contacts/${contact._id}`}>
       <li className={commStatus} key={contact._id}>
