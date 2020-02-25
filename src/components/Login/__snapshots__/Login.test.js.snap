@@ -32,5 +32,14 @@ exports[`Login component renders Login 1`] = `
       Login
     </button>
   </form>
+  <p
+    className="center"
+  >
+    <Link
+      to="/signup"
+    >
+      Sign up
+    </Link>
+  </p>
 </main>
 `;
