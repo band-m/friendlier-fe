@@ -72,7 +72,7 @@ export default function Slider(){
     setDeadline(format(add(new Date(), deadlineObject), "PPPP"));
   }, [deadlineObject])
 
-  // When notification object or numOfDays changes, change slider positions
+  // When notificationObject or numOfDays changes, change slider positions
   useEffect(() => {
     switch(notificationOption){
       case 1:
@@ -89,6 +89,14 @@ export default function Slider(){
       return;
     }
   }, [notificationOption, numOfDays])
+
+  // When slider positions change, change yellowZone and redZone
+  useEffect(() => {
+    console.log(slider1, slider2);
+    
+    setYellowZone(format(add(new Date(), { days: slider1 }), "PPPP"));
+    setRedZone(format(add(new Date(), { days: slider2 }), "PPPP"))
+  }, [slider1, slider2])
 
   return (
     <>
@@ -111,8 +119,8 @@ export default function Slider(){
       <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({target}) => setNotificationOption(+target.id)} /><br/><br/><br/>
 
       <p>Your connection deadline with name will be on {deadline}</p>
-      <p>Your yellow zone will begin on </p>
-      <p>Your red zone will begin on </p>
+      <p>Your yellow zone will begin on {yellowZone}</p>
+      <p>Your red zone will begin on {redZone}</p>
       <Nouislider style={{ margin: '25px' }}onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect step={1} pips={{ mode: 'steps', density: 4 }} />
     </>
   )
