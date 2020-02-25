@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Login.css';
-import { login } from '../../data/actions/auth-actions';
+import { signup } from '../../data/actions/auth-actions';
 import { useDispatch } from 'react-redux';
 
-const Login = () => {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const dispatch = useDispatch();
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(login(email, password));
+    dispatch(signup(username, email, password));
   };
 
   return (
     <main className={styles.Login}>
-      <h1>Login</h1>
+      <h1>Signup</h1>
       <form onSubmit={handleSubmit}>
+        <label>Username<input type="text" name="username" value={username} onChange={({ target }) => setUsername(target.value)} /></label>
         <label>Email<input type="email" name="email" value={email} onChange={({ target }) => setEmail(target.value)} /></label>
         <label>Password<input type="password" name="password" value={password} onChange={({ target }) => setPassword(target.value)} /></label>
-        <button>Login</button>
+        <button>Signup</button>
       </form>
-      <p className={styles.center}><Link to="/signup">Sign up</Link></p>
+      <p className={styles.center}><Link to="/">Login</Link></p>
     </main>
   );
 };
 
-export default Login;
+export default Signup;
