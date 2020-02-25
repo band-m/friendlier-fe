@@ -6,4 +6,7 @@ export const getLogin = (email, password) =>
 export const getSignup = (displayName, email, password) => 
   request('/api/v1/auth/signup', 'POST', { displayName, email, password });
 
+export const getSignedIn = () => 
+  request('/api/v1/auth/signed-in');
+
 

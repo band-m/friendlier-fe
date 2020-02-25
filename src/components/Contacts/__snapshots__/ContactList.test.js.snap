@@ -3,12 +3,12 @@
 exports[`ContactList component matches snapshot 1`] = `
 <Fragment>
   <ul />
-  <Link
+  <Component
     to="contacts/add"
   >
     <img
       src="PLUS_ICON"
     />
-  </Link>
+  </Component>
 </Fragment>
 `;
