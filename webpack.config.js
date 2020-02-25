@@ -16,6 +16,7 @@ module.exports = {
     historyApiFallback: true
   },
   plugins: [
+    new webpack.EnvironmentPlugin({ API_URL: 'http://localhost:7891' }),
     new HtmlPlugin({ template: './src/index.html' }),
     new CleanWebpackPlugin(),
     new Dotenv({
