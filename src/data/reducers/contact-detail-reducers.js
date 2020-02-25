@@ -2,7 +2,7 @@
 
 import { SET_CONTACT_DETAILS, SET_FIRST_NAME, SET_LAST_NAME, SET_PHONE_NUMBER, SET_ADDRESS, SET_EMAIL, SET_IMAGE, SET_COMM_FREQUENCY, SET_LAST_CONTACTED, SET_BIRTHDATE, SET_SPECIAL_DATES, SET_NOTES, SET_YELLOW_ZONE, SET_RED_ZONE, SET_CONNECTION_HISTORY } from '../action-types/action-types';
 
-export const initialState = {
+export const initialState={
 
   userId: '',
   firstName: '',
@@ -16,13 +16,13 @@ export const initialState = {
   yellowZone: 0,
   redZone: 0,
   connHistory: [],
-  birthdate: 'January 1, 2020',
+  birthdate: null,
   specialDates: [],
   notes: '',
 };
 
-export const contactDetailReducer = (state = initialState, action) => {
-  switch(action.type) {
+export const contactDetailReducer=(state=initialState, action) => {
+  switch (action.type) {
     case SET_FIRST_NAME:
       return { ...state, firstName: action.payload };
     case SET_LAST_NAME:
@@ -54,20 +54,20 @@ export const contactDetailReducer = (state = initialState, action) => {
     case SET_CONTACT_DETAILS:
       return {
         ...state,
-        userId: action.payload,
-        firstName: action.payload,
-        lastName: action.payload,
-        phoneNumber: action.payload,
-        address: action.payload,
-        email: action.payload,
-        image: action.payload,
-        commFrequency: action.payload,
-        lastContacted: action.payload,
-        yellowZone: action.payload,
-        redZone: action.payload,
-        connHistory: [],
+        userId: action.payload.userId,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        phoneNumber: action.payload.phoneNumber,
+        address: action.payload.address,
+        email: action.payload.email,
+        image: action.payload.image,
+        commFrequency: action.payload.commFrequency,
+        lastContacted: action.payload.lastContacted,
+        yellowZone: action.payload.yellowZone,
+        redZone: action.payload.redZone,
+        connHistory: [...state.connectionHistory, action.payload.connectionHistory],
         birthdate: action.payload,
-        specialDates: [],
+        specialDates: [...state.specialDates, action.payload.specialDates],
         notes: action.payload,
       };
   }
