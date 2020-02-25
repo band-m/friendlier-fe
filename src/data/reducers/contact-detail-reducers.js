@@ -70,5 +70,6 @@ export const contactDetailReducer=(state=initialState, action) => {
         specialDates: [...state.specialDates, action.payload.specialDates],
         notes: action.payload,
       };
+    default: return state;
   }
 };
