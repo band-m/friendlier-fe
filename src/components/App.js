@@ -5,6 +5,7 @@ import Home from './Home/HomePage';
 import About from './About/AboutPage';
 import Contacts from './Contacts/ContactsPage';
 import Settings from './Settings/SettingsPage';
+import Slider from './Slider/Slider';
 
 export default function App() {
   return (
