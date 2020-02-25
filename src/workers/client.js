@@ -9,16 +9,14 @@ if('serviceWorker' in navigator) {
 
 async function run() {
   console.log('Registering service worker');
-  const registration = await navigator.serviceWorker.
-    register('/worker.js', { scope: '/' });
+  const registration = await navigator.serviceWorker.register('/worker.js', { scope: '/' });
   console.log('Registered service worker');
 
   console.log('Registering push');
-  const subscription = await registration.pushManager.
-    subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-    });
+  const subscription = await registration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+  });
   console.log('Registered push');
 
   console.log('Sending push');
