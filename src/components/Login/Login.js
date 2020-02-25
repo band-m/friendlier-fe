@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import styles from './Login.css';
+import {login} from '../../data/actions/auth-actions';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
-
-  const [input, setInput] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const dispatch = useDispatch();
+  const handleSubmit = event => {
+    event.preventDefault();
+    dispatch(login(email, password));
+  };
+
 
   return (
     <main className={styles.Login}>
-      <h1>Login/Signup</h1>
-      <label>Email<input type="email" name="email" /></label>
-      <label>Password<input type="password" name="password" /></label>
-      <button>Login</button>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <label>Email<input type="email" name="email" value={email} onChange={({ target }) => setEmail(target.value)} /></label>
+        <label>Password<input type="password" name="password" value={password} onChange={({ target }) => setPassword(target.value)} /></label>
+        <button>Login</button>
+      </form>
     </main>
   );
 };
