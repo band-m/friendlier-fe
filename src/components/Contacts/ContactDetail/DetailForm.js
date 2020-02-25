@@ -23,19 +23,21 @@ import { selectUser } from '../../../data/selectors/auth-selector';
 
 const DetailForm = () => {
   const dispatch = useDispatch();
-  // const user = useSelector(selectUser);
+  const user = useSelector(selectUser);
   // const contactDetails = useSelector(selectContactDetails);
 
   // const contactDeadline = (comFreq, lastCont) => {
   //   return (Number(comFreq) - Number(lastCont));
   // };
 
-  // useEffect(() => {
-  //   dispatch(myAction(SET_USER_ID, user._id));
-  // }, []);
-
-  const contactDetails = useSelector(selectContactDetails);
+  useEffect(() => {
+    console.log(user);
+    
+    dispatch(myAction(SET_USER_ID, user._id));
+  }, []);
+  
   const handleSubmit = event => {
+    const contactDetails = useSelector(selectContactDetails);
     event.preventDefault();
     dispatch(postContactDetails(contactDetails));
   };
