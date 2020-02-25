@@ -10,6 +10,7 @@ import Signup from './Login/Signup';
 import Slider from './Slider/Slider';
 import Login from './Login/Login';
 import { signedIn } from '../data/actions/auth-actions';
+import AddContact from './Contacts/AddContact';
 
 
 
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/contacts" component={Contacts} />
+        <Route path="/add" component={AddContact} />
         <Route path="/about" component={About} />
         <Route path="/settings" component={Settings} />
       </Switch>

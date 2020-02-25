@@ -32,7 +32,7 @@ export default function ContactList() {
         {contactList}
       </ul> }
       {!contactList && <p>Add your first contact to get started!</p>}
-      <Link to='contacts/add'>
+      <Link to='/add'>
         <p>+</p>
       </Link>
     </>
