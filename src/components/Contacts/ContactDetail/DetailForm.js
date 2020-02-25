@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import styles from './DetailForm.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
@@ -20,12 +19,12 @@ import {
   SET_SPECIAL_DATES,
   SET_CONTACT_DETAILS
 } from '../../../data/action-types/action-types';
-import postContactDetails from '../../../services/contacts';
+import { postContactDetails } from '../../../services/contacts';
 import { selectUser } from '../../../data/selectors/auth-selector';
 
 const DetailForm = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  // const user = useSelector(selectUser);
   // const contactDetails = useSelector(selectContactDetails);
 
   // const contactDeadline = (comFreq, lastCont) => {
@@ -36,24 +35,10 @@ const DetailForm = () => {
   //   dispatch(myAction(SET_USER_ID, user._id));
   // }, []);
 
+  const contactDetails = useSelector(selectContactDetails);
   const handleSubmit = event => {
     event.preventDefault();
-    const formData = new FormData;
-    const details = {
-      firstName,
-      lastName,
-      phoneNumber,
-      address,
-      email,
-      commFrequency,
-      yellowZone,
-      redZone,
-      birthdate,
-      specialDates,
-      notes
-    };
-    dispatch(myAction(SET_CONTACT_DETAILS, details));
-    postContactDetails(details);
+    postContactDetails(contactDetails);
   };
 
   return (
