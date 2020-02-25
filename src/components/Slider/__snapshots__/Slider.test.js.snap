@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slider component matches snapshot 1`] = `
+<Fragment>
+  <p>
+    How often do you want to be in contact with name?
+  </p>
+  <p>
+    Every
+  </p>
+  <input
+    min={1}
+    onChange={[Function]}
+    type="number"
+    value={2}
+  />
+  <br />
+  <label
+    htmlFor="days"
+  >
+    Days
+  </label>
+  <input
+    checked={false}
+    id="days"
+    name="deadlineUnit"
+    onChange={[Function]}
+    type="radio"
+  />
+  <label
+    htmlFor="weeks"
+  >
+    Weeks
+  </label>
+  <input
+    checked={true}
+    id="weeks"
+    name="deadlineUnit"
+    onChange={[Function]}
+    type="radio"
+  />
+  <label
+    htmlFor="months"
+  >
+    Months
+  </label>
+  <input
+    checked={false}
+    id="months"
+    name="deadlineUnit"
+    onChange={[Function]}
+    type="radio"
+  />
+  <br />
+  <br />
+  <br />
+  <p>
+    Choose your notification range for name:
+  </p>
+  <label
+    htmlFor={1}
+  >
+    1
+  </label>
+  <input
+    checked={true}
+    id={1}
+    name="notificationOptions"
+    onChange={[Function]}
+    type="radio"
+  />
+  <label
+    htmlFor={2}
+  >
+    2
+  </label>
+  <input
+    checked={false}
+    id={2}
+    name="notificationOptions"
+    onChange={[Function]}
+    type="radio"
+  />
+  <label
+    htmlFor={3}
+  >
+    3
+  </label>
+  <input
+    checked={false}
+    id={3}
+    name="notificationOptions"
+    onChange={[Function]}
+    type="radio"
+  />
+  <br />
+  <br />
+  <br />
+  <p>
+    Your connection deadline with name will be on 
+  </p>
+  <p>
+    Your yellow zone will begin on 
+  </p>
+  <p>
+    Your red zone will begin on 
+  </p>
+  <Memo(Nouislider)
+    connect={
+      Array [
+        true,
+        true,
+        true,
+      ]
+    }
+    margin={1}
+    onSlide={[Function]}
+    pips={
+      Object {
+        "density": 4,
+        "mode": "steps",
+      }
+    }
+    range={
+      Object {
+        "max": 14,
+        "min": 0,
+      }
+    }
+    start={
+      Array [
+        10,
+        20,
+      ]
+    }
+    step={1}
+    style={
+      Object {
+        "margin": "25px",
+      }
+    }
+    tooltips={
+      Array [
+        true,
+        true,
+      ]
+    }
+  />
+</Fragment>
+`;

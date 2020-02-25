@@ -2,6 +2,7 @@ const HtmlPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 // eslint-disable-next-line
 module.exports = {
@@ -22,13 +23,15 @@ module.exports = {
     }),
     new CopyPlugin([
       { from: 'public' },
-    ])
+    ]),
+    new webpack.ProvidePlugin({
+      noUiSlider: 'nouislider'
+    })
   ],
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -38,6 +41,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        exclude: /nouislider/,
         use: [
           {
             loader: 'style-loader'
@@ -61,6 +65,18 @@ module.exports = {
                 require('postcss-simple-vars')()
               ]
             }
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+        include: /nouislider/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
           }
         ]
       },
