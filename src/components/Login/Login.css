@@ -1,0 +1,43 @@
+.Login{
+  h1{
+    font-size: 1.4rem;
+    padding: 1rem 0 1rem;
+    margin: 1rem auto;
+    text-align: center;
+  }
+
+  form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+    label{
+      input[type="text"] {
+        margin: 0 0 0.75rem 0.9rem;
+      }
+
+      input[type="email"] {
+        margin: 0 0 0.75rem 3rem;
+      }
+
+      input[type="password"] {
+        margin-left: 1.1rem;
+      }
+    }
+
+    button {
+      margin: 1rem 0;
+    }
+  }
+
+
+}
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+
+  a{
+    text-decoration: none;
+  }
+}

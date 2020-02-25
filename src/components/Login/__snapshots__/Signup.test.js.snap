@@ -1,15 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login component renders Login 1`] = `
+exports[`Signup component renders Signup 1`] = `
 <main
   className="Login"
 >
   <h1>
-    Login
+    Signup
   </h1>
   <form
     onSubmit={[Function]}
   >
+    <label>
+      Username
+      <input
+        name="username"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </label>
     <label>
       Email
       <input
@@ -29,16 +38,16 @@ exports[`Login component renders Login 1`] = `
       />
     </label>
     <button>
-      Login
+      Signup
     </button>
   </form>
   <p
     className="center"
   >
     <Link
-      to="/signup"
+      to="/"
     >
-      Sign up
+      Login
     </Link>
   </p>
 </main>
