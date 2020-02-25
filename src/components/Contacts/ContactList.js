@@ -13,13 +13,13 @@ export default function ContactList() {
         ratio > contact.yellowZone && ratio < contact.redZone ? 'yellow' :
           ratio > contact.redZone < 1 ? 'red' :
             'overdue';
-
-    <Link to={`/contacts/${contact._id}`}>
-      <li className={commStatus} key={contact._id}>
-        <span>{contact.firstName} {contact.lastName}</span>
-        <span>{statusIcon}</span>
-      </li>
-    </Link>
+    return (
+      <Link key={contact._id} to={`/contacts/${contact._id}`}>
+        <li className={commStatus}>
+          <span>{contact.firstName} {contact.lastName}</span>
+          {/* <span>{statusIcon}</span> */}
+        </li>
+      </Link>);
   });
 
   return (
