@@ -1,8 +1,10 @@
 import React from 'react';
+import Login from '../Login/Login.js';
+
 
 const HomePage = () => {
   return (
-    <h1>Tumlbeweed</h1>
+    <Login />
   );
 };
 
