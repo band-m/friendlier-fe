@@ -7,6 +7,7 @@ import Contacts from './Contacts/ContactsPage';
 import Settings from './Settings/SettingsPage';
 import Signup from './Login/Signup';
 import Slider from './Slider/Slider';
+import Login from './Login/Login';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/contacts" component={Contacts} />
         <Route path="/about" component={About} />
