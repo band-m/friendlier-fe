@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Nouislider from 'nouislider-react';
 import 'nouislider/distribute/nouislider.css';
+import add from 'date-fns/add';
+import format from 'date-fns/format';
 
 export default function Slider(){
   const [slider1, setSlider1] = useState(10);
   const [slider2, setSlider2] = useState(20);
   const [num, setNum] = useState(1);
   const [numOfDays, setNumOfDays] = useState(30);
-  const [deadline, setDeadline] = useState('months');
+  const [deadlineUnit, setDeadlineUnit] = useState('months');
   const [notificationOption, setNotificationOption] = useState(1);
+  const [deadline, setDeadline] = useState();
+  const [yellowZone, setYellowZone] = useState();
+  const [redZone, setRedZone] = useState();
 
   const update = (render, handle, value, un, percent) => {    
     if(handle === 0){
@@ -19,7 +24,7 @@ export default function Slider(){
   }
 
   const changeNumOfDaysRadio = target => {
-    setDeadline(target.id);
+    setDeadlineUnit(target.id);
     switch(target.id){
       case 'days':
         return setNumOfDays(num)
@@ -32,7 +37,7 @@ export default function Slider(){
 
   const changeNumOfDaysInput = value => {
     setNum(value);
-    switch(deadline){
+    switch(deadlineUnit){
       case 'days':
         return setNumOfDays(value);
       case 'weeks':
@@ -41,6 +46,16 @@ export default function Slider(){
         return setNumOfDays(value * 30)
     }
   }
+
+  // useEffect(() => {
+  //   const deadlineObject = { [deadlineUnit]: num };
+  //   setDeadline(format(add(new Date(), deadlineObject), "EEEE MMMM Mo yyyy"));  
+  // }, [numOfDays])
+
+  // useEffect(() => {
+    
+    
+  // }, [deadline])
 
   useEffect(() => {
     switch(notificationOption){
@@ -65,11 +80,11 @@ export default function Slider(){
       <p>Every</p>
       <input type='number' min={1} value={num} onChange={({target}) => changeNumOfDaysInput(+target.value)} /><br/>
       <label htmlFor='days'>Days</label>
-      <input type='radio' id='days' name='deadline' checked={deadline === 'days'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
+      <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
       <label htmlFor='weeks'>Weeks</label>
-      <input type='radio' id='weeks' name='deadline' checked={deadline === 'weeks'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
+      <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
       <label htmlFor='months'>Months</label>
-      <input type='radio' id='months' name='deadline' checked={deadline === 'months'} onChange={({target}) => changeNumOfDaysRadio(target)}/><br/><br/><br/>
+      <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({target}) => changeNumOfDaysRadio(target)}/><br/><br/><br/>
 
       <p>Choose your notification range for name:</p>
       <label htmlFor={1}>1</label>
@@ -77,14 +92,12 @@ export default function Slider(){
       <label htmlFor={2}>2</label>
       <input type='radio' name='notificationOptions' id={2} checked={notificationOption === 2} onChange={({target}) => setNotificationOption(+target.id)} />
       <label htmlFor={3}>3</label>
-      <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({target}) => setNotificationOption(+target.id)} />
+      <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({target}) => setNotificationOption(+target.id)} /><br/><br/><br/>
 
-
-      {/* <input style={{ marginTop: '50px' }} type='number' value={slider1} onChange={({target}) => setSlider1(target.value)} />
-      <input type='number' value={slider2} onChange={({target}) => setSlider2(target.value)} />
-      <input type='number' value={numOfDays} onChange={({target}) => setNumOfDays(+target.value)} /> */}
-
-      <Nouislider onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect step={1} pips={{ mode: 'steps' }} />
+      <p>Your connection deadline with name will be on </p>
+      <p>Your yellow zone will begin on </p>
+      <p>Your red zone will begin on </p>
+      <Nouislider style={{ margin: '25px' }}onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect step={1} pips={{ mode: 'steps', density: 4 }} />
     </>
   )
 }
