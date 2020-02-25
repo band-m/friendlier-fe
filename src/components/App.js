@@ -9,17 +9,16 @@ import Slider from './Slider/Slider';
 
 export default function App() {
   return (
-    <Slider />
-    // <Router>
-    //   <Header />
-    //   <Switch>
-    //     <Route exact path="/" component={Home} />
-    //     <Route path="/contacts" component={Contacts} />
-    //     <Route path="/about" component={About} />
-    //     <Route path="/settings" component={Settings} />
-    //   </Switch>
-    //     {/* <Route path='/contacts/:id' component={ContactDetail} />
-    //     <Route path='/contacts/add' component={AddContact} /> */}
-    // </Router>
+    <Router>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/contacts" component={Contacts} />
+        <Route path="/about" component={About} />
+        <Route path="/settings" component={Settings} />
+      </Switch>
+        {/* <Route path='/contacts/:id' component={ContactDetail} />
+        <Route path='/contacts/add' component={AddContact} /> */}
+    </Router>
   );
 }
