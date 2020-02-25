@@ -12,9 +12,6 @@ const Login = () => {
     dispatch(login(email, password));
   };
 
-
-
-
   return (
     <main className={styles.Login}>
       <h1>Login</h1>
