@@ -17,8 +17,8 @@ const Login = () => {
     <main className={styles.Login}>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <label>Email<input type="email" name="email" value={email} onChange={({ target }) => setEmail(target.value)} /></label>
-        <label>Password<input type="password" name="password" value={password} onChange={({ target }) => setPassword(target.value)} /></label>
+        <div><label htmlFor="email">Email</label><input type="email" name="email" value={email} onChange={({ target }) => setEmail(target.value)} /></div>
+        <div><label htmlFor="password">Password</label><input type="password" name="password" value={password} onChange={({ target }) => setPassword(target.value)} /></div>
         <button>Login</button>
       </form>
       <p className={styles.center}><Link to="/signup">Sign up</Link></p>
