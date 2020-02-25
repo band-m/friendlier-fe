@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './Header/Header';
 import Home from './Home/HomePage';
@@ -6,8 +7,16 @@ import About from './About/AboutPage';
 import Contacts from './Contacts/ContactDetail/ContactDetail';
 import Settings from './Settings/SettingsPage';
 import Signup from './Login/Signup';
+import { signedIn } from '../data/actions/auth-actions';
+
+
 
 export default function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(signedIn());
+  }, []);
+
   return (
     <Router>
       <Header />
