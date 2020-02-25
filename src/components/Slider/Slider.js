@@ -3,18 +3,21 @@ import Nouislider from 'nouislider-react';
 import 'nouislider/distribute/nouislider.css';
 import add from 'date-fns/add';
 import format from 'date-fns/format';
+import differenceInDays from 'date-fns/differenceInCalendarDays';
 
 export default function Slider(){
   const [slider1, setSlider1] = useState(10);
   const [slider2, setSlider2] = useState(20);
-  const [num, setNum] = useState(1);
-  const [numOfDays, setNumOfDays] = useState(30);
-  const [deadlineUnit, setDeadlineUnit] = useState('months');
+  const [num, setNum] = useState(2);
+  const [numOfDays, setNumOfDays] = useState(14);
+  const [deadlineUnit, setDeadlineUnit] = useState('weeks');
   const [notificationOption, setNotificationOption] = useState(1);
   const [deadline, setDeadline] = useState();
+  const [deadlineObject, setDeadlineObject] = useState({ days: 14, months: 0 })
   const [yellowZone, setYellowZone] = useState();
   const [redZone, setRedZone] = useState();
 
+  // When user moves a slider, set slider
   const update = (render, handle, value, un, percent) => {    
     if(handle === 0){
       setSlider1(Math.floor(value[0]))
@@ -23,40 +26,53 @@ export default function Slider(){
     }
   }
 
-  const changeNumOfDaysRadio = target => {
-    setDeadlineUnit(target.id);
-    switch(target.id){
-      case 'days':
-        return setNumOfDays(num)
-      case 'weeks':
-        return setNumOfDays(num * 7)
-      case 'months':
-        return setNumOfDays(num * 30)
-    }
-  }
-
+  // When user inputs a number, change num and numOfDays
   const changeNumOfDaysInput = value => {
     setNum(value);
     switch(deadlineUnit){
       case 'days':
         return setNumOfDays(value);
       case 'weeks':
-        return setNumOfDays(value * 7)
+        return setNumOfDays(value * 7);
       case 'months':
-        return setNumOfDays(value * 30)
+        const monthDays = differenceInDays((add(new Date(), { months: value })), new Date());
+        return setNumOfDays(monthDays);
     }
   }
 
-  // useEffect(() => {
-  //   const deadlineObject = { [deadlineUnit]: num };
-  //   setDeadline(format(add(new Date(), deadlineObject), "EEEE MMMM Mo yyyy"));  
-  // }, [numOfDays])
+  // When user selects a days/weeks/months radio, change deadlineUnit and numOfDays
+  const changeNumOfDaysRadio = target => {
+    setDeadlineUnit(target.id);
+    switch(target.id){
+      case 'days':
+        return setNumOfDays(num);
+      case 'weeks':
+        return setNumOfDays(num * 7);
+      case 'months':
+        const monthDays = differenceInDays((add(new Date(), { months: num })), new Date());
+        return setNumOfDays(monthDays);
+    }
+  }
 
-  // useEffect(() => {
-    
-    
-  // }, [deadline])
+  // When numOfDays changes, make new deadlineObject
+  useEffect(() => {
+    switch(deadlineUnit){
+      case 'days':
+        return setDeadlineObject({ days: num, months: 0 });
+      case 'weeks':
+        return setDeadlineObject({ days: num * 7, months: 0 });
+      case 'months':
+        return setDeadlineObject({ days: 0, months: num });
+    };  
+  }, [numOfDays])
 
+  // When deadlineObject changes, make new deadline
+  useEffect(() => {
+    console.log(deadlineObject);
+    setDeadline(format(add(new Date(), deadlineObject), "PPPP"));
+  }, [deadlineObject])
+
+  // When notification object or numOfDays changes, change slider positions
   useEffect(() => {
     switch(notificationOption){
       case 1:
@@ -94,7 +110,7 @@ export default function Slider(){
       <label htmlFor={3}>3</label>
       <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({target}) => setNotificationOption(+target.id)} /><br/><br/><br/>
 
-      <p>Your connection deadline with name will be on </p>
+      <p>Your connection deadline with name will be on {deadline}</p>
       <p>Your yellow zone will begin on </p>
       <p>Your red zone will begin on </p>
       <Nouislider style={{ margin: '25px' }}onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect step={1} pips={{ mode: 'steps', density: 4 }} />
