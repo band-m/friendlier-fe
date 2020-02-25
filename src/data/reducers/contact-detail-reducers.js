@@ -1,9 +1,8 @@
 // Nick's reducers for contact detail actions
 
-import { SET_CONTACT_DETAILS, SET_FIRST_NAME, SET_LAST_NAME, SET_PHONE_NUMBER, SET_ADDRESS, SET_EMAIL, SET_IMAGE, SET_COMM_FREQUENCY, SET_LAST_CONTACTED, SET_BIRTHDATE, SET_SPECIAL_DATES, SET_NOTES, SET_YELLOW_ZONE, SET_RED_ZONE, SET_CONNECTION_HISTORY } from '../action-types/action-types';
+import { SET_USER_ID, SET_CONTACT_DETAILS, SET_FIRST_NAME, SET_LAST_NAME, SET_PHONE_NUMBER, SET_ADDRESS, SET_EMAIL, SET_IMAGE, SET_COMM_FREQUENCY, SET_LAST_CONTACTED, SET_BIRTHDATE, SET_SPECIAL_DATES, SET_NOTES, SET_YELLOW_ZONE, SET_RED_ZONE, SET_CONNECTION_HISTORY } from '../action-types/action-types';
 
-export const initialState={
-
+const initialState = {
   userId: '',
   firstName: '',
   lastName: '',
@@ -11,18 +10,20 @@ export const initialState={
   address: '',
   email: '',
   image: '',
-  commFrequency: 0,
+  commFrequency: 1,
   lastContacted: 0,
   yellowZone: 0,
   redZone: 0,
   connHistory: [],
   birthdate: null,
   specialDates: [],
-  notes: '',
+  notes: ''
 };
 
-export const contactDetailReducer=(state=initialState, action) => {
-  switch (action.type) {
+export default function contactDetailReducer(state = initialState, action) {
+  switch(action.type) {
+    case SET_USER_ID:
+      return { ...state, userId: action.payload };
     case SET_FIRST_NAME:
       return { ...state, firstName: action.payload };
     case SET_LAST_NAME:
@@ -70,5 +71,6 @@ export const contactDetailReducer=(state=initialState, action) => {
         specialDates: [...state.specialDates, action.payload.specialDates],
         notes: action.payload,
       };
+    default: return state;
   }
-};
+}

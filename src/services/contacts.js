@@ -16,6 +16,21 @@ export const getContactDetails = contactId => {
     });
 };
 
+export const postContactDetails = body => {
+  return fetch('/api/v1/contacts/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+    .then(res => Promise.all[res.ok, res.json()])
+    .then(([ok, data]) => {
+      if(!ok) throw data;
+      return data;
+    });
+};
+
 export const updateContactDetails = (contactId, body) => {
   return fetch(`/api/v1/contacts/${contactId}`, {
     method: 'PATCH',

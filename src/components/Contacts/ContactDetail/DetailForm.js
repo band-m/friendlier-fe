@@ -1,82 +1,99 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './DetailForm.css';
-import { useSelector } from 'react-redux';
-import { getContactDetail } from '../../../data/selectors/contact-detail-selectors';
-// import { getContactDetails } from '../../../services/getContactDetails;;';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
+import { myAction } from '../../../data/actions/contact-detail-actions';
+import {
+  SET_USER_ID,
+  SET_FIRST_NAME,
+  SET_LAST_NAME,
+  // SET_IMAGE,
+  SET_NOTES,
+  SET_BIRTHDATE,
+  SET_RED_ZONE,
+  SET_YELLOW_ZONE,
+  SET_COMM_FREQUENCY,
+  SET_EMAIL,
+  SET_ADDRESS,
+  SET_PHONE_NUMBER,
+  SET_SPECIAL_DATES,
+  SET_CONTACT_DETAILS
+} from '../../../data/action-types/action-types';
+import postContactDetails from '../../../services/contacts';
+import { selectUser } from '../../../data/selectors/auth-selector';
 
-const DetailForm = ({ handleChange }) => {
-  const contactDetails = useSelector(getContactDetail);
-  const {
-    firstName,
-    lastName,
-    phoneNumber,
-    address,
-    email,
-    commFrequency,
-    lastContacted,
-    birthdate,
-    notes
-  } = contactDetails;
+const DetailForm = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  // const contactDetails = useSelector(selectContactDetails);
 
-  const contactDeadline = (comFreq, lastCont) => {
-    return (Number(comFreq) - Number(lastCont));
+  // const contactDeadline = (comFreq, lastCont) => {
+  //   return (Number(comFreq) - Number(lastCont));
+  // };
+
+  // useEffect(() => {
+  //   dispatch(myAction(SET_USER_ID, user._id));
+  // }, []);
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const formData = new FormData;
+    const details = {
+      firstName,
+      lastName,
+      phoneNumber,
+      address,
+      email,
+      commFrequency,
+      yellowZone,
+      redZone,
+      birthdate,
+      specialDates,
+      notes
+    };
+    dispatch(myAction(SET_CONTACT_DETAILS, details));
+    postContactDetails(details);
   };
 
   return (
-    <>
-      <form className={styles.DetailForm}>
+    <form className={styles.DetailForm} onSubmit={handleSubmit}>
+      <div>
+        <input type="text" onChange={({ target }) => dispatch(myAction(SET_FIRST_NAME, target.value))} name="firstName" placeholder="First Name" />
+        <input type="text" onChange={({ target }) => dispatch(myAction(SET_LAST_NAME, target.value))} name="lastName" placeholder="Last Name"/>
+      </div>
+
+      <div>
+        <p>Last Contacted <span></span></p>
+        <p>Contact Deadline <span></span></p>
+      </div>
+
+      <button>Show Contact History</button>
+
+      <section>
         <div>
-          <input type="text" onChange={handleChange} name="firstName" value={firstName || ''} placeholder="First Name" />
-          <input type="text" onChange={handleChange} name="lastName" value={lastName || ''} placeholder="Last Name"/>
+          <label htmlFor="email">Email</label>
+          <label htmlFor="address">Address</label>
+          <label htmlFor="phoneNumber">Phone Number</label>
+          <label htmlFor="birthdate">Birthdate</label>
+          <label htmlFor="notes">Notes</label>
         </div>
 
         <div>
-          <p>Last Contacted <span>{lastContacted}</span></p>
-          <p>Contact Deadline <span>{contactDeadline(commFrequency, lastContacted)}</span></p>
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_EMAIL, target.value))} id="email" name="email" placeholder="Email address"/>
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_ADDRESS, target.value))} id="address" name="address" placeholder="Physical Address"/>
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_PHONE_NUMBER, target.value))} id="phoneNumber" name="phoneNumber" placeholder="Phone Number"/>
+          {
+            /* <input type="text" onChange={({ target }) => dispatch(myAction(SET_IMAGE, target.value))} id="image" name="image" value={image || ''} placeholder="First Name"/> */ }
+          <input type="date" onChange={({ target }) => dispatch(myAction(SET_BIRTHDATE, target.value))} id="birthdate" name="birthdate" placeholder="Birthdate" />
+          <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes"></textarea>
+          {
+            /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */ }
         </div>
-
-        <button>Show Contact History</button>
-
-        <section>
-          <div>
-            <label htmlFor="email">Email</label>
-            <label htmlFor="address">Address</label>
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <label htmlFor="birthdate">Birthdate</label>
-            <label htmlFor="notes">Notes</label>
-          </div>
-
-          <div>
-            <input type="text" onChange={handleChange} id="email" name="email" value={email || ''} placeholder="Email address"/>
-            <input type="text" onChange={handleChange} id="address" name="address" value={address || ''} placeholder="Physical Address"/>
-            <input type="text" onChange={handleChange} id="phoneNumber" name="phoneNumber" value={phoneNumber || ''} placeholder="Phone Number"/>
-            {
-              /* <input type="text" onChange={handleChange} id="image" name="image" value={image || ''} placeholder="First Name"/> */ }
-            <input type="date" onChange={handleChange} id="birthdate" name="birthdate" value={birthdate || ''} placeholder="Birthdate" />
-            <textarea type="text" onChange={handleChange} id="notes" name="notes" value={notes || ''}></textarea>
-            {
-              /* <input type="date" onChange={handleChange} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */ }
-          </div>
-        </section>
-      </form>
-    </>
+      </section>
+      <button>Create a new contact</button>
+    </form>
   );
-};
-
-DetailForm.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  contactDetail: PropTypes.shape({
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string,
-    phoneNumber: PropTypes.string,
-    address: PropTypes.string,
-    email: PropTypes.string,
-    commFrequency: PropTypes.number.isRequired,
-    lastContacted: PropTypes.number,
-    birthdate: PropTypes.string,
-    notes: PropTypes.string
-  }).isRequired
 };
 
 export default DetailForm;

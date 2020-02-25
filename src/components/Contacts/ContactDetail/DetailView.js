@@ -1,20 +1,18 @@
 import React from 'react';
+// import { useSelector } from 'react-redux';
+// import { getContactDetail } from '../../../data/selectors/contact-detail-selectors';
+import styles from './DetailView.css';
 
-const DetailView = ({ contactDetail }) => {
-  const {
-    firstName,
-    lastName,
-    phoneNumber,
-    address,
-    email,
-    commFrequency,
-    lastContacted,
-    birthdate,
-    notes
-  } = contactDetail;
+const DetailView = () => {
+  // const contactDetail = useSelector(getContactDetail);
 
   return (
-    <div>Killer Whale</div>
+    <section className={styles.DetailView}>
+      <div>
+        <h2></h2>
+        <h2></h2>
+      </div>
+    </section>
   );
 };
 
