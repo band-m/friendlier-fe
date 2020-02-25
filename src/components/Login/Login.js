@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Login.css';
 import { login } from '../../data/actions/auth-actions';
 import { useDispatch } from 'react-redux';
@@ -20,6 +21,7 @@ const Login = () => {
         <label>Password<input type="password" name="password" value={password} onChange={({ target }) => setPassword(target.value)} /></label>
         <button>Login</button>
       </form>
+      <p className={styles.center}><Link to="/signup">Sign up</Link></p>
     </main>
   );
 };
