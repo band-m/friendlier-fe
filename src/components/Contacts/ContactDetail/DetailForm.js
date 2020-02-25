@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './DetailForm.css';
-// import { getContactDetails } from '../../../services/getContactDetails';
+import { useSelector } from 'react-redux';
+import { getContactDetail } from '../../../data/selectors/contact-detail-selectors';
+// import { getContactDetails } from '../../../services/getContactDetails;;';
 
-const DetailForm = ({ handleChange, contactDetail }) => {
+const DetailForm = ({ handleChange }) => {
+  const contactDetails = useSelector(getContactDetail);
   const {
     firstName,
     lastName,
@@ -14,7 +17,7 @@ const DetailForm = ({ handleChange, contactDetail }) => {
     lastContacted,
     birthdate,
     notes
-  } = contactDetail;
+  } = contactDetails;
 
   const contactDeadline = (comFreq, lastCont) => {
     return (Number(comFreq) - Number(lastCont));
@@ -27,15 +30,6 @@ const DetailForm = ({ handleChange, contactDetail }) => {
           <input type="text" onChange={handleChange} name="firstName" value={firstName || ''} placeholder="First Name" />
           <input type="text" onChange={handleChange} name="lastName" value={lastName || ''} placeholder="Last Name"/>
         </div>
-
-        {/* <p>How often do you wish to connect?</p>
-        <label htmlFor="frequencyNumber">Every: </label>
-        <input type="number" id="frequencyNumber"></input>
-        <label htmlFor="commFrequency">Choose a frequency:
-          <input className={styles.frequencyRadios} type="radio" onChange={handleChange} name="frequencyRadios" value="day">Days</input>
-          <input className={styles.frequencyRadios} type="radio" onChange={handleChange} name="frequencyRadios" value="week">Weeks</input>
-          <input className={styles.frequencyRadios} type="radio" onChange={handleChange} name="frequencyRadios" value="month">Months</input>
-        </label> */}
 
         <div>
           <p>Last Contacted <span>{lastContacted}</span></p>
@@ -71,6 +65,7 @@ const DetailForm = ({ handleChange, contactDetail }) => {
 };
 
 DetailForm.propTypes = {
+  handleChange: PropTypes.func.isRequired,
   contactDetail: PropTypes.shape({
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string,

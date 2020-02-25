@@ -19,20 +19,10 @@ const ContactDetail = () => {
     notes: 'This is a note'
   });
 
-  const detailFormFactory = {
-    firstName: setContactDetail(contactDetail.firstName),
-    lastName: setLastName,
-    phoneNumber: setPhoneNumber,
-    address: setAddress,
-    email: setEmail,
-    commFrequency: setCommFrequency,
-    lastContacted: setLastContacted,
-    birthdate: setBirthdate,
-    notes: setNotes
-  };
-
-  const handleChange = ({ target }) => {
-    detailFormFactory[target.name](target.value);
+  const handleChange = () => {
+    console.log('plop');
+    
+    // detailFormFactory[target.name](target.value);
   };
 
   // useEffect(() => {
