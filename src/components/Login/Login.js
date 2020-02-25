@@ -4,13 +4,15 @@ import { login } from '../../data/actions/auth-actions';
 import { useDispatch } from 'react-redux';
 
 const Login = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(login(email, password));
   };
+
+
 
 
   return (
