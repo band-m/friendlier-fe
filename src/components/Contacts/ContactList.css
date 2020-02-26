@@ -1,0 +1,27 @@
+.ContactList{
+  display: flex;
+  flex-direction: column;
+  ul{
+    margin: 0 auto;
+
+    a{
+      text-decoration: none;
+
+      li{
+        padding: 0.25rem 0;
+      }
+
+      li.red {
+        background-color: red;
+      }
+
+      .yellow {
+        background-color: yellow;
+      }
+
+      p{
+        padding: 0.25rem;
+      }
+    }
+  }
+}
