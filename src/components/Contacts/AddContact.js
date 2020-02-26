@@ -137,9 +137,6 @@ export default function AddContact(){
 
   // When yellowZone or redZone change, set yellowZoneStartDate and redZoneStartDate in contact details
   useEffect(() => {
-    console.log(yellowZone);
-    console.log(redZone);
-    
     dispatch(myAction(SET_YELLOW_ZONE, yellowZone));
     dispatch(myAction(SET_RED_ZONE, redZone));
   }, [yellowZone, redZone])
@@ -236,6 +233,7 @@ export default function AddContact(){
       <p>Your red zone will begin on {redZone}</p>
       </section>
       <Nouislider style={{ margin: '25px' }} onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
+      
       <button type="submit">Create a new contact</button>
     </form>
   );
