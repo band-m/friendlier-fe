@@ -38,7 +38,6 @@ const DetailForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    
     dispatch(setContact(details));
     dispatch(postContactDetails(details));
   };

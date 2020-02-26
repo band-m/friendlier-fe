@@ -1,4 +1,5 @@
 import { FETCH_CONTACTS, FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED } from '../action-types/action-types';
+import { getContacts } from '../../services/contacts';
 import contactsReducer, { initialState } from './contacts-reducer';
 
 jest.mock('../../services/contacts.js');
