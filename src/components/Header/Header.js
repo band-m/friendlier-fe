@@ -12,6 +12,11 @@ const Header = () => {
 
   return (
     <header className={styles.Header}>
+      <button className={`${styles.hamburger} ${styles.hamburgersqueeze}`} type="button">
+        <span className={styles.hamburger_box}>
+          <span className={styles.hamburgerinner}></span>
+        </span>
+      </button>
       <Link to="/">
         <div className={styles.Logo} alt="re:connect logo" title="Back to Home"></div>
       </Link>
@@ -24,5 +29,7 @@ const Header = () => {
     </header>
   );
 };
+
+
 
 export default Header;
