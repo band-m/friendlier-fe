@@ -8,7 +8,7 @@ const ContactDetail = () => {
   const handleClick = () => {
     setShowForm(!showForm);
   };
-  
+
   return (
     <>
       {!showForm && <DetailView />}
