@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { getContactDetails } from '../../data/selectors/contact-detail-selectors';
+import { selectContactDetails } from '../../data/selectors/contact-detail-selectors';
 
 
 export const ContactDetailView = ({ match }) => {
