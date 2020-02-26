@@ -2,10 +2,11 @@ import { authReducer, initialState } from './auth-reducer';
 import {
   LOGIN, LOGIN_PENDING, LOGIN_FULFILLED, LOGIN_REJECTED,
   LOGOUT, LOGOUT_PENDING, LOGOUT_FULFILLED, LOGOUT_REJECTED,
-  SIGNUP, SIGNUP_PENDING, SIGNUP_FULFILLED, SIGNUP_REJECTED
+  SIGNUP, SIGNUP_PENDING, SIGNUP_FULFILLED, SIGNUP_REJECTED,
+  UPDATE_USER, UPDATE_USER_PENDING, UPDATE_USER_FULFILLED, UPDATE_USER_REJECTED
 } from '../action-types/action-types';
 
-const loggedInState = {...initialState, user: 'user data'};
+const loggedInState = { ...initialState, user: 'user data'};
 
 describe('auth reducer module', () => {
   it('LOGIN does nothing', () => {
@@ -67,4 +68,25 @@ describe('auth reducer module', () => {
     expect(authReducer(initialState, { type: SIGNUP_REJECTED, payload: 'error data' }))
       .toEqual({ ...initialState, signupLoading: false, user: null, error: 'error data' });
   });
+
+  it('UPDATE_USER does nothing', () => {
+    expect(authReducer(loggedInState, { type: SIGNUP, payload: 'fake promise' }))
+      .toEqual(loggedInState);
+  });
+
+  it('UPDATE_USER_PENDING sets updateUserLoading', () => {
+    expect(authReducer(loggedInState, { type: UPDATE_USER_PENDING }))
+      .toEqual({ ...loggedInState, updateUserLoading: true});
+  });
+
+  it('UPDATE_USER_FULFILLED unsets updateUserLoading and error, sets user', () => {
+    expect(authReducer(loggedInState, { type: UPDATE_USER_FULFILLED, payload: 'user data' }))
+      .toEqual({ ...loggedInState, updateUserLoading: false, user: 'user data', error: null });
+  });
+
+  it('UPDATE_USER_REJECTED unsets updateUserLoading, sets error', () => {
+    expect(authReducer(loggedInState, { type: UPDATE_USER_REJECTED, payload: 'error data' }))
+      .toEqual({ ...loggedInState, updateUserLoading: false, error: 'error data' });
+  });
+
 });
