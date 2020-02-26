@@ -1,6 +1,11 @@
 import { authReducer, initialState } from './auth-reducer';
-import { LOGIN, LOGIN_PENDING, LOGIN_FULFILLED, LOGIN_REJECTED, 
-  SIGNUP, SIGNUP_PENDING, SIGNUP_FULFILLED, SIGNUP_REJECTED } from '../action-types/action-types';
+import {
+  LOGIN, LOGIN_PENDING, LOGIN_FULFILLED, LOGIN_REJECTED,
+  LOGOUT, LOGOUT_PENDING, LOGOUT_FULFILLED, LOGOUT_REJECTED,
+  SIGNUP, SIGNUP_PENDING, SIGNUP_FULFILLED, SIGNUP_REJECTED
+} from '../action-types/action-types';
+
+const loggedInState = {...initialState, user: 'user data'};
 
 describe('auth reducer module', () => {
   it('LOGIN does nothing', () => {
@@ -21,6 +26,26 @@ describe('auth reducer module', () => {
   it('LOGIN_REJECTED unsets loginLoading and user, sets error', () => {
     expect(authReducer(initialState, { type: LOGIN_REJECTED, payload: 'error data' }))
       .toEqual({ ...initialState, loginLoading: false, user: null, error: 'error data' });
+  });
+
+  it('LOGOUT does nothing', () => {
+    expect(authReducer(loggedInState, { type: LOGOUT, payload: 'fake promise' }))
+      .toEqual(loggedInState);
+  });
+
+  it('LOGOUT_PENDING sets logoutLoading, unsets error', () => {
+    expect(authReducer(loggedInState, { type: LOGOUT_PENDING }))
+      .toEqual({ ...loggedInState, logoutLoading: true, error: null });
+  });
+
+  it('LOGOUT_FULFILLED unsets logoutLoading, error, and user', () => {
+    expect(authReducer(loggedInState, { type: LOGOUT_FULFILLED }))
+      .toEqual({ ...loggedInState, logoutLoading: false, user: null, error: null });
+  });
+
+  it('LOGOUT_REJECTED unsets logoutLoading, sets error', () => {
+    expect(authReducer(loggedInState, { type: LOGOUT_REJECTED, payload: 'error data' }))
+      .toEqual({ ...loggedInState, logoutLoading: false, error: 'error data' });
   });
 
   it('SIGNUP does nothing', () => {

@@ -1,9 +1,11 @@
-import { LOGIN_PENDING, LOGIN_FULFILLED, LOGIN_REJECTED, 
+import { LOGIN_PENDING, LOGIN_FULFILLED, LOGIN_REJECTED,
+  LOGOUT_PENDING, LOGOUT_FULFILLED, LOGOUT_REJECTED,
   SIGNUP_PENDING, SIGNUP_FULFILLED, SIGNUP_REJECTED, 
   SIGNED_IN_PENDING, SIGNED_IN_FULFILLED, SIGNED_IN_REJECTED } from '../action-types/action-types';
 
 export const initialState = {
   loginLoading: false,
+  logoutLoading: false,
   signUpLoading: false,
   signedInPending: false,
   user: null,
@@ -19,6 +21,14 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, loginLoading: false, user: action.payload, error: null };
     case LOGIN_REJECTED:
       return { ...state, loginLoading: false, user: null, error: action.payload };
+
+    case LOGOUT_PENDING:
+      return { ...state, logoutLoading: true, error: null,  };
+    case LOGOUT_FULFILLED:
+      return { ...state, logoutLoading: false, user: null, error: null };
+    case LOGOUT_REJECTED:
+      return { ...state, logoutLoading: false, error: action.payload };
+
     case SIGNUP_PENDING:
       return { ...state, signupLoading: true, user: null, error: null };
     case SIGNUP_FULFILLED:
