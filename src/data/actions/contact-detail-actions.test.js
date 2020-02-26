@@ -17,7 +17,8 @@ import {
   FETCH_ONE_CONTACT,
   SET_NOTIFICATION_RANGE,
   SET_DEADLINE_DATE,
-  SET_DEADLINE_OBJECT
+  SET_DEADLINE_OBJECT,
+  SET_CONTACT_CREATED_ON
 } from '../action-types/action-types';
 import {
   fetchContacts,
@@ -235,6 +236,15 @@ describe('contact detail actions', () => {
     expect(action).toEqual({
       type: SET_DEADLINE_OBJECT,
       payload: { 'days': 3 }
+    });
+  });
+
+  it('should create a set contact created on action', () => {
+    const action = myAction(SET_CONTACT_CREATED_ON, 'Sept 2 2020');
+
+    expect(action).toEqual({
+      type: SET_CONTACT_CREATED_ON,
+      payload: 'Sept 2 2020'
     });
   });
 });
