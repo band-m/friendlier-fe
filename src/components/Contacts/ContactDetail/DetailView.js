@@ -3,18 +3,25 @@ import styles from './DetailView.css';
 import { useDispatch } from 'react-redux';
 import { fetchOneContact } from '../../../data/actions/contact-detail-actions';
 import PropTypes from 'prop-types';
-import { setContactDetails } from '../../../services/contacts';
-
+import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
+import { useHistory } from 'react-router-dom';
 
 const DetailView = ({ match }) => {
   const [contact, setContact] = useState({});
 
+  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchOneContact(match.params.id))
       .then(contact => setContact(contact.value));
   }, [match.params.id]);
+
+  const deleteContact = contactId => {
+    console.log(contactId);
+    deleteContactDetails(contactId);
+    history.replace('/contacts');
+  };
 
   const { firstName, lastName, lastContacted, email, phoneNumber, address, commFrequency, birthdate, notes } = contact;
 
@@ -43,7 +50,7 @@ const DetailView = ({ match }) => {
 
         {/* <p>Special Dates: {specialDates}</p> */}
       </div>
-      {/* <button id="delete" onClick={deleteContact}>Delete Contact</button> */}
+      <button id="delete" onClick={() => deleteContact(contact._id)}>Delete Contact</button>
     </section>
   );
 };
