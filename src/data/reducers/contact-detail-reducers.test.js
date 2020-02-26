@@ -132,26 +132,26 @@ describe('contact detail reducer', () => {
   it('handles set yellow zone action', () => {
     const action = {
       type: SET_YELLOW_ZONE,
-      payload: 2
+      payload: 'Sept 2 2020'
     };
 
-    const initialState = { yellowZone: 0 };
+    const initialState = { yellowZoneStartDate: '' };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({
-      yellowZone: 2
+      yellowZoneStartDate: 'Sept 2 2020'
     });
   });
 
   it('handles set redzone action', () => {
     const action = {
       type: SET_RED_ZONE,
-      payload: 2
+      payload: 'Sept 2 2020'
     };
 
-    const initialState = { redZone: 0 };
+    const initialState = { redZoneStartDate: '' };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({
-      redZone: 2
+      redZoneStartDate: 'Sept 2 2020'
     });
   });
 

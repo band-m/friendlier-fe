@@ -136,6 +136,9 @@ export default function AddContact(){
 
   // When yellowZone or redZone change, set yellowZoneStartDate and redZoneStartDate in contact details
   useEffect(() => {
+    console.log(yellowZone);
+    console.log(redZone);
+    
     dispatch(myAction(SET_YELLOW_ZONE, yellowZone));
     dispatch(myAction(SET_RED_ZONE, redZone));
   }, [yellowZone, redZone])
