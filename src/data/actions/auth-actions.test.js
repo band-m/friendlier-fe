@@ -1,7 +1,7 @@
-import { login, signup } from './auth-actions';
-import { LOGIN, SIGNUP } from '../action-types/action-types';
+import { login, signup, signedIn } from './auth-actions';
+import { LOGIN, SIGNUP, SIGNED_IN } from '../action-types/action-types';
 
-jest.mock('../../services/auth.js');
+jest.mock('../../services/request.js');
 
 describe('login actions', () => {
   it('creates a login action', () => {
@@ -23,6 +23,14 @@ describe('login actions', () => {
     expect(action).toEqual({
       type: SIGNUP,
       payload: Promise.resolve(body)
+    });
+  });
+
+  it('creates a signedIn action', () => {
+    const action = signedIn();
+    expect(action).toEqual({
+      type: SIGNED_IN,
+      payload: Promise.resolve('success')
     });
   });
 });
