@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { getContactDetails } from '../../data/selectors/contact-detail-selectors';
 
 
-export const ContactDetailView=({ match }) => {
+export const ContactDetailView = ({ match }) => {
 
-  const contact=getContactDetails(match.params.contactId);
+  const contact = getContactDetails(match.params.contactId);
 
   useEffect(() => {
-    fetchData = async () => {
-      comst data = await getContactDetails(match.params.contactId)
-      dispatch
-    }
-  })
+    fetchData = async() => {
+      const data = await getContactDetails(match.params.contactId);
+      dispatch;
+    };
+  });
 
 
   return (
