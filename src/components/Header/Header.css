@@ -1,6 +1,9 @@
 .Header{
+  display: flex;
   .Nav{
-    a{
+    a, span{
+      color: white;
+      background-color: black;
       text-decoration: none;
     }
   }
@@ -19,7 +22,7 @@
       text-align: center;
       margin: 0;
 
-      a{
+      a, span{
         color: white;
         background-color: black;
         display:block;
@@ -48,6 +51,7 @@
     overflow: visible;
     background: black;
   }
+  
   .hamburger:hover {
     opacity: 0.7;
   }
@@ -57,7 +61,7 @@
   .hamburger.is_active .hamburgerinner,
   .hamburger.is_active .hamburgerinner::before,
   .hamburger.is_active .hamburgerinner::after {
-    background-color: black;
+    background-color: transparent;
   }
 
   .hamburger_box {
@@ -123,11 +127,18 @@
     transition: bottom 0.075s ease, transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
 }
+
 @media screen and (min-width: 800px) {
   .Header {
-    display: flex;
+background-color: black;
     flex-direction: row;
     justify-content: space-between;
+
+    .hamburger{
+      display: none;
+      visibility: hidden;
+    }
+
     .Logo{
       background: midnightblue;
       color: white;
@@ -135,7 +146,7 @@
       width: 50px;
     }
     .Nav{
-      background-color: salmon;
+      background-color: transparent;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -143,6 +154,7 @@
       padding: 0 1rem;
       a {
         padding: 0 1rem;
+        color: white;
       }
     }
   }

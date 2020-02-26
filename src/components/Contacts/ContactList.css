@@ -9,10 +9,10 @@
 
     a{
       text-decoration: none;
+      text-align: center;
 
       li{
-        padding: 0.25rem 0;
-        margin: 0 auto;
+        padding: 0.5rem 1rem;
         border-bottom: 0.5px solid #343;
         color: #666;
       }
@@ -32,5 +32,10 @@
   }
   a{
     text-decoration: none;
+    margin: 0.75rem auto;
+
+    button{
+      font-size: 2rem;
+    }
   }
 }
