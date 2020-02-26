@@ -1,17 +1,23 @@
 .ContactList{
   display: flex;
   flex-direction: column;
+
   ul{
-    margin: 0 auto;
+    width: 100%;
+    background-color: #EEE;
+    border-top: 0.5px solid #343;
 
     a{
       text-decoration: none;
 
       li{
         padding: 0.25rem 0;
+        margin: 0 auto;
+        border-bottom: 0.5px solid #343;
+        color: #666;
       }
 
-      li.red {
+      li.red{
         background-color: red;
       }
 
@@ -23,5 +29,8 @@
         padding: 0.25rem;
       }
     }
+  }
+  a{
+    text-decoration: none;
   }
 }
