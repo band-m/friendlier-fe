@@ -10,24 +10,32 @@ exports[`Login component renders Login 1`] = `
   <form
     onSubmit={[Function]}
   >
-    <label>
-      Email
+    <div>
+      <label
+        htmlFor="email"
+      >
+        Email
+      </label>
       <input
         name="email"
         onChange={[Function]}
         type="email"
         value=""
       />
-    </label>
-    <label>
-      Password
+    </div>
+    <div>
+      <label
+        htmlFor="password"
+      >
+        Password
+      </label>
       <input
         name="password"
         onChange={[Function]}
         type="password"
         value=""
       />
-    </label>
+    </div>
     <button>
       Login
     </button>
@@ -35,11 +43,11 @@ exports[`Login component renders Login 1`] = `
   <p
     className="center"
   >
-    <Link
+    <Component
       to="/signup"
     >
       Sign up
-    </Link>
+    </Component>
   </p>
 </main>
 `;
