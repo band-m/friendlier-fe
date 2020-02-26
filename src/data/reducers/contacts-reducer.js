@@ -1,4 +1,4 @@
-import { FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED } from '../action-types/action-types';
+import { FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED, SET_CONTACT } from '../action-types/action-types';
 
 export const initialState = { contactsLoading: false, contactList: [], error: null };
 
@@ -10,6 +10,8 @@ export default function contactsReducer(state = initialState, action) {
       return { ...state, contactsLoading: false, contactList: action.payload, error: null };
     case FETCH_CONTACTS_REJECTED:
       return { ...state, contactsLoading: false, contactList: [], error: action.payload };
+    case SET_CONTACT:
+      return { ...state, contactList: [...state.contactList, action.payload] };
     default:
       return state;
   }
