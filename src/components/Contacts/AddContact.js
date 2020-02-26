@@ -25,7 +25,8 @@ import {
   SET_CONTACT_DETAILS,
   SET_DEADLINE_OBJECT,
   SET_NOTIFICATION_RANGE,
-  SET_DEADLINE_DATE
+  SET_DEADLINE_DATE,
+  SET_CONTACT_CREATED_ON
 } from '../../data/action-types/action-types';
 import { selectUser } from '../../data/selectors/auth-selector';
 import { setContact } from '../../data/actions/contacts-actions';
@@ -171,6 +172,7 @@ export default function AddContact(){
   useEffect(() => {
     if(user){
       dispatch(myAction(SET_USER_ID, user._id));
+      dispatch(myAction(SET_CONTACT_CREATED_ON, format(new Date(), "PPPP")));
     }
   }, [user]);
 
