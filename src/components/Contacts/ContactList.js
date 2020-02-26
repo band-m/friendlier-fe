@@ -46,7 +46,7 @@ export default function ContactList() {
       </ul>}
       {!contactList && <p>Add your first contact to get started!</p>}
       <Link to='/add'>
-        <button>+</button>
+        <button title="Add New Contact">+</button>
       </Link>
     </main>
   );
