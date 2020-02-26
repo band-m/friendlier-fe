@@ -1,6 +1,10 @@
 // Nick's reducers for contact detail actions
 
+<<<<<<< HEAD
 import { SET_USER_ID, SET_CONTACT_DETAILS, SET_FIRST_NAME, SET_LAST_NAME, SET_PHONE_NUMBER, SET_ADDRESS, SET_EMAIL, SET_IMAGE, SET_COMM_FREQUENCY, SET_LAST_CONTACTED, SET_BIRTHDATE, SET_SPECIAL_DATES, SET_NOTES, SET_YELLOW_ZONE, SET_RED_ZONE, SET_CONNECTION_HISTORY, SET_NOTIFICATION_RANGE, SET_DEADLINE_DATE, SET_DEADLINE_OBJECT, SET_LAST_CONTACTED_DATE, FETCH_ONE_CONTACT_PENDING, FETCH_ONE_CONTACT_FULFILLED, FETCH_ONE_CONTACT_REJECTED } from '../action-types/action-types';
+=======
+import { SET_USER_ID, SET_CONTACT_DETAILS, SET_FIRST_NAME, SET_LAST_NAME, SET_PHONE_NUMBER, SET_ADDRESS, SET_EMAIL, SET_IMAGE, SET_COMM_FREQUENCY, SET_LAST_CONTACTED, SET_BIRTHDATE, SET_SPECIAL_DATES, SET_NOTES, SET_YELLOW_ZONE, SET_RED_ZONE, SET_CONNECTION_HISTORY, SET_NOTIFICATION_RANGE, SET_DEADLINE_DATE, SET_DEADLINE_OBJECT, SET_LAST_CONTACTED_DATE, SET_CONTACT_CREATED_ON } from '../action-types/action-types';
+>>>>>>> 2b44a800c4c0fcd948e9d8fec600dc4088173a45
 
 const initialState = {
   userId: '',
@@ -11,12 +15,13 @@ const initialState = {
   email: '',
   image: '',
   commFrequency: 1,
-  lastContactedDate: 'Feb 1, 2020',
+  createdOn: '',
+  lastContactedDate: '',
   notificationRange: 3,
-  yellowZoneStartDate: 'Feb 20, 2020',
-  redZoneStartDate: 'Feb 26, 2020',
-  deadlineDate: 'March 1, 2020',
-  deadlineObject: { 'days': 30 },
+  yellowZoneStartDate: '',
+  redZoneStartDate: '',
+  deadlineDate: '',
+  deadlineObject: {},
   connHistory: [],
   birthdate: null,
   specialDates: [],
@@ -48,9 +53,9 @@ export default function contactDetailReducer(state = initialState, action) {
     case SET_NOTES:
       return { ...state, notes: action.payload };
     case SET_YELLOW_ZONE:
-      return { ...state, yellowZone: action.payload };
+      return { ...state, yellowZoneStartDate: action.payload };
     case SET_RED_ZONE:
-      return { ...state, redZone: action.payload };
+      return { ...state, redZoneStartDate: action.payload };
     case SET_SPECIAL_DATES:
       return { ...state, specialDates: [...state.specialDates, action.payload] };
     case SET_CONNECTION_HISTORY:
@@ -69,6 +74,8 @@ export default function contactDetailReducer(state = initialState, action) {
       return { ...state, deadlineDate: action.payload };
     case SET_DEADLINE_OBJECT:
       return { ...state, deadlineObject: action.payload };
+    case SET_CONTACT_CREATED_ON:
+      return { ...state, createdOn: action.payload };
     default: return state;
   }
 }

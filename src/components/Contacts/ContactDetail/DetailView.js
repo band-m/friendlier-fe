@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styles from './DetailView.css';
-import { useDispatch } from 'react-redux';
-import { fetchOneContact } from '../../../data/actions/contact-detail-actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchOneContact, fetchContacts } from '../../../data/actions/contact-detail-actions';
 import PropTypes from 'prop-types';
 import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
 import { useHistory } from 'react-router-dom';
+import { selectUser } from '../../../data/selectors/auth-selector';
 
 const DetailView = ({ match }) => {
   const [contact, setContact] = useState({});
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(fetchOneContact(match.params.id))
@@ -20,6 +22,7 @@ const DetailView = ({ match }) => {
   const deleteContact = contactId => {
     console.log(contactId);
     deleteContactDetails(contactId);
+    dispatch(fetchContacts(user._id));
     history.replace('/contacts');
   };
 
