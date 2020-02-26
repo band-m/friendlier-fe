@@ -18,7 +18,6 @@ const initialState = {
   birthdate: null,
   specialDates: [],
   notes: '',
-  contactDetails: {}
 };
 
 export default function contactDetailReducer(state = initialState, action) {

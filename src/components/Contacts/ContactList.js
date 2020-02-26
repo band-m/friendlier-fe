@@ -20,8 +20,6 @@ export default function ContactList() {
   let contactList;
   if(contacts.length > 0){
     contactList = contacts.map(contact => {
-      console.log(contact);
-      
       const ratio = 1 - ((contact.commFreq - contact.lastContact) / contact.commFreq);
       const commStatus =
         ratio < contact.yellowZone ? 'green' :

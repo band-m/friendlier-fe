@@ -1,32 +1,30 @@
 import React, { useEffect, useState } from 'react';
-// import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import styles from './DetailView.css';
 import { useDispatch } from 'react-redux';
 import { fetchOneContact } from '../../../data/actions/contact-detail-actions';
 import PropTypes from 'prop-types';
+import { setContactDetails } from '../../../services/contacts';
 
 
-const DetailView=({ match }) => {
+const DetailView = ({ match }) => {
+  const [contact, setContact] = useState({});
 
-  console.log(match);
-
-  const dispatch=useDispatch();
-  const [contact, setContact]=useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setContact(dispatch(fetchOneContact(match.params.id)));
+    dispatch(fetchOneContact(match.params.id))
+      .then(contact => setContact(contact.value));
+  }, [match.params.id]);
 
-  }, []);
-  console.log(contact);
-
+  const { firstName, lastName, lastContacted, email, phoneNumber, address, commFrequency, birthdate, notes } = contact;
 
   return (
     <section className={styles.DetailView}>
-      {/* <div>
+      <div>
         <h2>{firstName}</h2>
         <h2>{lastName}</h2>
       </div>
-
+      
       <div>
         <p>Last Contacted <span>{lastContacted}</span></p>
         <p>Contact Deadline <span></span></p>
@@ -43,15 +41,15 @@ const DetailView=({ match }) => {
           <p>Notes: {notes}</p>
         </div>
 
-        <p>Special Dates: {specialDates}</p>
+        {/* <p>Special Dates: {specialDates}</p> */}
       </div>
-      <button id="delete" onClick={deleteContact}>Delete Contact</button> */}
+      {/* <button id="delete" onClick={deleteContact}>Delete Contact</button> */}
     </section>
   );
 };
 
 
-DetailView.propTypes={
+DetailView.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './Header/Header';
 import Home from './Home/HomePage';
 import About from './About/AboutPage';
-import Contacts from './Contacts/ContactDetail/ContactDetail';
+// import Contacts from './Contacts/ContactDetail/ContactDetail';
 import Settings from './Settings/SettingsPage';
 import Signup from './Login/Signup';
 import Login from './Login/Login';
@@ -16,7 +16,7 @@ import DetailView from './Contacts/ContactDetail/DetailView';
 
 
 export default function App() {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(signedIn());
   }, []);

@@ -53,31 +53,12 @@ describe('contact detail actions', () => {
       });
   });
 
-  it('should create a fetch one contact detail action', () => {
-    const dispatch = jest.fn();
+  it('creates a FETCH_ONE_CONTACT action', () => {
     const action = fetchOneContact();
-    return action(dispatch)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledWith({
-          type: FETCH_ONE_CONTACT,
-          payload: {
-            _id: 'contactId',
-            userId: 'frogs',
-            firstName: 'Billy',
-            lastName: 'Boy',
-            phoneNumber: 2168675309,
-            address: '1234 Unpleasant Circle',
-            email: 'test@test.com',
-            image: 'ttttttt',
-            commFrequency: 3,
-            lastContacted: 10,
-            birthdate: 'October 12, 1987',
-            specialDates: null,
-            notes: 'Grizzly Bears',
-            __v: 0
-          }
-        });
-      });
+    expect(action).toEqual({
+      type: FETCH_ONE_CONTACT,
+      payload: Promise.resolve({ userId: 'hi', firstName: 'Nick' })
+    });
   });
 
   it('should create a set contact details action', () => {
