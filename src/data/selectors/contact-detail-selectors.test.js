@@ -1,9 +1,9 @@
-import { selectContactDetails, selectFormData } from './contact-detail-selectors';
+import { selectContactDetails } from './contact-detail-selectors';
 
 describe('contact details selectors', () => {
   it('should select contact details', () => {
     const state = {
-      contactDetail: {
+      contactDetails: {
         userId: 'lhsbkj26785iygkfuyi',
         firstName: 'Norma',
         lastName: 'Sass',
