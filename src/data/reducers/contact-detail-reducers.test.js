@@ -1,6 +1,6 @@
 import { SET_FIRST_NAME, SET_LAST_NAME, SET_PHONE_NUMBER, SET_ADDRESS, SET_EMAIL, SET_IMAGE, SET_COMM_FREQUENCY, SET_LAST_CONTACTED, SET_BIRTHDATE, SET_SPECIAL_DATES, SET_NOTES, SET_YELLOW_ZONE, SET_RED_ZONE, SET_CONNECTION_HISTORY } from '../action-types/action-types';
 
-import { contactDetailReducer } from './contact-detail-reducers';
+import contactDetailReducer from './contact-detail-reducers';
 // SET_CONTACT_DETAILS
 
 describe('contact detail reducer', () => {
