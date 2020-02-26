@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectContactsList } from '../../data/selectors/contacts-selectors';
+import { fetchContacts, setContacts } from '../../data/actions/contacts-actions';
+import { selectUser } from '../../data/selectors/auth-selector';
 
 export default function ContactList() {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    dispatch(fetchContacts(user._id))
+      .then(contacts => dispatch(setContacts(contacts)))
+  }, []);
+
   const contacts = useSelector(selectContactsList);
   
   let contactList;
