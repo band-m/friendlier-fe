@@ -1,5 +1,5 @@
-import { login, signup, signedIn } from './auth-actions';
-import { LOGIN, SIGNUP, SIGNED_IN } from '../action-types/action-types';
+import { login, logout, signup, signedIn } from './auth-actions';
+import { LOGIN, LOGOUT, SIGNUP, SIGNED_IN } from '../action-types/action-types';
 
 jest.mock('../../services/request.js');
 
@@ -10,6 +10,15 @@ describe('login actions', () => {
     expect(action).toEqual({ 
       type: LOGIN,
       payload: Promise.resolve('email: test@test.horse')
+    });
+  });
+
+  it('creates a logout action', () => {
+    const action = logout();
+
+    expect(action).toEqual({ 
+      type: LOGOUT,
+      payload: Promise.resolve()
     });
   });
 
