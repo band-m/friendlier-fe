@@ -4,19 +4,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectContactsList } from '../../data/selectors/contacts-selectors';
 import { fetchContacts } from '../../data/actions/contacts-actions';
 import { selectUser } from '../../data/selectors/auth-selector';
+import styles from './ContactList.css';
 
 export default function ContactList() {
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  
+
   useEffect(() => {
-    if(user){
+    if(user) {
       dispatch(fetchContacts(user._id));
     }
   }, [user]);
   
   const contacts = useSelector(selectContactsList);
-  
+
   let contactList;
   if(contacts.length){
     contactList = contacts.map(contact => {
@@ -37,14 +38,14 @@ export default function ContactList() {
   }
 
   return (
-    <>
+    <main className={styles.ContactList}>
       {contactList && <ul>
         {contactList}
-      </ul> }
+      </ul>}
       {!contactList && <p>Add your first contact to get started!</p>}
       <Link to='/add'>
-        <p>+</p>
+        <button title="Add New Contact">+</button>
       </Link>
-    </>
+    </main>
   );
 }
