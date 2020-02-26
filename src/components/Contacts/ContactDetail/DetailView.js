@@ -1,44 +1,30 @@
 import React from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { fetchContacts } from '../../../data/actions/contact-detail-actions';
-import styles from './DetailView.css';
-// import { SET_CONTACT_DETAILS } from '../../../data/action-types/action-types';
 // import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
+import styles from './DetailView.css';
+import { useDispatch } from 'react-redux';
+import { fetchOneContact } from '../../../data/actions/contact-detail-actions';
+import PropTypes from 'prop-types';
 
-const DetailView = () => {
-  // const dispatch = useDispatch();
-  // const contactDetail = useSelector(selectContactDetails);
-  
-  // const {
-  //   firstName,
-  //   lastName,
-  //   phoneNumber,
-  //   address,
-  //   email,
-  //   commFrequency,
-  //   lastContacted,
-  //   yellowZone,
-  //   redZone,
-  //   connHistory,
-  //   specialDates,
-  //   birthdate,
-  //   notes
-  // } = contactDetail;
 
-  // const dispatch = useDispatch();
+const DetailView=({ match }) => {
+  const dispatch=useDispatch();
+  const contact=dispatch(fetchOneContact(match.params.contactId));
+
+  console.log(contact);
+
 
   // useEffect(() => {
-  //   dispatch(fetchContacts(contactId));
+  //   fetchData = async() => {
+  //     const data = await getContactDetails(match.params.contactId);
+  //     dispatch();
+  //   };
   // });
 
-  const deleteContact = () => {
-
-  };
 
   return (
     <section className={styles.DetailView}>
-      <div>
-        {/* <h2>{firstName}</h2>
+      {/* <div>
+        <h2>{firstName}</h2>
         <h2>{lastName}</h2>
       </div>
 
@@ -58,11 +44,21 @@ const DetailView = () => {
           <p>Notes: {notes}</p>
         </div>
 
-        <p>Special Dates: {specialDates}</p> */}
+        <p>Special Dates: {specialDates}</p>
       </div>
-      <button id="delete" onClick={deleteContact}>Delete Contact</button>
+      <button id="delete" onClick={deleteContact}>Delete Contact</button> */}
     </section>
   );
+};
+
+
+DetailView.propTypes={
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      contactId: PropTypes.string.isRequired,
+    }).isRequired
+  }).isRequired
+
 };
 
 export default DetailView;
