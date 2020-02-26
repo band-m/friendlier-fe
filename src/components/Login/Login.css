@@ -15,6 +15,10 @@
       display: flex;
       justify-content: space-between;
       padding: 0.175rem 0;
+
+      input{
+        border: 1px gray solid;
+      }
     }
     button {
       margin: 1rem 0;
