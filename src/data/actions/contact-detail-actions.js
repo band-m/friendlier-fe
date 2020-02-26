@@ -21,9 +21,7 @@ export const postContactDetails = body => dispatch => {
     });
 };
 
-export const myAction = (type, payload) => {
-  return {
-    type,
-    payload
-  };
-};
+export const myAction = (type, payload) => ({
+  type,
+  payload
+});

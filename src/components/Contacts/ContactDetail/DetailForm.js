@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './DetailForm.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import { myAction, postContactDetails } from '../../../data/actions/contact-detail-actions';
 import {
   SET_USER_ID,
@@ -20,26 +19,28 @@ import {
   SET_CONTACT_DETAILS
 } from '../../../data/action-types/action-types';
 import { selectUser } from '../../../data/selectors/auth-selector';
+import { setContact } from '../../../data/actions/contacts-actions';
+import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 
 const DetailForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  // const contactDetails = useSelector(selectContactDetails);
+  const details = useSelector(selectContactDetails);
+  
 
   // const contactDeadline = (comFreq, lastCont) => {
   //   return (Number(comFreq) - Number(lastCont));
   // };
 
   useEffect(() => {
-    console.log(user);
-    
     dispatch(myAction(SET_USER_ID, user._id));
   }, []);
-  
+
   const handleSubmit = event => {
-    const contactDetails = useSelector(selectContactDetails);
     event.preventDefault();
-    dispatch(postContactDetails(contactDetails));
+    
+    dispatch(setContact(details));
+    dispatch(postContactDetails(details));
   };
 
   return (
@@ -77,7 +78,7 @@ const DetailForm = () => {
             /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */ }
         </div>
       </section>
-      <button>Create a new contact</button>
+      <button type="submit">Create a new contact</button>
     </form>
   );
 };
