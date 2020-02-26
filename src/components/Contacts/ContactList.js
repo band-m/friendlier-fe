@@ -8,7 +8,8 @@ import { selectUser } from '../../data/selectors/auth-selector';
 export default function ContactList() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-
+  console.log(user);
+  
   useEffect(() => {
     dispatch(fetchContacts(user._id))
       .then(contacts => dispatch(setContacts(contacts)))
