@@ -1,4 +1,4 @@
-import { FETCH_CONTACTS, FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED, SET_CONTACTS } from '../action-types/action-types';
+import { FETCH_CONTACTS, FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED } from '../action-types/action-types';
 import { getContacts } from '../../services/contacts';
 import contactsReducer, { initialState } from './contacts-reducer';
 
@@ -23,9 +23,5 @@ describe('contact-reducer', () => {
 
   it('handles a FETCH_CONTACTS_REJECTED action', () => {
     expect(contactsReducer(initialState, { type: FETCH_CONTACTS_REJECTED, payload: 'promise rejected' })).toEqual({ ...initialState, contactsLoading: false, contactList: [], error: 'promise rejected' });
-  });
-
-  it('handles a SET_CONTACTS action', () => {
-    expect(contactsReducer(initialState, { type: SET_CONTACTS, payload: ['Dalinar', 'Kaladin'] })).toEqual({ ...initialState, contactsLoading: false, contactList: ['Dalinar', 'Kaladin'], error: null });
   });
 });

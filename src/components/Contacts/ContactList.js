@@ -2,24 +2,26 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContactsList } from '../../data/selectors/contacts-selectors';
-import { fetchContacts, setContacts } from '../../data/actions/contacts-actions';
+import { fetchContacts } from '../../data/actions/contacts-actions';
 import { selectUser } from '../../data/selectors/auth-selector';
 
 export default function ContactList() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();  
   const user = useSelector(selectUser);
-  console.log(user);
   
   useEffect(() => {
-    dispatch(fetchContacts(user._id))
-      .then(contacts => dispatch(setContacts(contacts)))
-  }, []);
+    if(user){
+      dispatch(fetchContacts(user._id));
+    }
+  }, [user]);
 
   const contacts = useSelector(selectContactsList);
   
   let contactList;
   if(contacts.length > 0){
     contactList = contacts.map(contact => {
+      console.log(contact);
+      
       const ratio = 1 - ((contact.commFreq - contact.lastContact) / contact.commFreq);
       const commStatus =
         ratio < contact.yellowZone ? 'green' :
