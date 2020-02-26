@@ -5,6 +5,7 @@ import add from 'date-fns/add';
 import format from 'date-fns/format';
 import differenceInDays from 'date-fns/differenceInCalendarDays';
 import styles from './ContactDetail/DetailForm.css';
+import parse from 'date-fns/parse';
 import { useSelector, useDispatch } from 'react-redux';
 import { myAction, postContactDetails } from '../../data/actions/contact-detail-actions';
 import {
@@ -154,8 +155,8 @@ export default function AddContact(){
     dispatch(setContact(details));
     dispatch(postContactDetails(details));
     history.push('/contacts');
-  };
-
+  };  
+  
   return (
     <form className={styles.DetailForm} onSubmit={handleSubmit}>
       <div>
