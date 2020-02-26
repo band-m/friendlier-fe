@@ -25,6 +25,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.8.3",
     "date-fns": "^2.9.0",
     "nouislider-react": "^3.3.7",
     "react": "16.12.0",
@@ -32,7 +33,8 @@
     "react-redux": "7.2.0",
     "react-router-dom": "5.1.2",
     "redux": "4.0.5",
-    "redux-promise-middleware": "^6.1.2"
+    "redux-promise-middleware": "^6.1.2",
+    "serviceworker-webpack-plugin": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.8.4",
