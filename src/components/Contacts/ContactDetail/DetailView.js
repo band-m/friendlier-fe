@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import styles from './DetailView.css';
 import { useDispatch } from 'react-redux';
@@ -7,18 +7,17 @@ import PropTypes from 'prop-types';
 
 
 const DetailView=({ match }) => {
+
+  console.log(match);
+
   const dispatch=useDispatch();
-  const contact=dispatch(fetchOneContact(match.params.contactId));
+  const [contact, setContact]=useState([]);
 
+  useEffect(() => {
+    setContact(dispatch(fetchOneContact(match.params.id)));
+
+  }, []);
   console.log(contact);
-
-
-  // useEffect(() => {
-  //   fetchData = async() => {
-  //     const data = await getContactDetails(match.params.contactId);
-  //     dispatch();
-  //   };
-  // });
 
 
   return (
@@ -55,7 +54,7 @@ const DetailView=({ match }) => {
 DetailView.propTypes={
   match: PropTypes.shape({
     params: PropTypes.shape({
-      contactId: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
     }).isRequired
   }).isRequired
 

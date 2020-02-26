@@ -21,6 +21,7 @@ import {
 import { selectUser } from '../../../data/selectors/auth-selector';
 import { setContact } from '../../../data/actions/contacts-actions';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
+import { setContactDetails } from '../../../services/contacts';
 
 const DetailForm = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const DetailForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    dispatch(myAction(SET_CONTACT_DETAILS, ...details));
     dispatch(setContact(details));
     dispatch(postContactDetails(details));
   };

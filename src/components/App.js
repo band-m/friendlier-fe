@@ -11,11 +11,12 @@ import Login from './Login/Login';
 import { signedIn } from '../data/actions/auth-actions';
 import AddContact from './Contacts/AddContact';
 import ContactList from './Contacts/ContactList';
+import DetailView from './Contacts/ContactDetail/DetailView';
 
 
 
 export default function App() {
-  const dispatch = useDispatch();
+  const dispatch=useDispatch();
   useEffect(() => {
     dispatch(signedIn());
   }, []);
@@ -32,8 +33,8 @@ export default function App() {
         <Route path="/about" component={About} />
         <Route path="/settings" component={Settings} />
       </Switch>
-      {/* <Route path='/contacts/:id' component={ContactDetail} />
-        <Route path='/contacts/add' component={AddContact} /> */}
+      <Route path='/contacts/:id' component={DetailView} />
+      {/* <Route path='/contacts/add' component={AddContact} /> */}
     </Router>
   );
 }
