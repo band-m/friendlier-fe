@@ -22,7 +22,10 @@ import {
   SET_ADDRESS,
   SET_PHONE_NUMBER,
   SET_SPECIAL_DATES,
-  SET_CONTACT_DETAILS
+  SET_CONTACT_DETAILS,
+  SET_DEADLINE_OBJECT,
+  SET_NOTIFICATION_RANGE,
+  SET_DEADLINE_DATE
 } from '../../data/action-types/action-types';
 import { selectUser } from '../../data/selectors/auth-selector';
 import { setContact } from '../../data/actions/contacts-actions';
@@ -78,8 +81,9 @@ export default function AddContact(){
     }
   }
 
-  // When numOfDays changes, make new deadlineObject
+  // When numOfDays changes, make new deadlineObject and set commFrequency in contact details
   useEffect(() => {
+    dispatch(myAction(SET_COMM_FREQUENCY, numOfDays));
     switch(deadlineUnit){
       case 'days':
         return setDeadlineObject({ days: num, months: 0 });
@@ -90,10 +94,21 @@ export default function AddContact(){
     };  
   }, [numOfDays])
 
-  // When deadlineObject changes, make new deadline
+  // When deadlineObject changes, make new deadline and set deadlineObject in contact details
   useEffect(() => {
+    dispatch(myAction(SET_DEADLINE_OBJECT, deadlineObject));
     setDeadline(format(add(new Date(), deadlineObject), "PPPP"));
   }, [deadlineObject])
+
+  // When deadline changes, set deadlineDate in contact details
+  useEffect(() => {
+    dispatch(myAction(SET_DEADLINE_DATE, deadline));
+  }, [deadline])
+
+  // When notificationOption changes, set notificationRange in contact details
+  useEffect(() => {
+    dispatch(myAction(SET_NOTIFICATION_RANGE, notificationOption));
+  }, [notificationOption])
 
   // When notificationObject or numOfDays changes, change slider positions
   useEffect(() => {
@@ -119,13 +134,19 @@ export default function AddContact(){
     setRedZone(format(add(new Date(), { days: slider2 }), "PPPP"))
   }, [slider1, slider2])
 
+  // When yellowZone or redZone change, set yellowZoneStartDate and redZoneStartDate in contact details
+  useEffect(() => {
+    dispatch(myAction(SET_YELLOW_ZONE, yellowZone));
+    dispatch(myAction(SET_RED_ZONE, redZone));
+  }, [yellowZone, redZone])
+
+  // On initial load, add colors to the range connectors
   useEffect(() => {
     const connectors = document.querySelectorAll('.noUi-connect');
     const classes = ['c-1-color', 'c-2-color', 'c-3-color'];
     for(let i = 0; i < connectors.length; i++){
       connectors[i].classList.add(classes[i]);
-    }
-    
+    } 
   }, [])
 
 
