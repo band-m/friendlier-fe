@@ -3,7 +3,7 @@ import request from './request';
 export const getContacts = userId => 
   request(`/api/v1/contacts/${userId}`);
 
-export const getOneContactDetail = contactId =>
+export const getContactDetail = contactId =>
   request(`/api/v1/contacts/single/${contactId}`);
 
 export const setContactDetails = body =>

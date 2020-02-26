@@ -1,4 +1,4 @@
-export const getContacts = userId => Promise.resolve([{
+export const getContacts = () => Promise.resolve([{
   _id: 'grouper',
   userId: 'userId',
   firstName: 'Billy',
@@ -15,7 +15,7 @@ export const getContacts = userId => Promise.resolve([{
   __v: 0
 }]);
 
-export const getOneContactDetail = contactId => Promise.resolve({
+export const getContactDetail = () => Promise.resolve({
   _id: 'contactId',
   userId: 'frogs',
   firstName: 'Billy',

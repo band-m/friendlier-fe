@@ -1,5 +1,5 @@
 import { FETCH_CONTACTS, SET_CONTACT_DETAILS, FETCH_ONE_CONTACT } from '../action-types/action-types';
-import { getContacts, setContactDetails, getOneContactDetail } from '../../services/contacts';
+import { getContacts, setContactDetails, getContactDetail } from '../../services/contacts';
 
 export const fetchContacts = userId => dispatch => {
   return getContacts(userId)
@@ -12,7 +12,7 @@ export const fetchContacts = userId => dispatch => {
 };
 
 export const fetchOneContact = contactId => dispatch => {
-  return getOneContactDetail(contactId)
+  return getContactDetail(contactId)
     .then(detail => {
       dispatch({
         type: FETCH_ONE_CONTACT,
