@@ -10,6 +10,7 @@ import Signup from './Login/Signup';
 import Login from './Login/Login';
 import { signedIn } from '../data/actions/auth-actions';
 import AddContact from './Contacts/AddContact';
+import ContactList from './Contacts/ContactList';
 
 
 
@@ -26,7 +27,7 @@ export default function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/contacts" component={Contacts} />
+        <Route path="/contacts" component={ContactList} />
         <Route path="/add" component={AddContact} />
         <Route path="/about" component={About} />
         <Route path="/settings" component={Settings} />
