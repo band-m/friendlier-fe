@@ -7,10 +7,14 @@ if('serviceWorker' in navigator) {
 
   run().catch(error => console.error(error));
 }
+else {
+  console.log('service workers not supported');
+}
 
 async function run() {
   console.log('Registering service worker');
-  const registration = await navigator.serviceWorker.register('/worker.js', { scope: '/' });
+  const registration = await navigator.serviceWorker.register('/workers/worker.js', { scope: '/' })
+    .then(registration);
   console.log('Registered service worker');
 
   console.log('Registering push');
