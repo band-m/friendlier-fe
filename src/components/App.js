@@ -4,13 +4,14 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './Header/Header';
 import Home from './Home/HomePage';
 import About from './About/AboutPage';
-import Contacts from './Contacts/ContactDetail/ContactDetail';
+// import Contacts from './Contacts/ContactDetail/ContactDetail';
 import Settings from './Settings/SettingsPage';
 import Signup from './Login/Signup';
 import Login from './Login/Login';
 import { signedIn } from '../data/actions/auth-actions';
 import AddContact from './Contacts/AddContact';
 import ContactList from './Contacts/ContactList';
+import DetailView from './Contacts/ContactDetail/DetailView';
 
 
 
@@ -32,8 +33,8 @@ export default function App() {
         <Route path="/about" component={About} />
         <Route path="/settings" component={Settings} />
       </Switch>
-      {/* <Route path='/contacts/:id' component={ContactDetail} />
-        <Route path='/contacts/add' component={AddContact} /> */}
+      <Route path='/contacts/:id' component={DetailView} />
+      {/* <Route path='/contacts/add' component={AddContact} /> */}
     </Router>
   );
 }
