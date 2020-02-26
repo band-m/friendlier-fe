@@ -1,0 +1,14 @@
+.DetailForm{
+  section{
+    display: flex;
+    flex-direction: row;
+    div{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+  }
+  .notes{
+    flex-direction: column;
+  }
+}
