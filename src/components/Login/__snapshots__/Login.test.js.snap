@@ -43,11 +43,11 @@ exports[`Login component renders Login 1`] = `
   <p
     className="center"
   >
-    <Link
+    <Component
       to="/signup"
     >
       Sign up
-    </Link>
+    </Component>
   </p>
 </main>
 `;
