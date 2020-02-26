@@ -34,7 +34,7 @@
     "react-router-dom": "5.1.2",
     "redux": "4.0.5",
     "redux-promise-middleware": "^6.1.2",
-    "serviceworker-webpack-plugin": "^1.0.1"
+    "serviceworker-webpack-plugin": "^1.0.1",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
