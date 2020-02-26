@@ -26,7 +26,7 @@ const DetailForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const details = useSelector(selectContactDetails);
-  
+
 
   // const contactDeadline = (comFreq, lastCont) => {
   //   return (Number(comFreq) - Number(lastCont));
@@ -46,7 +46,7 @@ const DetailForm = () => {
     <form className={styles.DetailForm} onSubmit={handleSubmit}>
       <div>
         <input type="text" onChange={({ target }) => dispatch(myAction(SET_FIRST_NAME, target.value))} name="firstName" placeholder="First Name" />
-        <input type="text" onChange={({ target }) => dispatch(myAction(SET_LAST_NAME, target.value))} name="lastName" placeholder="Last Name"/>
+        <input type="text" onChange={({ target }) => dispatch(myAction(SET_LAST_NAME, target.value))} name="lastName" placeholder="Last Name" />
       </div>
 
       <div>
@@ -62,20 +62,22 @@ const DetailForm = () => {
           <label htmlFor="address">Address</label>
           <label htmlFor="phoneNumber">Phone Number</label>
           <label htmlFor="birthdate">Birthdate</label>
-          <label htmlFor="notes">Notes</label>
         </div>
 
         <div>
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_EMAIL, target.value))} id="email" name="email" placeholder="Email address"/>
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_ADDRESS, target.value))} id="address" name="address" placeholder="Physical Address"/>
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_PHONE_NUMBER, target.value))} id="phoneNumber" name="phoneNumber" placeholder="Phone Number"/>
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_EMAIL, target.value))} id="email" name="email" placeholder="Email address" />
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_ADDRESS, target.value))} id="address" name="address" placeholder="Physical Address" />
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_PHONE_NUMBER, target.value))} id="phoneNumber" name="phoneNumber" placeholder="Phone Number" />
           {
-            /* <input type="text" onChange={({ target }) => dispatch(myAction(SET_IMAGE, target.value))} id="image" name="image" value={image || ''} placeholder="First Name"/> */ }
+            /* <input type="text" onChange={({ target }) => dispatch(myAction(SET_IMAGE, target.value))} id="image" name="image" value={image || ''} placeholder="First Name"/> */}
           <input type="date" onChange={({ target }) => dispatch(myAction(SET_BIRTHDATE, target.value))} id="birthdate" name="birthdate" placeholder="Birthdate" />
-          <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes"></textarea>
+
           {
-            /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */ }
+            /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */}
         </div>
+      </section>
+      <section className={styles.notes}><label htmlFor="notes">Notes</label>
+        <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes"></textarea>
       </section>
       <button type="submit">Create a new contact</button>
     </form>

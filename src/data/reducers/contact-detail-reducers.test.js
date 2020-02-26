@@ -1,4 +1,4 @@
-import { SET_FIRST_NAME, SET_LAST_NAME, SET_PHONE_NUMBER, SET_ADDRESS, SET_EMAIL, SET_IMAGE, SET_COMM_FREQUENCY, SET_LAST_CONTACTED, SET_BIRTHDATE, SET_SPECIAL_DATES, SET_NOTES, SET_YELLOW_ZONE, SET_RED_ZONE, SET_CONNECTION_HISTORY } from '../action-types/action-types';
+import { SET_FIRST_NAME, SET_LAST_NAME, SET_PHONE_NUMBER, SET_ADDRESS, SET_EMAIL, SET_IMAGE, SET_COMM_FREQUENCY, SET_BIRTHDATE, SET_SPECIAL_DATES, SET_NOTES, SET_YELLOW_ZONE, SET_RED_ZONE, SET_CONNECTION_HISTORY, SET_LAST_CONTACTED_DATE, SET_NOTIFICATION_RANGE, SET_DEADLINE_DATE, SET_DEADLINE_OBJECT, SET_CONTACT_CREATED_ON } from '../action-types/action-types';
 
 import contactDetailReducer from './contact-detail-reducers';
 // SET_CONTACT_DETAILS
@@ -92,14 +92,14 @@ describe('contact detail reducer', () => {
 
   it('handles set last contacted action', () => {
     const action = {
-      type: SET_LAST_CONTACTED,
+      type: SET_LAST_CONTACTED_DATE,
       payload: 5
     };
 
-    const initialState = { lastContacted: 1 };
+    const initialState = { lastContactedDate: 1 };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({
-      lastContacted: 5
+      lastContactedDate: 5
     });
   });
 
@@ -132,26 +132,78 @@ describe('contact detail reducer', () => {
   it('handles set yellow zone action', () => {
     const action = {
       type: SET_YELLOW_ZONE,
-      payload: 2
+      payload: 'Sept 2 2020'
     };
 
-    const initialState = { yellowZone: 0 };
+    const initialState = { yellowZoneStartDate: '' };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({
-      yellowZone: 2
+      yellowZoneStartDate: 'Sept 2 2020'
     });
   });
 
   it('handles set redzone action', () => {
     const action = {
       type: SET_RED_ZONE,
+      payload: 'Sept 2 2020'
+    };
+
+    const initialState = { redZoneStartDate: '' };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({
+      redZoneStartDate: 'Sept 2 2020'
+    });
+  });
+
+  it('handles set notification range action', () => {
+    const action = {
+      type: SET_NOTIFICATION_RANGE,
       payload: 2
     };
 
-    const initialState = { redZone: 0 };
+    const initialState = { notificationRange: 1 };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({
-      redZone: 2
+      notificationRange: 2
+    });
+  });
+
+  it('handles set deadline date action', () => {
+    const action = {
+      type: SET_DEADLINE_DATE,
+      payload: 'Sept 2, 2020'
+    };
+
+    const initialState = { deadlineDate: 'March 1, 2020' };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({
+      deadlineDate: 'Sept 2, 2020'
+    });
+  });
+
+  it('handles set deadline object action', () => {
+    const action = {
+      type: SET_DEADLINE_OBJECT,
+      payload: { 'months': 3 }
+    };
+
+    const initialState = { deadlineObject: { 'days': 3 } };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({
+      deadlineObject: { 'months': 3 }
+    });
+  });
+
+  it('handles set contact created on action', () => {
+    const action = {
+      type: SET_CONTACT_CREATED_ON,
+      payload: 'Sept 2 2020'
+    };
+
+    const initialState = { createdOn: '' };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({
+      createdOn: 'Sept 2 2020'
     });
   });
 });

@@ -11,10 +11,14 @@ import {
   SET_BIRTHDATE,
   SET_SPECIAL_DATES,
   SET_NOTES,
-  SET_LAST_CONTACTED,
+  SET_LAST_CONTACTED_DATE,
   SET_YELLOW_ZONE,
   SET_RED_ZONE,
-  FETCH_ONE_CONTACT
+  FETCH_ONE_CONTACT,
+  SET_NOTIFICATION_RANGE,
+  SET_DEADLINE_DATE,
+  SET_DEADLINE_OBJECT,
+  SET_CONTACT_CREATED_ON
 } from '../action-types/action-types';
 import {
   fetchContacts,
@@ -164,10 +168,10 @@ describe('contact detail actions', () => {
   });
 
   it('should create a set last contacted action', () => {
-    const action = myAction(SET_LAST_CONTACTED, 'January 2, 2020');
+    const action = myAction(SET_LAST_CONTACTED_DATE, 'January 2, 2020');
 
     expect(action).toEqual({
-      type: SET_LAST_CONTACTED,
+      type: SET_LAST_CONTACTED_DATE,
       payload: 'January 2, 2020'
     });
   });
@@ -205,6 +209,42 @@ describe('contact detail actions', () => {
     expect(action).toEqual({
       type: SET_RED_ZONE,
       payload: 1
+    });
+  });
+
+  it('should create a set notifiction range action', () => {
+    const action = myAction(SET_NOTIFICATION_RANGE, 3);
+
+    expect(action).toEqual({
+      type: SET_NOTIFICATION_RANGE,
+      payload: 3
+    });
+  });
+
+  it('should create a set deadline date action', () => {
+    const action = myAction(SET_DEADLINE_DATE, 'Sept 2 2022');
+
+    expect(action).toEqual({
+      type: SET_DEADLINE_DATE,
+      payload: 'Sept 2 2022'
+    });
+  });
+
+  it('should create a set deadline object action', () => {
+    const action = myAction(SET_DEADLINE_OBJECT, { 'days': 3 });
+
+    expect(action).toEqual({
+      type: SET_DEADLINE_OBJECT,
+      payload: { 'days': 3 }
+    });
+  });
+
+  it('should create a set contact created on action', () => {
+    const action = myAction(SET_CONTACT_CREATED_ON, 'Sept 2 2020');
+
+    expect(action).toEqual({
+      type: SET_CONTACT_CREATED_ON,
+      payload: 'Sept 2 2020'
     });
   });
 });
