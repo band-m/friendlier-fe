@@ -1,4 +1,4 @@
-import { SET_FIRST_NAME, SET_LAST_NAME, SET_PHONE_NUMBER, SET_ADDRESS, SET_EMAIL, SET_IMAGE, SET_COMM_FREQUENCY, SET_BIRTHDATE, SET_SPECIAL_DATES, SET_NOTES, SET_YELLOW_ZONE, SET_RED_ZONE, SET_CONNECTION_HISTORY, SET_LAST_CONTACTED_DATE, SET_NOTIFICATION_RANGE, SET_DEADLINE_DATE, SET_DEADLINE_OBJECT } from '../action-types/action-types';
+import { SET_FIRST_NAME, SET_LAST_NAME, SET_PHONE_NUMBER, SET_ADDRESS, SET_EMAIL, SET_IMAGE, SET_COMM_FREQUENCY, SET_BIRTHDATE, SET_SPECIAL_DATES, SET_NOTES, SET_YELLOW_ZONE, SET_RED_ZONE, SET_CONNECTION_HISTORY, SET_LAST_CONTACTED_DATE, SET_NOTIFICATION_RANGE, SET_DEADLINE_DATE, SET_DEADLINE_OBJECT, SET_CONTACT_CREATED_ON } from '../action-types/action-types';
 
 import contactDetailReducer from './contact-detail-reducers';
 // SET_CONTACT_DETAILS
@@ -132,26 +132,26 @@ describe('contact detail reducer', () => {
   it('handles set yellow zone action', () => {
     const action = {
       type: SET_YELLOW_ZONE,
-      payload: 2
+      payload: 'Sept 2 2020'
     };
 
-    const initialState = { yellowZone: 0 };
+    const initialState = { yellowZoneStartDate: '' };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({
-      yellowZone: 2
+      yellowZoneStartDate: 'Sept 2 2020'
     });
   });
 
   it('handles set redzone action', () => {
     const action = {
       type: SET_RED_ZONE,
-      payload: 2
+      payload: 'Sept 2 2020'
     };
 
-    const initialState = { redZone: 0 };
+    const initialState = { redZoneStartDate: '' };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({
-      redZone: 2
+      redZoneStartDate: 'Sept 2 2020'
     });
   });
 
@@ -191,6 +191,19 @@ describe('contact detail reducer', () => {
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({
       deadlineObject: { 'months': 3 }
+    });
+  });
+
+  it('handles set contact created on action', () => {
+    const action = {
+      type: SET_CONTACT_CREATED_ON,
+      payload: 'Sept 2 2020'
+    };
+
+    const initialState = { createdOn: '' };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({
+      createdOn: 'Sept 2 2020'
     });
   });
 });
