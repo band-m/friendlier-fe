@@ -1,6 +1,6 @@
 import React, { useEffect }   from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchContactDetails } from '../../../data/actions/contact-detail-actions';
+import { fetchContacts } from '../../../data/actions/contact-detail-actions';
 import styles from './DetailView.css';
 import { SET_CONTACT_DETAILS } from '../../../data/action-types/action-types';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
@@ -28,7 +28,7 @@ const DetailView = () => {
   // const dispatch = useDispatch();
 
   // useEffect(() => {
-  //   dispatch(fetchContactDetails(contactId));
+  //   dispatch(fetchContacts(contactId));
   // });
 
   const deleteContact = () => {

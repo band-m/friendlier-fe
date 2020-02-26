@@ -1,5 +1,5 @@
 import {
-  FETCH_CONTACT_DETAILS,
+  FETCH_CONTACTS,
   SET_CONTACT_DETAILS,
   SET_FIRST_NAME,
   SET_LAST_NAME,
@@ -13,10 +13,12 @@ import {
   SET_NOTES,
   SET_LAST_CONTACTED,
   SET_YELLOW_ZONE,
-  SET_RED_ZONE
+  SET_RED_ZONE,
+  FETCH_ONE_CONTACT
 } from '../action-types/action-types';
 import {
-  fetchContactDetails,
+  fetchContacts,
+  fetchOneContact,
   myAction
 } from '../actions/contact-detail-actions';
 
@@ -25,14 +27,15 @@ jest.mock('../../services/contacts.js');
 describe('contact detail actions', () => {
   it('should create a fetch contact detail action', () => {
     const dispatch = jest.fn();
-    const action = fetchContactDetails();
+    const action = fetchContacts();
 
     return action(dispatch)
       .then(() => {
         expect(dispatch).toHaveBeenCalledWith({
-          type: FETCH_CONTACT_DETAILS,
-          payload: {
-            userId: 'ljdgckxjdgckjhey586',
+          type: FETCH_CONTACTS,
+          payload: [{
+            _id: 'grouper',
+            userId: 'userId',
             firstName: 'Billy',
             lastName: 'Boy',
             phoneNumber: 2168675309,
@@ -43,7 +46,35 @@ describe('contact detail actions', () => {
             lastContacted: 10,
             birthdate: 'October 12, 1987',
             specialDates: null,
-            notes: 'Grizzly Bears'
+            notes: 'Grizzly Bears',
+            __v: 0
+          }]
+        });
+      });
+  });
+
+  it('should create a fetch one contact detail action', () => {
+    const dispatch = jest.fn();
+    const action = fetchOneContact();
+    return action(dispatch)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledWith({
+          type: FETCH_ONE_CONTACT,
+          payload: {
+            _id: 'contactId',
+            userId: 'frogs',
+            firstName: 'Billy',
+            lastName: 'Boy',
+            phoneNumber: 2168675309,
+            address: '1234 Unpleasant Circle',
+            email: 'test@test.com',
+            image: 'ttttttt',
+            commFrequency: 3,
+            lastContacted: 10,
+            birthdate: 'October 12, 1987',
+            specialDates: null,
+            notes: 'Grizzly Bears',
+            __v: 0
           }
         });
       });
@@ -132,7 +163,7 @@ describe('contact detail actions', () => {
     });
   });
 
-  it('it should create a set last contacted action', () => {
+  it('should create a set last contacted action', () => {
     const action = myAction(SET_LAST_CONTACTED, 'January 2, 2020');
 
     expect(action).toEqual({
