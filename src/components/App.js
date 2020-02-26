@@ -7,7 +7,6 @@ import About from './About/AboutPage';
 import Contacts from './Contacts/ContactList';
 import Settings from './Settings/SettingsPage';
 import Signup from './Login/Signup';
-import Slider from './Slider/Slider';
 import Login from './Login/Login';
 import { signedIn } from '../data/actions/auth-actions';
 import AddContact from './Contacts/AddContact';

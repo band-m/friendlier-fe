@@ -5,7 +5,6 @@ import { selectContactsList } from '../../data/selectors/contacts-selectors';
 
 export default function ContactList() {
   const contacts = useSelector(selectContactsList);
-  console.log(contacts);
   
   let contactList;
   if(contacts.length > 0){

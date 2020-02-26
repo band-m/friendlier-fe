@@ -2,13 +2,15 @@
 
 exports[`ContactList component matches snapshot 1`] = `
 <Fragment>
-  <ul />
+  <p>
+    Add your first contact to get started!
+  </p>
   <Component
-    to="contacts/add"
+    to="/add"
   >
-    <img
-      src="PLUS_ICON"
-    />
+    <p>
+      +
+    </p>
   </Component>
 </Fragment>
 `;
