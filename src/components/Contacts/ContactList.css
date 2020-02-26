@@ -1,0 +1,41 @@
+.ContactList{
+  display: flex;
+  flex-direction: column;
+
+  ul{
+    width: 100%;
+    background-color: #EEE;
+    border-top: 0.5px solid #343;
+
+    a{
+      text-decoration: none;
+      text-align: center;
+
+      li{
+        padding: 0.5rem 1rem;
+        border-bottom: 0.5px solid #343;
+        color: #666;
+      }
+
+      .red{
+        background-color: red;
+      }
+
+      .yellow {
+        background-color: yellow;
+      }
+
+      p{
+        padding: 0.25rem;
+      }
+    }
+  }
+  a{
+    text-decoration: none;
+    margin: 0.75rem auto;
+
+    button{
+      font-size: 2rem;
+    }
+  }
+}

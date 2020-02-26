@@ -1,4 +1,4 @@
-import { FETCH_CONTACTS, SET_CONTACT_DETAILS, FETCH_ONE_CONTACT } from '../action-types/action-types';
+import { FETCH_CONTACTS, SET_CONTACT_DETAILS, FETCH_ONE_CONTACT, E } from '../action-types/action-types';
 import { getContacts, setContactDetails, getContactDetail } from '../../services/contacts';
 
 export const fetchContacts = userId => dispatch => {
@@ -11,15 +11,10 @@ export const fetchContacts = userId => dispatch => {
     });
 };
 
-export const fetchOneContact = contactId => dispatch => {
-  return getContactDetail(contactId)
-    .then(detail => {
-      dispatch({
-        type: FETCH_ONE_CONTACT,
-        payload: detail
-      });
-    });
-};
+export const fetchOneContact = contactId => ({
+  type: FETCH_ONE_CONTACT,
+  payload: getContactDetail(contactId)
+});
 
 export const postContactDetails = body => dispatch => {
   return setContactDetails(body)

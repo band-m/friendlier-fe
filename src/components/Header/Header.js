@@ -18,13 +18,14 @@ const Header = () => {
         </span>
       </button>
       <Link to="/">
-        <div className={styles.Logo} alt="re:connect logo" title="Back to Home"></div>
+        <div className={styles.Logo} alt="KIT logo" title="Back to Home"></div>
       </Link>
       <nav className={styles.Nav}>
+        {!user && <Link to="/" className={styles.HomeLink}><span>Home</span></Link>}
         {user && <Link to="/contacts"><span>Contact List</span></Link>}
         <Link to="/about"><span>About</span></Link>
         {user && <Link to="/settings"><span>Settings</span></Link>}
-        {user && <span onClick={handleLogoutClick}>Logout</span>}
+        {user && <span onClick={handleLogoutClick} className={styles.LogoutButton}>Logout</span>}
       </nav>
     </header>
   );
