@@ -53,7 +53,7 @@ const DetailView = ({ match }) => {
           <p>Email: {email}</p>
           <p>Address: {address}</p>
           <p>Phone Number: {phoneNumber}</p>
-          <p>Birthdate: {birthdate && birthdate.split('T')[0]}</p>
+          <p>Birthdate: {birthdate ? birthdate.split('T')[0] : ''}</p>
           <p>Notes: {notes}</p>
         </div><br/>
 
