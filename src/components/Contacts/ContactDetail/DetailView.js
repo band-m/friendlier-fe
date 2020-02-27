@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
 import { useHistory } from 'react-router-dom';
 import { selectUser } from '../../../data/selectors/auth-selector';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const DetailView = ({ match }) => {
   const [contact, setContact] = useState({});
@@ -30,30 +31,44 @@ const DetailView = ({ match }) => {
 
   return (
     <section className={styles.DetailView}>
-      <div>
-        <h2>{firstName}</h2>
-        <h2>{lastName}</h2>
+      <div className={styles.FullName}>
+        {firstName &&
+          <h2>{firstName}</h2>
+        }
+        {lastName &&
+          <h2>{lastName}</h2>
+        }
       </div>
-      
-      <div>
-        <p>Last Contacted <span>{lastContacted}</span></p>
-        <p>Contact Deadline <span></span></p>
-      </div>
-
-      <button>Show Contact History</button>
-
-      <div>
-        <div>
-          <p>Email: {email}</p>
-          <p>Address: {address}</p>
-          <p>Phone Number: {phoneNumber}</p>
-          <p>Birthdate: {birthdate}</p>
-          <p>Notes: {notes}</p>
+      <div className={styles.ContactHistory}>
+        <div className={styles.Column}>
+          <p>Last Contacted <span>{lastContacted}</span></p>
+          <p>Contact Deadline <span></span></p>
         </div>
 
+        <button>Show Contact History</button>
+      </div>
+
+      <div className={styles.ContactFields}>
+        {email &&
+          <p>Email: {email}</p>
+        }
+        {address &&
+          <p>Address: {address}</p>
+        }
+        {phoneNumber &&
+          <p>Phone Number: {phoneNumber}</p>
+        }
+        {birthdate &&
+          <p>Birthdate: {birthdate}</p>
+        }
+        {notes &&
+          <p>Notes: {notes}</p>
+        }
         {/* <p>Special Dates: {specialDates}</p> */}
       </div>
-      <button id="delete" onClick={() => deleteContact(contact._id)}>Delete Contact</button>
+      <div className={styles.ToolbarBottom}>
+        <FaTrashAlt id="delete" onClick={() => deleteContact(contact._id)} />
+      </div>
     </section>
   );
 };

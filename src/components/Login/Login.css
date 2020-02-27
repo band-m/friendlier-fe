@@ -1,4 +1,11 @@
 .Login{
+  .LoadingImage{
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    height: auto;
+  }
+
   h1{
     font-size: 1.4rem;
     padding: 1rem 0 1rem;

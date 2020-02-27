@@ -1,16 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContactList component matches snapshot 1`] = `
-<Fragment>
+<section
+  className="ContactList"
+>
   <p>
     Add your first contact to get started!
   </p>
   <Component
     to="/add"
   >
-    <p>
+    <button
+      title="Add New Contact"
+    >
       +
-    </p>
+    </button>
   </Component>
-</Fragment>
+</section>
 `;

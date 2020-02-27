@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from './Login.css';
 import { signup } from '../../data/actions/auth-actions';
@@ -19,9 +19,11 @@ const Signup = () => {
     dispatch(signup(username, email, password));
   };
 
-  if(user){
-    history.push('/');
-  }
+  useEffect(() => {
+    if(user) {
+      history.push('/');
+    }
+  }, [user]);
 
   return (
     <main className={styles.Login}>
