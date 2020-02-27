@@ -15,7 +15,7 @@ export default function ContactList() {
       dispatch(fetchContacts(user._id));
     }
   }, [user]);
-  
+
   const contacts = useSelector(selectContactsList);
 
   let contactList;
@@ -23,7 +23,7 @@ export default function ContactList() {
     contactList = contacts.map(contact => {
       return (
         <Link key={contact._id} to={`/contacts/${contact._id}`}>
-          <li className={commStatus}>
+          <li className={styles.commStatus}>
             <span>{contact.firstName} {contact.lastName}</span>
             {/* <span>{statusIcon}</span> */}
           </li>
