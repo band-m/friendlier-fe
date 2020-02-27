@@ -114,13 +114,14 @@ describe('contact detail reducer', () => {
   it('handles set last contacted action', () => {
     const action = {
       type: SET_LAST_CONTACTED_DATE,
-      payload: 5
+      payload: 'Sept 2 2020'
     };
 
-    const initialState = { lastContactedDate: 1 };
+    const initialState = { lastContactedDate: 'August 20 2020', connHistory: ['July 4 2020', 'August 20 2020'] };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({
-      lastContactedDate: 5
+      lastContactedDate: 'Sept 2 2020',
+      connHistory: ['July 4 2020', 'August 20 2020', 'Sept 2 2020']
     });
   });
 

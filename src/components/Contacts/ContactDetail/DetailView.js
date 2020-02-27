@@ -1,38 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './DetailView.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchOneContact, fetchContacts } from '../../../data/actions/contact-detail-actions';
 import PropTypes from 'prop-types';
-// import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
 import { useHistory, Link } from 'react-router-dom';
-import { selectUser } from '../../../data/selectors/auth-selector';
 import format from 'date-fns/format';
-import parse from 'date-fns/parse';
-import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import { selectSelectedContact } from '../../../data/selectors/contacts-selectors';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
 import { deleteContact } from '../../../data/actions/contacts-actions';
 
 const DetailView = ({ match }) => {
-  const contact = useSelector(state => selectSelectedContact(state, match.params.id));
-
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+
+  const contact = useSelector(state => selectSelectedContact(state, match.params.id));
+
   if(!contact) return null;
 
-  // useEffect(() => {
-  //   dispatch(fetchOneContact(match.params.id))
-  //     .then(contact => setContact(contact.value));
-  // }, [match.params.id]);
+  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;
 
   const deleteOne = contactId => {
     dispatch(deleteContact(contactId));
     history.replace('/contacts');
   };
 
-  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;
+  const addConnectionEvent = () => {
+
+  };
 
   return (
     <section className={styles.DetailView}>
@@ -58,9 +52,8 @@ const DetailView = ({ match }) => {
         {birthdate && <div><p>Birthdate</p><p>{birthdate.split('T')[0]}</p></div>}
 
         {notes && <div styleName={styles.Notes}><p>Notes</p><p>{notes}</p></div>}
-
-        {/* <p>Special Dates: {specialDates}</p> */}
       </div>
+
       <div className={styles.ToolbarBottom}>
         <FaTrashAlt id="delete" onClick={() => deleteOne(contact._id)} />
         <Link to={`/edit/${contact._id}`}><AiFillEdit id="edit" /></Link>
