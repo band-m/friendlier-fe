@@ -19,7 +19,7 @@ export default function ContactList() {
   const contacts = useSelector(selectContactsList);
 
   let contactList;
-  if(contacts.length){
+  if(contacts.length) {
     contactList = contacts.map(contact => {
       const ratio = 1 - ((contact.commFreq - contact.lastContact) / contact.commFreq);
       const commStatus =
@@ -38,7 +38,7 @@ export default function ContactList() {
   }
 
   return (
-    <main className={styles.ContactList}>
+    <section className={styles.ContactList}>
       {contactList && <ul>
         {contactList}
       </ul>}
@@ -46,6 +46,6 @@ export default function ContactList() {
       <Link to='/add'>
         <button title="Add New Contact">+</button>
       </Link>
-    </main>
+    </section>
   );
 }
