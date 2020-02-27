@@ -33,7 +33,7 @@ import { setContact } from '../../data/actions/contacts-actions';
 import { selectContactDetails } from '../../data/selectors/contact-detail-selectors';
 import { useHistory } from 'react-router-dom';
 
-export default function AddContact(){
+export default function AddContact() {
   const [slider1, setSlider1] = useState(10);
   const [slider2, setSlider2] = useState(20);
   const [num, setNum] = useState(2);
@@ -41,23 +41,23 @@ export default function AddContact(){
   const [deadlineUnit, setDeadlineUnit] = useState('weeks');
   const [notificationOption, setNotificationOption] = useState(1);
   const [deadline, setDeadline] = useState();
-  const [deadlineObject, setDeadlineObject] = useState({ days: 14, months: 0 })
+  const [deadlineObject, setDeadlineObject] = useState({ days: 14, months: 0 });
   const [yellowZone, setYellowZone] = useState();
   const [redZone, setRedZone] = useState();
 
   // When user moves a slider, set slider
-  const update = (render, handle, value, un, percent) => {    
-    if(handle === 0){
-      setSlider1(Math.floor(value[0]))
+  const update = (render, handle, value, un, percent) => {
+    if(handle === 0) {
+      setSlider1(Math.floor(value[0]));
     } else {
-      setSlider2(Math.floor(value[1]))
+      setSlider2(Math.floor(value[1]));
     }
-  }
+  };
 
   // When user inputs a number, change num and numOfDays
   const changeNumOfDaysInput = value => {
     setNum(value);
-    switch(deadlineUnit){
+    switch(deadlineUnit) {
       case 'days':
         return setNumOfDays(value);
       case 'weeks':
@@ -66,12 +66,12 @@ export default function AddContact(){
         const monthDays = differenceInDays((add(new Date(), { months: value })), new Date());
         return setNumOfDays(monthDays);
     }
-  }
+  };
 
   // When user selects a days/weeks/months radio, change deadlineUnit and numOfDays
   const changeNumOfDaysRadio = target => {
     setDeadlineUnit(target.id);
-    switch(target.id){
+    switch(target.id) {
       case 'days':
         return setNumOfDays(num);
       case 'weeks':
@@ -80,75 +80,79 @@ export default function AddContact(){
         const monthDays = differenceInDays((add(new Date(), { months: num })), new Date());
         return setNumOfDays(monthDays);
     }
-  }
+  };
 
   // When numOfDays changes, make new deadlineObject and set commFrequency in contact details
   useEffect(() => {
     dispatch(myAction(SET_COMM_FREQUENCY, numOfDays));
-    switch(deadlineUnit){
+    switch(deadlineUnit) {
       case 'days':
         return setDeadlineObject({ days: num, months: 0 });
       case 'weeks':
         return setDeadlineObject({ days: num * 7, months: 0 });
       case 'months':
         return setDeadlineObject({ days: 0, months: num });
-    };  
-  }, [numOfDays])
+    }
+  }, [numOfDays]);
 
   // When deadlineObject changes, make new deadline and set deadlineObject in contact details
   useEffect(() => {
     dispatch(myAction(SET_DEADLINE_OBJECT, deadlineObject));
-    setDeadline(format(add(new Date(), deadlineObject), "PPPP"));
+    setDeadline(add(new Date(), deadlineObject));
   }, [deadlineObject])
 
   // When deadline changes, set deadlineDate in contact details
   useEffect(() => {
     dispatch(myAction(SET_DEADLINE_DATE, deadline));
-  }, [deadline])
+  }, [deadline]);
 
   // When notificationOption changes, set notificationRange in contact details
   useEffect(() => {
     dispatch(myAction(SET_NOTIFICATION_RANGE, notificationOption));
-  }, [notificationOption])
+  }, [notificationOption]);
 
   // When notificationObject or numOfDays changes, change slider positions
   useEffect(() => {
-    switch(notificationOption){
+    switch(notificationOption) {
       case 1:
-      setSlider1(Math.floor(numOfDays / 3));
-      setSlider2(Math.floor((2 * numOfDays) / 3));
-      return;
-    case 2:
-      setSlider1(Math.floor(numOfDays / 2));
-      setSlider2(Math.floor((3 * numOfDays) / 4));
-      return;
-    case 3:
-      setSlider1(Math.floor((3 * numOfDays) / 4));
-      setSlider2(Math.floor((7 * numOfDays) / 8));
-      return;
+        setSlider1(Math.floor(numOfDays / 3));
+        setSlider2(Math.floor((2 * numOfDays) / 3));
+        return;
+      case 2:
+        setSlider1(Math.floor(numOfDays / 2));
+        setSlider2(Math.floor((3 * numOfDays) / 4));
+        return;
+      case 3:
+        setSlider1(Math.floor((3 * numOfDays) / 4));
+        setSlider2(Math.floor((7 * numOfDays) / 8));
+        return;
     }
-  }, [notificationOption, numOfDays])
+  }, [notificationOption, numOfDays]);
 
   // When slider positions change, change yellowZone and redZone
   useEffect(() => {
-    setYellowZone(format(add(new Date(), { days: slider1 }), "PPPP"));
-    setRedZone(format(add(new Date(), { days: slider2 }), "PPPP"))
+    setYellowZone(add(new Date(), { days: slider1 }));
+    setRedZone(add(new Date(), { days: slider2 }))
   }, [slider1, slider2])
 
   // When yellowZone or redZone change, set yellowZoneStartDate and redZoneStartDate in contact details
   useEffect(() => {
+    console.log(yellowZone);
+    console.log(redZone);
+    
+    
     dispatch(myAction(SET_YELLOW_ZONE, yellowZone));
     dispatch(myAction(SET_RED_ZONE, redZone));
-  }, [yellowZone, redZone])
+  }, [yellowZone, redZone]);
 
   // On initial load, add colors to the range connectors
   useEffect(() => {
     const connectors = document.querySelectorAll('.noUi-connect');
     const classes = ['c-1-color', 'c-2-color', 'c-3-color'];
-    for(let i = 0; i < connectors.length; i++){
+    for(let i = 0; i < connectors.length; i++) {
       connectors[i].classList.add(classes[i]);
-    } 
-  }, [])
+    }
+  }, []);
 
 
 
@@ -167,9 +171,9 @@ export default function AddContact(){
   const history = useHistory();
 
   useEffect(() => {
-    if(user){
+    if(user) {
       dispatch(myAction(SET_USER_ID, user._id));
-      dispatch(myAction(SET_CONTACT_CREATED_ON, format(new Date(), "PPPP")));
+      dispatch(myAction(SET_CONTACT_CREATED_ON, new Date()));
     }
   }, [user]);
 
@@ -178,13 +182,13 @@ export default function AddContact(){
     dispatch(setContact(details));
     dispatch(postContactDetails(details));
     history.push('/contacts');
-  };  
+  };
   
   return (
     <form className={styles.DetailForm} onSubmit={handleSubmit}>
       <div>
         <input type="text" onChange={({ target }) => dispatch(myAction(SET_FIRST_NAME, target.value))} name="firstName" placeholder="First Name" />
-        <input type="text" onChange={({ target }) => dispatch(myAction(SET_LAST_NAME, target.value))} name="lastName" placeholder="Last Name"/>
+        <input type="text" onChange={({ target }) => dispatch(myAction(SET_LAST_NAME, target.value))} name="lastName" placeholder="Last Name" />
       </div>
 
       <section>
@@ -197,15 +201,15 @@ export default function AddContact(){
         </div>
 
         <div>
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_EMAIL, target.value))} id="email" name="email" placeholder="Email address"/>
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_ADDRESS, target.value))} id="address" name="address" placeholder="Physical Address"/>
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_PHONE_NUMBER, target.value))} id="phoneNumber" name="phoneNumber" placeholder="Phone Number"/>
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_EMAIL, target.value))} id="email" name="email" placeholder="Email address" />
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_ADDRESS, target.value))} id="address" name="address" placeholder="Physical Address" />
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_PHONE_NUMBER, target.value))} id="phoneNumber" name="phoneNumber" placeholder="Phone Number" />
           {
-            /* <input type="text" onChange={({ target }) => dispatch(myAction(SET_IMAGE, target.value))} id="image" name="image" value={image || ''} placeholder="First Name"/> */ }
+            /* <input type="text" onChange={({ target }) => dispatch(myAction(SET_IMAGE, target.value))} id="image" name="image" value={image || ''} placeholder="First Name"/> */}
           <input type="date" onChange={({ target }) => dispatch(myAction(SET_BIRTHDATE, target.value))} id="birthdate" name="birthdate" placeholder="Birthdate" />
           <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes"></textarea>
           {
-            /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */ }
+            /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */}
         </div>
       </section>
 
@@ -228,12 +232,12 @@ export default function AddContact(){
       <label htmlFor={3}>3</label>
       <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({target}) => setNotificationOption(+target.id)} /><br/><br/><br/>
 
-      <p>Your connection deadline with name will be on {deadline}</p>
-      <p>Your yellow zone will begin on {yellowZone}</p>
-      <p>Your red zone will begin on {redZone}</p>
+      <p>Your connection deadline with name will be on {deadline && format(deadline, "PPPP", new Date())}</p>
+      <p>Your yellow zone will begin on {yellowZone && format(yellowZone, "PPPP")}</p>
+      <p>Your red zone will begin on {redZone && format(redZone, "PPPP")}</p>
       </section>
       <Nouislider style={{ margin: '25px' }} onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
-      
+
       <button type="submit">Create a new contact</button>
     </form>
   );

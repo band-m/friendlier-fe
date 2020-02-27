@@ -27,6 +27,10 @@ exports[`App component renders App 1`] = `
     />
     <Component
       component={[Function]}
+      path="/edit/:id"
+    />
+    <Component
+      component={[Function]}
       path="/about"
     />
     <Component

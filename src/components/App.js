@@ -12,6 +12,8 @@ import { signedIn } from '../data/actions/auth-actions';
 import AddContact from './Contacts/AddContact';
 import ContactList from './Contacts/ContactList';
 import DetailView from './Contacts/ContactDetail/DetailView';
+import DetailForm from './Contacts/ContactDetail/DetailForm';
+import styles from './App.css';
 
 jest.mock('../workers/subscribe-push.js');
 jest.mock('../workers/unsubscribe-push.js');
@@ -33,6 +35,7 @@ export default function App() {
         <Route path="/signup" component={Signup} />
         <Route path="/contacts" component={ContactList} />
         <Route path="/add" component={AddContact} />
+        <Route path="/edit/:id" component={DetailForm} />
         <Route path="/about" component={About} />
         <Route path="/settings" component={Settings} />
       </Switch>

@@ -19,14 +19,8 @@ export default function ContactList() {
   const contacts = useSelector(selectContactsList);
 
   let contactList;
-  if(contacts.length){
+  if(contacts.length) {
     contactList = contacts.map(contact => {
-      const ratio = 1 - ((contact.commFreq - contact.lastContact) / contact.commFreq);
-      const commStatus =
-        ratio < contact.yellowZone ? 'green' :
-          ratio > contact.yellowZone && ratio < contact.redZone ? 'yellow' :
-            ratio > contact.redZone < 1 ? 'red' :
-              'overdue';
       return (
         <Link key={contact._id} to={`/contacts/${contact._id}`}>
           <li className={commStatus}>
@@ -38,7 +32,7 @@ export default function ContactList() {
   }
 
   return (
-    <main className={styles.ContactList}>
+    <section className={styles.ContactList}>
       {contactList && <ul>
         {contactList}
       </ul>}
@@ -46,6 +40,6 @@ export default function ContactList() {
       <Link to='/add'>
         <button title="Add New Contact">+</button>
       </Link>
-    </main>
+    </section>
   );
 }
