@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
 import { useHistory } from 'react-router-dom';
 import { selectUser } from '../../../data/selectors/auth-selector';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const DetailView = ({ match }) => {
   const [contact, setContact] = useState({});
@@ -65,7 +66,9 @@ const DetailView = ({ match }) => {
         }
         {/* <p>Special Dates: {specialDates}</p> */}
       </div>
-      <button id="delete" onClick={() => deleteContact(contact._id)}>Delete Contact</button>
+      <div className={styles.ToolbarBottom}>
+        <FaTrashAlt id="delete" onClick={() => deleteContact(contact._id)} />
+      </div>
     </section>
   );
 };

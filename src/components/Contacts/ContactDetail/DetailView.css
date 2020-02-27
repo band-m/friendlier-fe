@@ -3,6 +3,7 @@
   height: 60vh;
   width: 100%;
   padding: 1rem;
+  position: relative;
 
   .FullName, .ContactHistory{
     display: flex;
@@ -15,6 +16,14 @@
   }
   .ContactFields{
     margin: 0 auto;
+    text-align: center;
+    min-width: 300px;
+  }
+  .ToolbarBottom{
+position: absolute;
+bottom: 10px;
+left: 10px;
+font-size: 1.6rem;
   }
 
 }
