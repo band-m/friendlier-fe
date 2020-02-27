@@ -19,7 +19,7 @@ export default function ContactList() {
   const contacts = useSelector(selectContactsList);
 
   let contactList;
-  if(contacts.length){
+  if(contacts.length) {
     contactList = contacts.map(contact => {
       return (
         <Link key={contact._id} to={`/contacts/${contact._id}`}>
@@ -32,7 +32,7 @@ export default function ContactList() {
   }
 
   return (
-    <main className={styles.ContactList}>
+    <section className={styles.ContactList}>
       {contactList && <ul>
         {contactList}
       </ul>}
@@ -40,6 +40,6 @@ export default function ContactList() {
       <Link to='/add'>
         <button title="Add New Contact">+</button>
       </Link>
-    </main>
+    </section>
   );
 }

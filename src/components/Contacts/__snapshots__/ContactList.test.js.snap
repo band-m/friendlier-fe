@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContactList component matches snapshot 1`] = `
-<main
+<section
   className="ContactList"
 >
   <p>
@@ -16,5 +16,5 @@ exports[`ContactList component matches snapshot 1`] = `
       +
     </button>
   </Component>
-</main>
+</section>
 `;

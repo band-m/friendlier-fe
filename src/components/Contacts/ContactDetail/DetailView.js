@@ -10,6 +10,7 @@ import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import { selectSelectedContact } from '../../../data/selectors/contacts-selectors';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const DetailView = ({ match }) => {
   const contact = useSelector(state => selectSelectedContact(state, match.params.id));  
@@ -46,22 +47,27 @@ const DetailView = ({ match }) => {
         <p>Contact Deadline: {deadlineDate && format(new Date(deadlineDate), "PPPP")} <span></span></p>
       </div><br/>
 
-      <div>
-        <div>
+      <div className={styles.ContactFields}>
+        {email &&
           <p>Email: {email}</p>
+        }
+        {address &&
           <p>Address: {address}</p>
+        }
+        {phoneNumber &&
           <p>Phone Number: {phoneNumber}</p>
-          <p>Birthdate: {birthdate ? birthdate.split('T')[0] : ''}</p>
+        }
+        {birthdate &&
+          <p>Birthdate: {birthdate}</p>
+        }
+        {notes &&
           <p>Notes: {notes}</p>
-        </div><br/>
-
+        }
         {/* <p>Special Dates: {specialDates}</p> */}
       </div>
-      <button>Show Contact History</button><br/><br/>
-      <Link to={`/edit/${contact._id}`}>
-      <button>Edit contact</button>
-      </Link>
-      <button id="delete" onClick={() => deleteContact(contact._id)}>Delete Contact</button>
+      <div className={styles.ToolbarBottom}>
+        <FaTrashAlt id="delete" onClick={() => deleteContact(contact._id)} />
+      </div>
     </section>
   );
 };

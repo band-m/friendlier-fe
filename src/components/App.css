@@ -1,0 +1,6 @@
+@media screen and (min-width: 800px) {
+  .Main{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+}

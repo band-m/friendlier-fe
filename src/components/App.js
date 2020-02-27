@@ -13,6 +13,7 @@ import AddContact from './Contacts/AddContact';
 import ContactList from './Contacts/ContactList';
 import DetailView from './Contacts/ContactDetail/DetailView';
 import DetailForm from './Contacts/ContactDetail/DetailForm';
+import styles from './App.css';
 
 // jest.mock('../workers/subscribe-push.js');
 // jest.mock('../workers/unsubscribe-push.js');
