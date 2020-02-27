@@ -12,9 +12,7 @@ import { selectContactDetails } from '../../../data/selectors/contact-detail-sel
 import { selectSelectedContact } from '../../../data/selectors/contacts-selectors';
 
 const DetailView = ({ match }) => {
-  const contact = useSelector(state => selectSelectedContact(state, match.params.id));
-  console.log(contact);
-  
+  const contact = useSelector(state => selectSelectedContact(state, match.params.id));  
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -42,10 +40,10 @@ const DetailView = ({ match }) => {
       </div><br/>
       
       <div>
-        <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} {lastContactedDate}</p>
-        <p>Yellow Zone Begins: {yellowZoneStartDate} </p>
-        <p>Red Zone Begins: {redZoneStartDate}</p>
-        <p>Contact Deadline: {deadlineDate} <span></span></p>
+        <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} {lastContactedDate && format(lastContactedDate, "PPPP")}</p>
+        <p>Yellow Zone Begins: {yellowZoneStartDate && format(new Date(yellowZoneStartDate), "PPPP")} </p>
+        <p>Red Zone Begins: {redZoneStartDate && format(new Date(redZoneStartDate), "PPPP")}</p>
+        <p>Contact Deadline: {deadlineDate && format(new Date(deadlineDate), "PPPP")} <span></span></p>
       </div><br/>
 
       <div>

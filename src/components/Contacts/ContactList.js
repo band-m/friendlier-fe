@@ -21,12 +21,6 @@ export default function ContactList() {
   let contactList;
   if(contacts.length){
     contactList = contacts.map(contact => {
-      const ratio = 1 - ((contact.commFreq - contact.lastContact) / contact.commFreq);
-      const commStatus =
-        ratio < contact.yellowZone ? 'green' :
-          ratio > contact.yellowZone && ratio < contact.redZone ? 'yellow' :
-            ratio > contact.redZone < 1 ? 'red' :
-              'overdue';
       return (
         <Link key={contact._id} to={`/contacts/${contact._id}`}>
           <li className={commStatus}>
