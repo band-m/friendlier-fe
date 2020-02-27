@@ -1,5 +1,5 @@
-import { login, logout, signup, signedIn } from './auth-actions';
-import { LOGIN, LOGOUT, SIGNUP, SIGNED_IN } from '../action-types/action-types';
+import { login, logout, signup, signedIn, updateUser } from './auth-actions';
+import { LOGIN, LOGOUT, SIGNUP, SIGNED_IN, UPDATE_USER } from '../action-types/action-types';
 
 jest.mock('../../services/request.js');
 
@@ -40,6 +40,15 @@ describe('login actions', () => {
     expect(action).toEqual({
       type: SIGNED_IN,
       payload: Promise.resolve('success')
+    });
+  });
+
+  it('creates an updateUser action', () => {
+    const body = { phoneNumber: '867-5309' };
+    const action = updateUser(body);
+    expect(action).toEqual({
+      type: UPDATE_USER,
+      payload: Promise.resolve(body)
     });
   });
 });

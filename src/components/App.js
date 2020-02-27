@@ -13,7 +13,8 @@ import AddContact from './Contacts/AddContact';
 import ContactList from './Contacts/ContactList';
 import DetailView from './Contacts/ContactDetail/DetailView';
 
-
+jest.mock('../workers/subscribe-push.js');
+jest.mock('../workers/unsubscribe-push.js');
 
 export default function App() {
   const dispatch = useDispatch();
