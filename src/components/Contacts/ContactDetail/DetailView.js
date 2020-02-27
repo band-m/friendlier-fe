@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
 import { useHistory } from 'react-router-dom';
 import { selectUser } from '../../../data/selectors/auth-selector';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 
 const DetailView = ({ match }) => {
   const [contact, setContact] = useState({});
@@ -25,34 +27,35 @@ const DetailView = ({ match }) => {
     dispatch(fetchContacts(user._id));
     history.replace('/contacts');
   };
+console.log(contact);
 
-  const { firstName, lastName, lastContacted, email, phoneNumber, address, commFrequency, birthdate, notes } = contact;
+  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, commFrequency, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;  
 
   return (
     <section className={styles.DetailView}>
       <div>
-        <h2>{firstName}</h2>
-        <h2>{lastName}</h2>
-      </div>
+        <h2>{firstName} {lastName}</h2>
+      </div><br/>
       
       <div>
-        <p>Last Contacted <span>{lastContacted}</span></p>
-        <p>Contact Deadline <span></span></p>
-      </div>
-
-      <button>Show Contact History</button>
+        <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} {lastContactedDate}</p>
+        <p>Yellow Zone Begins: {yellowZoneStartDate} </p>
+        <p>Red Zone Begins: {redZoneStartDate}</p>
+        <p>Contact Deadline: {deadlineDate} <span></span></p>
+      </div><br/>
 
       <div>
         <div>
           <p>Email: {email}</p>
           <p>Address: {address}</p>
           <p>Phone Number: {phoneNumber}</p>
-          <p>Birthdate: {birthdate}</p>
+          <p>Birthdate: {birthdate && birthdate.split('T')[0]}</p>
           <p>Notes: {notes}</p>
-        </div>
+        </div><br/>
 
         {/* <p>Special Dates: {specialDates}</p> */}
       </div>
+      <button>Show Contact History</button>
       <button id="delete" onClick={() => deleteContact(contact._id)}>Delete Contact</button>
     </section>
   );
