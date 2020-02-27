@@ -5,3 +5,4 @@ export const selectLoading = (state) =>
   state.auth.logoutLoading || 
   state.auth.signupLoading || 
   state.auth.updateUserLoading;
+export const selectLoggedOut = (state) => state.auth.loggedOut;

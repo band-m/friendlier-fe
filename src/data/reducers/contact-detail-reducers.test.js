@@ -20,6 +20,8 @@ import {
   SET_TOTAL_GREEN_ZONE_DAYS,
   SET_TOTAL_RED_ZONE_DAYS,
   SET_TOTAL_YELLOW_ZONE_DAYS
+  SET_DEADLINE_UNIT,
+  SET_DEADLINE_NUMBER
 } from '../action-types/action-types';
 
 import contactDetailReducer from './contact-detail-reducers';
@@ -259,22 +261,26 @@ describe('contact detail reducer', () => {
       createdOn: 'Sept 2 2020'
     });
   });
+
+  it('handles set deadline unit action', () => {
+    const action = {
+      type: SET_DEADLINE_UNIT,
+      payload: 'months'
+    };
+
+    const initialState = { deadlineUnit: 'weeks' };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ deadlineUnit: 'months' });
+  });
+
+  it('handles set deadline number action', () => {
+    const action = {
+      type: SET_DEADLINE_NUMBER,
+      payload: 3
+    };
+
+    const initialState = { deadlineNumber: 1 };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ deadlineNumber: 3 });
+  });
 });
-
-
-// comm_frequency, set last contacted, set birthdate, set special dates, set notes, set yellow zone, set red zone, set connection history
-
-
-
-// it('handles set special dates action', () => {
-//   const action={
-//     type: SET_SPECIAL_DATES,
-//     payload: [{'January 1, 1980'}]
-//   }
-
-//   const initialState={ specialDates: []}
-//   const newState=contactDetailReducer(initialState, action)
-//   expect(newState).toEqual([{
-//     'January 1, 1980'
-//   }])
-// })

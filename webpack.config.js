@@ -27,9 +27,6 @@ module.exports = {
     new CopyPlugin([
       { from: 'public' },
     ]),
-    new webpack.ProvidePlugin({
-      noUiSlider: 'nouislider'
-    }),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, 'src/workers/worker.js'),
     })
@@ -47,7 +44,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /nouislider/,
+        exclude: /Slider/,
         use: [
           {
             loader: 'style-loader'
@@ -68,7 +65,8 @@ module.exports = {
                 require('postcss-import')(),
                 require('autoprefixer')(),
                 require('postcss-nested')(),
-                require('postcss-simple-vars')()
+                require('postcss-simple-vars')(),
+                require('postcss-modules-values')()
               ]
             }
           }
@@ -76,7 +74,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: /nouislider/,
+        include: /Slider/,
         use: [
           {
             loader: 'style-loader'

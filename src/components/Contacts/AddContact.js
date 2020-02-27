@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Nouislider from 'nouislider-react';
-import 'nouislider/distribute/nouislider.css';
+import '../Slider/Slider.css';
 import add from 'date-fns/add';
 import format from 'date-fns/format';
 import differenceInDays from 'date-fns/differenceInCalendarDays';
@@ -27,7 +27,9 @@ import {
   SET_DEADLINE_OBJECT,
   SET_NOTIFICATION_RANGE,
   SET_DEADLINE_DATE,
-  SET_CONTACT_CREATED_ON
+  SET_CONTACT_CREATED_ON,
+  SET_DEADLINE_NUMBER,
+  SET_DEADLINE_UNIT
 } from '../../data/action-types/action-types';
 import { selectUser } from '../../data/selectors/auth-selector';
 import { setContact } from '../../data/actions/contacts-actions';
@@ -37,7 +39,7 @@ import { useHistory } from 'react-router-dom';
 export default function AddContact() {
   const [slider1, setSlider1] = useState(10);
   const [slider2, setSlider2] = useState(20);
-  const [num, setNum] = useState(2);
+  const [deadlineNumber, setDeadlineNumber] = useState(2);
   const [numOfDays, setNumOfDays] = useState(14);
   const [deadlineUnit, setDeadlineUnit] = useState('weeks');
   const [notificationOption, setNotificationOption] = useState(1);
@@ -55,9 +57,9 @@ export default function AddContact() {
     }
   };
 
-  // When user inputs a number, change num and numOfDays
+  // When user inputs a number, change deadlineNumber and numOfDays
   const changeNumOfDaysInput = value => {
-    setNum(value);
+    setDeadlineNumber(value);
     switch(deadlineUnit) {
       case 'days':
         return setNumOfDays(value);
@@ -74,11 +76,11 @@ export default function AddContact() {
     setDeadlineUnit(target.id);
     switch(target.id) {
       case 'days':
-        return setNumOfDays(num);
+        return setNumOfDays(deadlineNumber);
       case 'weeks':
-        return setNumOfDays(num * 7);
+        return setNumOfDays(deadlineNumber * 7);
       case 'months':
-        const monthDays = differenceInDays((add(new Date(), { months: num })), new Date());
+        const monthDays = differenceInDays((add(new Date(), { months: deadlineNumber })), new Date());
         return setNumOfDays(monthDays);
     }
   };
@@ -88,16 +90,18 @@ export default function AddContact() {
     dispatch(myAction(SET_COMM_FREQUENCY, numOfDays));
     switch(deadlineUnit) {
       case 'days':
-        return setDeadlineObject({ days: num, months: 0 });
+        return setDeadlineObject({ days: deadlineNumber, months: 0 });
       case 'weeks':
-        return setDeadlineObject({ days: num * 7, months: 0 });
+        return setDeadlineObject({ days: deadlineNumber * 7, months: 0 });
       case 'months':
-        return setDeadlineObject({ days: 0, months: num });
+        return setDeadlineObject({ days: 0, months: deadlineNumber });
     }
   }, [numOfDays]);
 
-  // When deadlineObject changes, make new deadline and set deadlineObject in contact details
+  // When deadlineObject changes, make new deadline and set deadlineNumber, deadlineUnit, and deadlineObject in contact details
   useEffect(() => {
+    dispatch(myAction(SET_DEADLINE_NUMBER, deadlineNumber));
+    dispatch(myAction(SET_DEADLINE_UNIT, deadlineUnit));
     dispatch(myAction(SET_DEADLINE_OBJECT, deadlineObject));
     setDeadline(add(new Date(), deadlineObject));
   }, [deadlineObject])
@@ -137,10 +141,14 @@ export default function AddContact() {
   }, [slider1, slider2])
 
   // When yellowZone or redZone change, set yellowZoneStartDate and redZoneStartDate in contact details
+<<<<<<< HEAD
   useEffect(() => {
     console.log(yellowZone);
     console.log(redZone);
     
+=======
+  useEffect(() => {  
+>>>>>>> 32793f2cc23387afdce43965bc361a2905cb94ce
     dispatch(myAction(SET_YELLOW_ZONE, yellowZone));
     dispatch(myAction(SET_RED_ZONE, redZone));
   }, [yellowZone, redZone]);
@@ -216,7 +224,7 @@ export default function AddContact() {
       <section id='slider'>
       <p>How often do you want to be in contact with name?</p>
       <p>Every</p>
-      <input type='number' min={1} value={num} onChange={({target}) => changeNumOfDaysInput(+target.value)} /><br/>
+      <input type='number' min={1} value={deadlineNumber} onChange={({target}) => changeNumOfDaysInput(+target.value)} /><br/>
       <label htmlFor='days'>Days</label>
       <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
       <label htmlFor='weeks'>Weeks</label>

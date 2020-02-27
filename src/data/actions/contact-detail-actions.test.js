@@ -22,6 +22,8 @@ import {
   SET_TOTAL_GREEN_ZONE_DAYS,
   SET_TOTAL_YELLOW_ZONE_DAYS,
   SET_TOTAL_RED_ZONE_DAYS
+  SET_DEADLINE_UNIT,
+  SET_DEADLINE_NUMBER
 } from '../action-types/action-types';
 import {
   fetchContacts,
@@ -232,6 +234,7 @@ describe('contact detail actions', () => {
     });
   });
 
+<<<<<<< HEAD
   it('should create a set total green zone days action', () => {
     const action = myAction(SET_TOTAL_GREEN_ZONE_DAYS, '3 weeks');
 
@@ -256,6 +259,23 @@ describe('contact detail actions', () => {
     expect(action).toEqual({
       type: SET_TOTAL_RED_ZONE_DAYS,
       payload: '9 days'
+=======
+  it('should create a set deadline unit action', () => {
+    const action = myAction(SET_DEADLINE_UNIT, 'months');
+
+    expect(action).toEqual({
+      type: SET_DEADLINE_UNIT,
+      payload: 'months'
+    });
+  });
+
+  it('should create a set deadline number action', () => {
+    const action = myAction(SET_DEADLINE_NUMBER, 3);
+
+    expect(action).toEqual({
+      type: SET_DEADLINE_NUMBER,
+      payload: 3
+>>>>>>> 32793f2cc23387afdce43965bc361a2905cb94ce
     });
   });
 });
