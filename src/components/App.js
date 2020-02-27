@@ -20,6 +20,8 @@ jest.mock('../workers/unsubscribe-push.js');
 
 export default function App() {
   const dispatch = useDispatch();
+  // const [hasDeleted, setHasDeleted] = useState(false);
+
   useEffect(() => {
     dispatch(signedIn());
   }, []);

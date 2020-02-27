@@ -156,9 +156,7 @@ describe('contact detail reducer', () => {
 
     const initialState = { yellowZoneStartDate: '' };
     const newState = contactDetailReducer(initialState, action);
-    expect(newState).toEqual({
-      yellowZoneStartDate: 'Sept 2 2020'
-    });
+    expect(newState).toEqual({ yellowZoneStartDate: 'Sept 2 2020' });
   });
 
   it('handles set redzone action', () => {

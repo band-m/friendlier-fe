@@ -3,7 +3,7 @@ import styles from './DetailView.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneContact, fetchContacts } from '../../../data/actions/contact-detail-actions';
 import PropTypes from 'prop-types';
-import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
+// import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
 import { useHistory, Link } from 'react-router-dom';
 import { selectUser } from '../../../data/selectors/auth-selector';
 import format from 'date-fns/format';
@@ -27,8 +27,8 @@ const DetailView = ({ match }) => {
   
   const deleteContact = contactId => {
     console.log(contactId);
-    deleteContactDetails(contactId);
-    dispatch(fetchContacts(user._id));
+    dispatch(deleteContact(contactId));
+    // dispatch(fetchContacts(user._id));
     history.replace('/contacts');
   };
 
@@ -41,10 +41,10 @@ const DetailView = ({ match }) => {
       </div><br/>
       
       <div>
-        <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} {lastContactedDate && format(lastContactedDate, "PPPP")}</p>
-        <p>Yellow Zone Begins: {yellowZoneStartDate && format(new Date(yellowZoneStartDate), "PPPP")} </p>
-        <p>Red Zone Begins: {redZoneStartDate && format(new Date(redZoneStartDate), "PPPP")}</p>
-        <p>Contact Deadline: {deadlineDate && format(new Date(deadlineDate), "PPPP")} <span></span></p>
+        <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} {lastContactedDate && format(lastContactedDate, 'PPPP')}</p>
+        <p>Yellow Zone Begins: {yellowZoneStartDate && format(new Date(yellowZoneStartDate), 'PPPP')} </p>
+        <p>Red Zone Begins: {redZoneStartDate && format(new Date(redZoneStartDate), 'PPPP')}</p>
+        <p>Contact Deadline: {deadlineDate && format(new Date(deadlineDate), 'PPPP')} <span></span></p>
       </div><br/>
 
       <div className={styles.ContactFields}>
@@ -71,7 +71,6 @@ const DetailView = ({ match }) => {
     </section>
   );
 };
-
 
 DetailView.propTypes = {
   match: PropTypes.shape({
