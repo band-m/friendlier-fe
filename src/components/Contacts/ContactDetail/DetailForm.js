@@ -25,6 +25,26 @@ import { setContactDetails } from '../../../services/contacts';
 import { useHistory } from 'react-router-dom';
 
 const DetailForm = ({ match }) => {
+  const [slider1, setSlider1] = useState(10);
+  const [slider2, setSlider2] = useState(20);
+  const [num, setNum] = useState(2);
+  const [numOfDays, setNumOfDays] = useState(14);
+  const [deadlineUnit, setDeadlineUnit] = useState('weeks');
+  const [notificationOption, setNotificationOption] = useState(1);
+  const [deadline, setDeadline] = useState();
+  const [deadlineObject, setDeadlineObject] = useState({ days: 14, months: 0 });
+  const [yellowZone, setYellowZone] = useState();
+  const [redZone, setRedZone] = useState();
+
+
+
+
+
+
+
+
+
+
   const contact = useSelector(selectContactDetails);  
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -70,7 +90,19 @@ const DetailForm = ({ match }) => {
         <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes" value={notes} ></textarea>
       </section>
 
-    
+      <section id='slider'>
+      <p>Would you like to change your connection settings with {firstName} {lastName}?</p><br/><br/>
+      <p>How often do you want to be in contact with name?</p>
+      <p>Every</p>
+      <input type='number' min={1} value={num} onChange={({target}) => changeNumOfDaysInput(+target.value)} /><br/>
+      <label htmlFor='days'>Days</label>
+      <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
+      <label htmlFor='weeks'>Weeks</label>
+      <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
+      <label htmlFor='months'>Months</label>
+      <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({target}) => changeNumOfDaysRadio(target)}/><br/><br/><br/>
+
+      </section>
 
       <button type="submit">Edit contact</button>
     </form>
