@@ -12,4 +12,7 @@ export const getSignup = (displayName, email, password) =>
 export const getSignedIn = () => 
   request('/api/v1/auth/signed-in');
 
+export const patchUser = (patch) =>
+  request('/api/v1/auth/update', 'PATCH', patch);
+
 
