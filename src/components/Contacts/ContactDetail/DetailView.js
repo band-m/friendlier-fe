@@ -12,17 +12,17 @@ const DetailView = ({ match }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  // const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(fetchOneContact(match.params.id))
       .then(contact => setContact(contact.value));
-  }, [match.params.id]);
+  }, []);
 
   const deleteContact = contactId => {
     console.log(contactId);
     deleteContactDetails(contactId);
-    dispatch(fetchContacts(user._id));
+    dispatch(deleteContact(contactId));
     history.replace('/contacts');
   };
 
