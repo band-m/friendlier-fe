@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import styles from './SettingsPage.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../data/actions/auth-actions';
-import registerPush from '../../workers/register-push';
+import { selectUser } from '../../data/selectors/auth-selector';
+import subscribePush from '../../workers/subscribe-push';
+import unsubscribePush from '../../workers/unsubscribe-push';
 
 const SettingsPage = () => {
+  const user = useSelector(selectUser);
+  let userPushHour = user?.pushHour;
+  if(!Number.isInteger(userPushHour)) {
+    userPushHour = 18;
+  }
   const [password, setPassword] = useState('');
-  const [wantsPush, setWantsPush] = useState(false);
-  const [pushHour, setPushHour] = useState(6);
-  const [pushIsPM, setPushIsPM] = useState(false);
+  const [wantsPush, setWantsPush] = useState(user?.wantsPush || false);
+  const [pushHour, setPushHour] = useState(userPushHour % 12);
+  const [pushIsPM, setPushIsPM] = useState(!!Math.floor(userPushHour / 12));
   const dispatch = useDispatch();
   const hours = Array(12).fill().map((x, i)=>i);
   const saveSettings = () => {
@@ -17,10 +24,10 @@ const SettingsPage = () => {
       wantsPush
     }));
     if(wantsPush) {
-      registerPush();
+      subscribePush();
     }
     else {
-      // would be nice to be able to unregister
+      unsubscribePush();
     }
   };
 
@@ -32,13 +39,13 @@ const SettingsPage = () => {
         Receive daily notifications: 
         <input type="checkbox" 
           value={wantsPush} 
-          onChange={({ target }) => setWantsPush(target.value)} />
+          onChange={({ target }) => setWantsPush(target.checked) } />
       </div>
       <div>
         At: <select value={pushHour} onChange={({ target }) => setPushHour(target.value) }>
           {hours.map((hour) => <option key={hour} value={hour}>{hour}</option>)}
         </select>
-        <select value={pushIsPM} onChange={({ target }) => setPushIsPM(target.value) }>
+        <select value={pushIsPM} onChange={({ target }) => setPushIsPM(Boolean(target.value)) }>
           <option value={false}>AM</option>
           <option value={true}>PM</option>
         </select>
