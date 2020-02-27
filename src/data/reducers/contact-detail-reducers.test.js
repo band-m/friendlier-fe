@@ -18,7 +18,9 @@ import {
   SET_DEADLINE_OBJECT,
   SET_CONTACT_CREATED_ON,
   SET_DEADLINE_UNIT,
-  SET_DEADLINE_NUMBER
+  SET_DEADLINE_NUMBER,
+  SET_SLIDER_1,
+  SET_SLIDER_2
 } from '../action-types/action-types';
 
 import contactDetailReducer from './contact-detail-reducers';
@@ -247,5 +249,27 @@ describe('contact detail reducer', () => {
     const initialState = { deadlineNumber: 1 };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({ deadlineNumber: 3 });
+  });
+
+  it('handles set slider 1 action', () => {
+    const action = {
+      type: SET_SLIDER_1,
+      payload: 15
+    };
+
+    const initialState = { slider1: 10 };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ slider1: 15 });
+  });
+
+  it('handles set slider 2 action', () => {
+    const action = {
+      type: SET_SLIDER_2,
+      payload: 15
+    };
+
+    const initialState = { slider2: 10 };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ slider2: 15 });
   });
 });

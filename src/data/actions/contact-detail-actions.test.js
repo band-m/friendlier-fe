@@ -20,7 +20,9 @@ import {
   SET_DEADLINE_OBJECT,
   SET_CONTACT_CREATED_ON,
   SET_DEADLINE_UNIT,
-  SET_DEADLINE_NUMBER
+  SET_DEADLINE_NUMBER,
+  SET_SLIDER_1,
+  SET_SLIDER_2
 } from '../action-types/action-types';
 import {
   fetchContacts,
@@ -246,6 +248,24 @@ describe('contact detail actions', () => {
     expect(action).toEqual({
       type: SET_DEADLINE_NUMBER,
       payload: 3
+    });
+  });
+
+  it('should create a set slider 1 action', () => {
+    const action = myAction(SET_SLIDER_1, 15);
+
+    expect(action).toEqual({
+      type: SET_SLIDER_1,
+      payload: 15
+    });
+  });
+
+  it('should create a set slider 1 action', () => {
+    const action = myAction(SET_SLIDER_2, 15);
+
+    expect(action).toEqual({
+      type: SET_SLIDER_2,
+      payload: 15
     });
   });
 });

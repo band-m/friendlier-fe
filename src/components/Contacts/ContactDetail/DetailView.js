@@ -22,7 +22,7 @@ const DetailView = ({ match }) => {
 
   dispatch(myAction(SET_CONTACT_DETAILS, contact));
 
-  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;
+  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate, slider1, slider2, deadlineObject } = contact;
 
   const deleteOne = contactId => {
     dispatch(deleteContact(contactId));
@@ -57,7 +57,7 @@ const DetailView = ({ match }) => {
 
       <div className={styles.ToolbarBottom}>
         <FaTrashAlt id="delete" onClick={() => deleteOne(contact._id)} />
-        <ConnectedButton />
+        <ConnectedButton props={slider1, slider2, deadlineObject} />
         <Link to={`/edit/${contact._id}`}><AiFillEdit id="edit" /></Link>
       </div>
     </section>
