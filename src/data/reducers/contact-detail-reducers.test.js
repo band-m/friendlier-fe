@@ -16,7 +16,10 @@ import {
   SET_NOTIFICATION_RANGE,
   SET_DEADLINE_DATE,
   SET_DEADLINE_OBJECT,
-  SET_CONTACT_CREATED_ON
+  SET_CONTACT_CREATED_ON,
+  SET_TOTAL_GREEN_ZONE_DAYS,
+  SET_TOTAL_RED_ZONE_DAYS,
+  SET_TOTAL_YELLOW_ZONE_DAYS
 } from '../action-types/action-types';
 
 import contactDetailReducer from './contact-detail-reducers';
@@ -170,6 +173,39 @@ describe('contact detail reducer', () => {
     expect(newState).toEqual({
       redZoneStartDate: 'Sept 2 2020'
     });
+  });
+
+  it('handles set total green zone days action', () => {
+    const initialState = { totalGreenZoneDays: 1 };
+    const action = {
+      type: SET_TOTAL_GREEN_ZONE_DAYS,
+      payload: 6
+    };
+
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ totalGreenZoneDays: 6 });
+  });
+
+  it('handles set total yellow zone days action', () => {
+    const initialState = { totalYellowZoneDays: 2 };
+    const action = {
+      type: SET_TOTAL_YELLOW_ZONE_DAYS,
+      payload: 9
+    };
+
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ totalYellowZoneDays: 9 });
+  });
+
+  it('handles set total red zone days action', () => {
+    const initialState = { totalRedZoneDays: 3 };
+    const action = {
+      type: SET_TOTAL_RED_ZONE_DAYS,
+      payload: 11
+    };
+
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ totalRedZoneDays: 11 });
   });
 
   it('handles set notification range action', () => {

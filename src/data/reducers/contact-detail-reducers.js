@@ -56,11 +56,11 @@ export default function contactDetailReducer(state = initialState, action) {
     case SET_RED_ZONE:
       return { ...state, redZoneStartDate: action.payload };
     case SET_TOTAL_GREEN_ZONE_DAYS:
-      return { ...state, totalGreenZoneDays: action.paylod };
+      return { ...state, totalGreenZoneDays: action.payload };
     case SET_TOTAL_YELLOW_ZONE_DAYS:
-      return { ...state, totalYellowZoneDays: action.paylod };
+      return { ...state, totalYellowZoneDays: action.payload };
     case SET_TOTAL_RED_ZONE_DAYS:
-      return { ...state, totalRedZoneDays: action.paylod };
+      return { ...state, totalRedZoneDays: action.payload };
     case SET_SPECIAL_DATES:
       return { ...state, specialDates: [...state.specialDates, action.payload] };
     case SET_CONNECTION_HISTORY:
