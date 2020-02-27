@@ -3,10 +3,11 @@ import {
   LOGIN, LOGIN_PENDING, LOGIN_FULFILLED, LOGIN_REJECTED,
   LOGOUT, LOGOUT_PENDING, LOGOUT_FULFILLED, LOGOUT_REJECTED,
   SIGNUP, SIGNUP_PENDING, SIGNUP_FULFILLED, SIGNUP_REJECTED,
+  SIGNED_IN, SIGNED_IN_PENDING, SIGNED_IN_FULFILLED, SIGNED_IN_REJECTED,
   UPDATE_USER, UPDATE_USER_PENDING, UPDATE_USER_FULFILLED, UPDATE_USER_REJECTED
 } from '../action-types/action-types';
 
-const loggedInState = { ...initialState, user: 'user data'};
+const loggedInState = { ...initialState, user: 'user data' };
 
 describe('auth reducer module', () => {
   it('LOGIN does nothing', () => {
@@ -41,7 +42,7 @@ describe('auth reducer module', () => {
 
   it('LOGOUT_FULFILLED unsets logoutLoading, error, and user', () => {
     expect(authReducer(loggedInState, { type: LOGOUT_FULFILLED }))
-      .toEqual({ ...loggedInState, logoutLoading: false, user: null, error: null });
+      .toEqual({ ...loggedInState, logoutLoading: false, user: null, error: null, loggedOut: true });
   });
 
   it('LOGOUT_REJECTED unsets logoutLoading, sets error', () => {
@@ -67,6 +68,26 @@ describe('auth reducer module', () => {
   it('SIGNUP_REJECTED unsets signupLoading and user, sets error', () => {
     expect(authReducer(initialState, { type: SIGNUP_REJECTED, payload: 'error data' }))
       .toEqual({ ...initialState, signupLoading: false, user: null, error: 'error data' });
+  });
+
+  it('SIGNED_IN does nothing', () => {
+    expect(authReducer(initialState, { type: SIGNED_IN, payload: 'fake promise' }))
+      .toEqual(initialState);
+  });
+
+  it('SIGNED_IN_PENDING sets signedInLoading, unsets error', () => {
+    expect(authReducer(initialState, { type: SIGNED_IN_PENDING }))
+      .toEqual({ ...initialState, signedInLoading: true, error: null });
+  });
+
+  it('SIGNED_IN_FULFILLED unsets signedInLoading and error, sets user', () => {
+    expect(authReducer(initialState, { type: SIGNED_IN_FULFILLED, payload: 'user data' }))
+      .toEqual({ ...initialState, signedInLoading: false, user: 'user data', error: null });
+  });
+
+  it('SIGNED_IN_REJECTED unsets signedInLoading and user, sets error', () => {
+    expect(authReducer(initialState, { type: SIGNED_IN_REJECTED, payload: 'error data' }))
+      .toEqual({ ...initialState, signedInLoading: false, user: null, loggedOut: true, error: 'error data' });
   });
 
   it('UPDATE_USER does nothing', () => {
