@@ -49,6 +49,7 @@ const SettingsPage = () => {
   // }, [user._id]);
 
   const saveSettings = async() => {
+    const offsetHours = Math.floor((new Date).getTimezoneOffset() / 60);
     let subscription;
     if(wantsPush) {
       subscription = await subscribePush();
@@ -59,7 +60,7 @@ const SettingsPage = () => {
     dispatch(updateUser({
       subscription,
       createDate: new Date(),
-      pushHour: Number(pushHour) + 12 * Number(pushIsPM),
+      pushHour: (Number(pushHour) + 12 * Number(pushIsPM) + offsetHours) % 24,
       wantsPush
     }));
   };
