@@ -1,7 +1,15 @@
 .DetailForm{
+  >:first-child{
+    align-items: center;
+    min-width: 300px;
+    text-align: center;
+  }
   section{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    min-width: 360px;
+
     div{
       display: flex;
       flex-direction: column;
