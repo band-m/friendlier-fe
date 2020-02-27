@@ -13,17 +13,27 @@
     h2{
       font-size: 1.5rem;
     }
+    p{
+      margin: 0.75rem 0;
+    }
+    button {
+      height: 2rem;
+    }
   }
   .ContactFields{
     margin: 0 auto;
     text-align: center;
     min-width: 300px;
+
+    p{
+      margin: 0.75rem 0;
+    }
   }
   .ToolbarBottom{
-position: absolute;
-bottom: 10px;
-left: 10px;
-font-size: 1.6rem;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 1.6rem;
   }
 
 }
