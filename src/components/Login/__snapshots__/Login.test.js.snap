@@ -2,12 +2,17 @@
 
 exports[`Login component renders Login 1`] = `
 <main
-  className="Login"
+  className="login"
 >
+  <img
+    className="logoImage"
+    src="assets/images/logo.png"
+  />
   <h1>
     Login
   </h1>
   <form
+    className="form"
     onSubmit={[Function]}
   >
     <div>
