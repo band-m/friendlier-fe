@@ -55,7 +55,7 @@ export default function contactDetailReducer(state = initialState, action) {
     case SET_SPECIAL_DATES:
       return { ...state, specialDates: [...state.specialDates, action.payload] };
     case SET_CONTACT_DETAILS:
-      return { ...state };
+      return { ...action.payload };
     case FETCH_ONE_CONTACT_FULFILLED:
       return action.payload;
     case SET_NOTIFICATION_RANGE:

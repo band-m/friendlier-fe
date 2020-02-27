@@ -27,9 +27,8 @@ import {
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import { useHistory } from 'react-router-dom';
 
-const DetailForm = ({ match }) => {
-  const contact = useSelector(selectContactDetails);  
-  const details = useSelector(selectContactDetails);
+const DetailForm = ({ match }) => {  
+  const contact = useSelector(selectContactDetails);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -38,8 +37,6 @@ const DetailForm = ({ match }) => {
   }, [match.params.id]);
 
   const { firstName, lastName, email, address, phoneNumber, birthdate, notes, deadlineNumber, deadlineUnit, deadlineObject, connHistory, lastContactedDate, createdOn, commFrequency, notificationRange, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;
-  
-  
 
   const compareDateString = connHistory.length > 0 ? lastContactedDate : createdOn;
   const compareDate = new Date(compareDateString);
@@ -47,7 +44,7 @@ const DetailForm = ({ match }) => {
   const redZoneNumber = differenceInDays(new Date(redZoneStartDate), compareDate);
 
   const [slider1, setSlider1] = useState(yellowZoneNumber);
-  const [slider2, setSlider2] = useState(20);
+  const [slider2, setSlider2] = useState(redZoneNumber);
 
   // When user inputs a number, set deadlineNumber and commFrequency in contact details
   const changeNumOfDaysInput = value => {
@@ -132,7 +129,7 @@ const DetailForm = ({ match }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(editContactDetails(match.params.id, details));
+    dispatch(editContactDetails(match.params.id, contact));
     history.push('/contacts');
   };
 

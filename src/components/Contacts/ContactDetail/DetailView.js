@@ -8,6 +8,9 @@ import { selectSelectedContact } from '../../../data/selectors/contacts-selector
 import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
 import { deleteContact } from '../../../data/actions/contacts-actions';
+import { myAction } from '../../../data/actions/contact-detail-actions';
+import { SET_CONTACT_DETAILS } from '../../../data/action-types/action-types';
+import ConnectedButton from '../ConnectedButton';
 
 const DetailView = ({ match }) => {
   const history = useHistory();
@@ -17,15 +20,13 @@ const DetailView = ({ match }) => {
 
   if(!contact) return null;
 
+  dispatch(myAction(SET_CONTACT_DETAILS, contact));
+
   const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;
 
   const deleteOne = contactId => {
     dispatch(deleteContact(contactId));
     history.replace('/contacts');
-  };
-
-  const addConnectionEvent = () => {
-
   };
 
   return (
@@ -56,6 +57,7 @@ const DetailView = ({ match }) => {
 
       <div className={styles.ToolbarBottom}>
         <FaTrashAlt id="delete" onClick={() => deleteOne(contact._id)} />
+        <ConnectedButton />
         <Link to={`/edit/${contact._id}`}><AiFillEdit id="edit" /></Link>
       </div>
     </section>
