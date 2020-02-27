@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from './About.css';
 
+
 const AboutPage = () => {
   return (
     <main className={styles.About}>
+      <img src='../../../assets/images/logo.png' />
       <h1>About KIT</h1>
       <p>KIT is a tool for improving your communication with the people that matter to you. If you&apos;ve got personal or professional connections that you want to nourish with regular contact, KIT can help.</p>
       <h2>Features include:</h2>

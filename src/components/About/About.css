@@ -1,3 +1,17 @@
+@value colors: '../colors.css';
+@value lightblue, orange, yellow, green, darkblue from colors;
+
+body{
+  background-color: lightblue;
+}
+h1, h2, h3, p, ul{
+  color: white;
+}
+img{
+  width:100%;
+  height: auto;
+}
+
 .About{
   display: flex;
   flex-direction: column;
