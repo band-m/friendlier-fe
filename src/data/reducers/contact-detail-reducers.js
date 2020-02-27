@@ -11,15 +11,15 @@ const initialState = {
   email: '',
   image: '',
   commFrequency: 1,
-  createdOn: '',
-  lastContactedDate: '',
+  createdOn: null,
+  lastContactedDate: null,
   notificationRange: 3,
-  yellowZoneStartDate: '',
-  redZoneStartDate: '',
-  deadlineDate: '',
+  yellowZoneStartDate: null,
+  redZoneStartDate: null,
+  deadlineDate: null,
   deadlineObject: {},
   connHistory: [],
-  birthdate: null,
+  birthdate: '',
   specialDates: [],
   notes: '',
 };
@@ -58,12 +58,8 @@ export default function contactDetailReducer(state = initialState, action) {
       return { ...state, connectionHistory: [...state.connectionHistory, action.payload] };
     case SET_CONTACT_DETAILS:
       return { ...state };
-    case FETCH_ONE_CONTACT_PENDING:
-      return { ...state, contactsLoading: true, contactList: [], error: null };
     case FETCH_ONE_CONTACT_FULFILLED:
-      return { ...state, contactsLoading: false, contactList: action.payload, error: null };
-    case FETCH_ONE_CONTACT_REJECTED:
-      return { ...state, contactsLoading: false, contactList: [], error: action.payload };
+      return action.payload;
     case SET_NOTIFICATION_RANGE:
       return { ...state, notificationRange: action.payload };
     case SET_DEADLINE_DATE:

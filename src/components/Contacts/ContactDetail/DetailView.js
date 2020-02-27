@@ -4,22 +4,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneContact, fetchContacts } from '../../../data/actions/contact-detail-actions';
 import PropTypes from 'prop-types';
 import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { selectUser } from '../../../data/selectors/auth-selector';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
+import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
+import { selectSelectedContact } from '../../../data/selectors/contacts-selectors';
 import { FaTrashAlt } from 'react-icons/fa';
 
 const DetailView = ({ match }) => {
-  const [contact, setContact] = useState({});
+  const contact = useSelector(state => selectSelectedContact(state, match.params.id));  
 
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  if(!contact) return null;
 
-  useEffect(() => {
-    dispatch(fetchOneContact(match.params.id))
-      .then(contact => setContact(contact.value));
-  }, [match.params.id]);
-
+  // useEffect(() => {
+  //   dispatch(fetchOneContact(match.params.id))
+  //     .then(contact => setContact(contact.value));
+  // }, [match.params.id]);
+  
   const deleteContact = contactId => {
     console.log(contactId);
     deleteContactDetails(contactId);
@@ -27,26 +32,20 @@ const DetailView = ({ match }) => {
     history.replace('/contacts');
   };
 
-  const { firstName, lastName, lastContacted, email, phoneNumber, address, commFrequency, birthdate, notes } = contact;
+  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;  
 
   return (
     <section className={styles.DetailView}>
-      <div className={styles.FullName}>
-        {firstName &&
-          <h2>{firstName}</h2>
-        }
-        {lastName &&
-          <h2>{lastName}</h2>
-        }
-      </div>
-      <div className={styles.ContactHistory}>
-        <div className={styles.Column}>
-          <p>Last Contacted <span>{lastContacted}</span></p>
-          <p>Contact Deadline <span></span></p>
-        </div>
-
-        <button>Show Contact History</button>
-      </div>
+      <div>
+        <h2>{firstName} {lastName}</h2>
+      </div><br/>
+      
+      <div>
+        <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} {lastContactedDate && format(lastContactedDate, "PPPP")}</p>
+        <p>Yellow Zone Begins: {yellowZoneStartDate && format(new Date(yellowZoneStartDate), "PPPP")} </p>
+        <p>Red Zone Begins: {redZoneStartDate && format(new Date(redZoneStartDate), "PPPP")}</p>
+        <p>Contact Deadline: {deadlineDate && format(new Date(deadlineDate), "PPPP")} <span></span></p>
+      </div><br/>
 
       <div className={styles.ContactFields}>
         {email &&
