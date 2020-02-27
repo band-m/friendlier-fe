@@ -9,6 +9,7 @@ export const initialState = {
   logoutLoading: false,
   signUpLoading: false,
   signedInPending: false,
+  loggedOut: false,
   user: null,
   error: null
 };
@@ -17,21 +18,21 @@ export const authReducer = (state = initialState, action) => {
   switch(action.type) {
     // Note: middleware handles the unsuffixed actions for us, and gives us the other actions 
     case LOGIN_PENDING:
-      return { ...state, loginLoading: true, user: null, error: null,  };
+      return { ...state, loginLoading: true, user: null, error: null, loggedOut: false };
     case LOGIN_FULFILLED:
       return { ...state, loginLoading: false, user: action.payload, error: null };
     case LOGIN_REJECTED:
       return { ...state, loginLoading: false, user: null, error: action.payload };
 
     case LOGOUT_PENDING:
-      return { ...state, logoutLoading: true, error: null,  };
+      return { ...state, logoutLoading: true, error: null };
     case LOGOUT_FULFILLED:
-      return { ...state, logoutLoading: false, user: null, error: null };
+      return { ...state, logoutLoading: false, user: null, error: null, loggedOut: true };
     case LOGOUT_REJECTED:
       return { ...state, logoutLoading: false, error: action.payload };
 
     case SIGNUP_PENDING:
-      return { ...state, signupLoading: true, user: null, error: null };
+      return { ...state, signupLoading: true, user: null, error: null, loggedOut: false };
     case SIGNUP_FULFILLED:
       return { ...state, signupLoading: false, user: action.payload, error: null };
     case SIGNUP_REJECTED:
@@ -42,7 +43,7 @@ export const authReducer = (state = initialState, action) => {
     case SIGNED_IN_FULFILLED: 
       return { ...state, signedInLoading: false, user: action.payload };
     case SIGNED_IN_REJECTED: 
-      return { ...state, signedInLoading: false };
+      return { ...state, signedInLoading: false, loggedOut: true, error: action.payload };
 
     case UPDATE_USER_PENDING: 
       return { ...state, updateUserLoading: true, error: null };

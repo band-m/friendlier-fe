@@ -1,10 +1,9 @@
 console.log('Loaded service worker!');
 
 self.addEventListener('push', ev => {
-  const data = ev.data.json();
-  console.log('Got push', data);
-  self.registration.showNotification(data.title, {
-    body: data.message,
+  const message = ev.data.text();
+  self.registration.showNotification('Kit Reminder:', {
+    body: message,
     // icon: 'url to our icon goes here'
   });
 });
