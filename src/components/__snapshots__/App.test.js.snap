@@ -3,40 +3,44 @@
 exports[`App component renders App 1`] = `
 <Component>
   <Header />
-  <Component>
+  <main
+    className="Main"
+  >
+    <Component>
+      <Component
+        component={[Function]}
+        exact={true}
+        path="/"
+      />
+      <Component
+        component={[Function]}
+        path="/login"
+      />
+      <Component
+        component={[Function]}
+        path="/signup"
+      />
+      <Component
+        component={[Function]}
+        path="/contacts"
+      />
+      <Component
+        component={[Function]}
+        path="/add"
+      />
+      <Component
+        component={[Function]}
+        path="/about"
+      />
+      <Component
+        component={[Function]}
+        path="/settings"
+      />
+    </Component>
     <Component
       component={[Function]}
-      exact={true}
-      path="/"
+      path="/contacts/:id"
     />
-    <Component
-      component={[Function]}
-      path="/login"
-    />
-    <Component
-      component={[Function]}
-      path="/signup"
-    />
-    <Component
-      component={[Function]}
-      path="/contacts"
-    />
-    <Component
-      component={[Function]}
-      path="/add"
-    />
-    <Component
-      component={[Function]}
-      path="/about"
-    />
-    <Component
-      component={[Function]}
-      path="/settings"
-    />
-  </Component>
-  <Component
-    component={[Function]}
-    path="/contacts/:id"
-  />
+  </main>
 </Component>
 `;
