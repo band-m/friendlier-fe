@@ -58,12 +58,8 @@ export default function contactDetailReducer(state = initialState, action) {
       return { ...state, connectionHistory: [...state.connectionHistory, action.payload] };
     case SET_CONTACT_DETAILS:
       return { ...state };
-    case FETCH_ONE_CONTACT_PENDING:
-      return { ...state, contactsLoading: true, contactList: [], error: null };
     case FETCH_ONE_CONTACT_FULFILLED:
-      return { ...state, contactsLoading: false, contactList: action.payload, error: null };
-    case FETCH_ONE_CONTACT_REJECTED:
-      return { ...state, contactsLoading: false, contactList: [], error: action.payload };
+      return action.payload;
     case SET_NOTIFICATION_RANGE:
       return { ...state, notificationRange: action.payload };
     case SET_DEADLINE_DATE:

@@ -4,32 +4,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneContact, fetchContacts } from '../../../data/actions/contact-detail-actions';
 import PropTypes from 'prop-types';
 import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { selectUser } from '../../../data/selectors/auth-selector';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
+import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
+import { selectSelectedContact } from '../../../data/selectors/contacts-selectors';
 
 const DetailView = ({ match }) => {
-  const [contact, setContact] = useState({});
+  const contact = useSelector(state => selectSelectedContact(state, match.params.id));
+  console.log(contact);
+  
 
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  if(!contact) return null;
 
-  useEffect(() => {
-    dispatch(fetchOneContact(match.params.id))
-      .then(contact => setContact(contact.value));
-  }, [match.params.id]);
-
+  // useEffect(() => {
+  //   dispatch(fetchOneContact(match.params.id))
+  //     .then(contact => setContact(contact.value));
+  // }, [match.params.id]);
+  
   const deleteContact = contactId => {
     console.log(contactId);
     deleteContactDetails(contactId);
     dispatch(fetchContacts(user._id));
     history.replace('/contacts');
   };
-console.log(contact);
 
-  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, commFrequency, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;  
+  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;  
 
   return (
     <section className={styles.DetailView}>
@@ -55,7 +59,10 @@ console.log(contact);
 
         {/* <p>Special Dates: {specialDates}</p> */}
       </div>
-      <button>Show Contact History</button>
+      <button>Show Contact History</button><br/><br/>
+      <Link to={`/edit/${contact._id}`}>
+      <button>Edit contact</button>
+      </Link>
       <button id="delete" onClick={() => deleteContact(contact._id)}>Delete Contact</button>
     </section>
   );
