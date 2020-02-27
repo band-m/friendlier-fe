@@ -18,17 +18,22 @@ const SettingsPage = () => {
   const [pushIsPM, setPushIsPM] = useState(!!Math.floor(userPushHour / 12));
   const dispatch = useDispatch();
   const hours = Array(12).fill().map((x, i)=>i);
-  const saveSettings = () => {
-    dispatch(updateUser({
-      pushHour: pushHour + 12 * Number(pushIsPM),
-      wantsPush
-    }));
+
+  const saveSettings = async() => {
+    let subscription;
     if(wantsPush) {
-      subscribePush();
+      subscription = await subscribePush();
+      console.log(subscription, 'subscription');
     }
     else {
       unsubscribePush();
     }
+    dispatch(updateUser({
+      subscription,
+      createDate: new Date(),
+      pushHour: pushHour + 12 * Number(pushIsPM),
+      wantsPush
+    }));
   };
 
   return (
