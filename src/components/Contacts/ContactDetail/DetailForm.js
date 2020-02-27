@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import Nouislider from 'nouislider-react';
+import format from 'date-fns/format';
 import styles from './DetailForm.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { myAction, postContactDetails, fetchOneContact, editContactDetails } from '../../../data/actions/contact-detail-actions';
+import differenceInDays from 'date-fns/differenceInCalendarDays';
+import add from 'date-fns/add';
+import { myAction, fetchOneContact, editContactDetails } from '../../../data/actions/contact-detail-actions';
 import {
-  SET_USER_ID,
   SET_FIRST_NAME,
   SET_LAST_NAME,
-  // SET_IMAGE,
   SET_NOTES,
   SET_BIRTHDATE,
   SET_RED_ZONE,
@@ -15,39 +17,17 @@ import {
   SET_EMAIL,
   SET_ADDRESS,
   SET_PHONE_NUMBER,
-  SET_SPECIAL_DATES,
-  SET_CONTACT_DETAILS
+  SET_DEADLINE_NUMBER,
+  SET_DEADLINE_UNIT,
+  SET_NOTIFICATION_RANGE,
+  SET_DEADLINE_DATE
 } from '../../../data/action-types/action-types';
-import { selectUser } from '../../../data/selectors/auth-selector';
-import { setContact } from '../../../data/actions/contacts-actions';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
-import { setContactDetails } from '../../../services/contacts';
 import { useHistory } from 'react-router-dom';
 
 const DetailForm = ({ match }) => {
-  const [slider1, setSlider1] = useState(10);
-  const [slider2, setSlider2] = useState(20);
-  const [num, setNum] = useState(2);
-  const [numOfDays, setNumOfDays] = useState(14);
-  const [deadlineUnit, setDeadlineUnit] = useState('weeks');
-  const [notificationOption, setNotificationOption] = useState(1);
-  const [deadline, setDeadline] = useState();
-  const [deadlineObject, setDeadlineObject] = useState({ days: 14, months: 0 });
-  const [yellowZone, setYellowZone] = useState();
-  const [redZone, setRedZone] = useState();
-
-
-
-
-
-
-
-
-
-
   const contact = useSelector(selectContactDetails);  
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
   const details = useSelector(selectContactDetails);
   const history = useHistory();
 
@@ -55,13 +35,84 @@ const DetailForm = ({ match }) => {
     dispatch(fetchOneContact(match.params.id));
   }, [match.params.id]);
 
+  const { firstName, lastName, email, address, phoneNumber, birthdate, notes, deadlineNumber, deadlineUnit, connHistory, lastContactedDate, createdOn, commFrequency, notificationRange, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;
+
+  const [slider1, setSlider1] = useState(10);
+  const [slider2, setSlider2] = useState(20);
+  const compareDateString = connHistory.length > 0 ? lastContactedDate : createdOn;
+  const compareDate = new Date(compareDateString);
+
+  // When user inputs a number, set deadlineNumber and commFrequency in contact details
+  const changeNumOfDaysInput = value => {
+    dispatch(myAction(SET_DEADLINE_NUMBER, value));
+    switch(deadlineUnit){
+      case 'days':
+        return dispatch(myAction(SET_COMM_FREQUENCY, value));
+      case 'weeks':
+        return dispatch(myAction(SET_COMM_FREQUENCY, value * 7));
+      case 'months':
+        const monthDays = differenceInDays((add(compareDate, { months: value })), compareDate);
+        return dispatch(myAction(SET_COMM_FREQUENCY, monthDays));
+    }
+  };
+
+    // When user selects a days/weeks/months radio, set deadlineUnit and commFrequency in contact details
+    const changeNumOfDaysRadio = target => {
+      dispatch(myAction(SET_DEADLINE_UNIT, target.id))
+      switch(target.id) {
+        case 'days':
+          return dispatch(myAction(SET_COMM_FREQUENCY, deadlineNumber));
+        case 'weeks':
+          return dispatch(myAction(SET_COMM_FREQUENCY, deadlineNumber * 7));
+        case 'months':
+          const monthDays = differenceInDays((add(compareDate, { months: value })), compareDate);
+          return dispatch(myAction(SET_COMM_FREQUENCY, monthDays));
+      }
+    };
+
+    // When commFrequency changes, set new deadlineDate in contact details
+    useEffect(() => {
+      dispatch(myAction(SET_DEADLINE_DATE, add(compareDate, { [deadlineUnit]: deadlineNumber })));
+    }, [commFrequency]);
+
+    // When notificationRange or commFrequency change, change slider positions
+    useEffect(() => {
+      switch(notificationRange) {
+        case 1:
+          setSlider1(Math.floor(commFrequency / 3));
+          setSlider2(Math.floor((2 * commFrequency) / 3));
+          return;
+        case 2:
+          setSlider1(Math.floor(commFrequency / 2));
+          setSlider2(Math.floor((3 * commFrequency) / 4));
+          return;
+        case 3:
+          setSlider1(Math.floor((3 * commFrequency) / 4));
+          setSlider2(Math.floor((7 * commFrequency) / 8));
+          return;
+      }
+    }, [notificationRange, commFrequency]);
+
+    // When slider positions change, set yellowZoneStartDate and redZoneStartDate in contact details
+    useEffect(() => {
+      dispatch(myAction(SET_YELLOW_ZONE, add(compareDate, { days: slider1 })));
+      dispatch(myAction(SET_RED_ZONE, add(compareDate, { days: slider2 })));
+    }, [slider1, slider2])
+
+  // On initial load, add colors to the range connectors
+  useEffect(() => {
+    const connectors = document.querySelectorAll('.noUi-connect');
+    const classes = ['c-1-color', 'c-2-color', 'c-3-color'];
+    for(let i = 0; i < connectors.length; i++) {
+      connectors[i].classList.add(classes[i]);
+    }
+  }, []);
+
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(editContactDetails(match.params.id, details));
     history.push('/contacts');
   };
-
-  const { firstName, lastName, email, address, phoneNumber, birthdate, notes } = contact;
 
   return (
     <form className={styles.DetailForm} onSubmit={handleSubmit}>
@@ -94,7 +145,7 @@ const DetailForm = ({ match }) => {
       <p>Would you like to change your connection settings with {firstName} {lastName}?</p><br/><br/>
       <p>How often do you want to be in contact with name?</p>
       <p>Every</p>
-      <input type='number' min={1} value={num} onChange={({target}) => changeNumOfDaysInput(+target.value)} /><br/>
+      <input type='number' min={1} value={deadlineNumber} onChange={({target}) => changeNumOfDaysInput(+target.value)} /><br/>
       <label htmlFor='days'>Days</label>
       <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
       <label htmlFor='weeks'>Weeks</label>
@@ -102,7 +153,21 @@ const DetailForm = ({ match }) => {
       <label htmlFor='months'>Months</label>
       <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({target}) => changeNumOfDaysRadio(target)}/><br/><br/><br/>
 
+      <p>Choose your notification range for name:</p>
+      <label htmlFor={1}>1</label>
+      <input type='radio' name='notificationOptions' id={1} checked={notificationRange === 1} onChange={({target}) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} />
+      <label htmlFor={2}>2</label>
+      <input type='radio' name='notificationOptions' id={2} checked={notificationRange === 2} onChange={({target}) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} />
+      <label htmlFor={3}>3</label>
+      <input type='radio' name='notificationOptions' id={3} checked={notificationRange === 3} onChange={({target}) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} /><br/><br/><br/>
+
+      <p>Your connection deadline with name will be on {deadlineDate && format(new Date(deadlineDate), "PPPP")}</p>
+      <p>Your yellow zone will begin on {yellowZoneStartDate && format(new Date(yellowZoneStartDate), "PPPP")}</p>
+      <p>Your red zone will begin on {redZoneStartDate && format(new Date(redZoneStartDate), "PPPP")}</p>
+
       </section>
+
+      <Nouislider style={{ margin: '25px' }} range={{ min: 0, max: commFrequency }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
 
       <button type="submit">Edit contact</button>
     </form>
