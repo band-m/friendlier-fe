@@ -1,19 +1,4 @@
 .DetailForm{
-  padding: 0.5rem;
-
-  button {
-  margin: 1.5rem auto 0.5rem;
-  display: block;
-  }
-
-  p{
-    margin: 0.3rem 0;
-  }
-  input[type="number"]{
-    display: inline;
-    margin: 0 0.5rem;
-    width: 2rem;
-  }
   >:first-child{
     align-items: center;
     min-width: 300px;
@@ -21,13 +6,6 @@
   }
   .ContactFrequencyInput{
     flex-direction: column;
-    margin-top: 0.5rem;
-
-    div{
-      flex-direction:row;
-      justify-content: center;
-    }
-
   }
   section{
     display: flex;
