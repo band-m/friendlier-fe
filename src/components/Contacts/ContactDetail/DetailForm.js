@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Nouislider from 'nouislider-react';
+import '../../Slider/Slider.css';
 import format from 'date-fns/format';
 import styles from './DetailForm.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,27 +21,33 @@ import {
   SET_DEADLINE_NUMBER,
   SET_DEADLINE_UNIT,
   SET_NOTIFICATION_RANGE,
-  SET_DEADLINE_DATE
+  SET_DEADLINE_DATE,
+  SET_DEADLINE_OBJECT
 } from '../../../data/action-types/action-types';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import { useHistory } from 'react-router-dom';
 
 const DetailForm = ({ match }) => {
   const contact = useSelector(selectContactDetails);  
-  const dispatch = useDispatch();
   const details = useSelector(selectContactDetails);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
     dispatch(fetchOneContact(match.params.id));
   }, [match.params.id]);
 
-  const { firstName, lastName, email, address, phoneNumber, birthdate, notes, deadlineNumber, deadlineUnit, connHistory, lastContactedDate, createdOn, commFrequency, notificationRange, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;
+  const { firstName, lastName, email, address, phoneNumber, birthdate, notes, deadlineNumber, deadlineUnit, deadlineObject, connHistory, lastContactedDate, createdOn, commFrequency, notificationRange, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;
+  
+  
 
-  const [slider1, setSlider1] = useState(10);
-  const [slider2, setSlider2] = useState(20);
   const compareDateString = connHistory.length > 0 ? lastContactedDate : createdOn;
   const compareDate = new Date(compareDateString);
+  const yellowZoneNumber = differenceInDays(new Date(yellowZoneStartDate), compareDate);
+  const redZoneNumber = differenceInDays(new Date(redZoneStartDate), compareDate);
+
+  const [slider1, setSlider1] = useState(yellowZoneNumber);
+  const [slider2, setSlider2] = useState(20);
 
   // When user inputs a number, set deadlineNumber and commFrequency in contact details
   const changeNumOfDaysInput = value => {
@@ -65,15 +72,30 @@ const DetailForm = ({ match }) => {
         case 'weeks':
           return dispatch(myAction(SET_COMM_FREQUENCY, deadlineNumber * 7));
         case 'months':
-          const monthDays = differenceInDays((add(compareDate, { months: value })), compareDate);
+          const monthDays = differenceInDays((add(compareDate, { months: deadlineNumber })), compareDate);
           return dispatch(myAction(SET_COMM_FREQUENCY, monthDays));
       }
     };
 
-    // When commFrequency changes, set new deadlineDate in contact details
+    // When commFrequency changes, set new deadlineObject in contact details
     useEffect(() => {
-      dispatch(myAction(SET_DEADLINE_DATE, add(compareDate, { [deadlineUnit]: deadlineNumber })));
+      switch(deadlineUnit) {
+        case 'days':
+          dispatch(myAction(SET_DEADLINE_OBJECT, { days: deadlineNumber, months: 0 }));
+          return;
+        case 'weeks':
+          dispatch(myAction(SET_DEADLINE_OBJECT, { days: deadlineNumber * 7, months: 0 }));
+          return;
+        case 'months':
+          dispatch(myAction(SET_DEADLINE_OBJECT, { days: 0, months: deadlineNumber }));
+          return;
+      }
     }, [commFrequency]);
+
+    // When deadlineObject changes, set new deadlineDate in contact details
+    useEffect(() => {
+      dispatch(myAction(SET_DEADLINE_DATE, add(compareDate, deadlineObject)));
+    }, [deadlineObject]);
 
     // When notificationRange or commFrequency change, change slider positions
     useEffect(() => {
@@ -121,7 +143,7 @@ const DetailForm = ({ match }) => {
         <input type="text" onChange={({ target }) => dispatch(myAction(SET_LAST_NAME, target.value))} name="lastName" placeholder="Last Name" value={lastName} />
       </div>
 
-      <section>
+      <section id='labels'>
         <div>
           <label htmlFor="email">Email</label>
           <label htmlFor="address">Address</label>
@@ -133,7 +155,7 @@ const DetailForm = ({ match }) => {
           <input type="text" onChange={({ target }) => dispatch(myAction(SET_EMAIL, target.value))} id="email" name="email" placeholder="Email address" value={email}/>
           <input type="text" onChange={({ target }) => dispatch(myAction(SET_ADDRESS, target.value))} id="address" name="address" placeholder="Physical Address" value={address}/>
           <input type="text" onChange={({ target }) => dispatch(myAction(SET_PHONE_NUMBER, target.value))} id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value={phoneNumber}/>
-          <input type="date" onChange={({ target }) => dispatch(myAction(SET_BIRTHDATE, target.value))} id="birthdate" name="birthdate" placeholder="Birthdate" value={birthdate && birthdate.split('T')[0]} />
+          <input type="date" onChange={({ target }) => dispatch(myAction(SET_BIRTHDATE, target.value))} id="birthdate" name="birthdate" placeholder="Birthdate" value={birthdate ? birthdate.split('T')[0] : ''} />
         </div>
       </section>
 

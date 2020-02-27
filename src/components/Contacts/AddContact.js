@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Nouislider from 'nouislider-react';
-import 'nouislider/distribute/nouislider.css';
+import '../Slider/Slider.css';
 import add from 'date-fns/add';
 import format from 'date-fns/format';
 import differenceInDays from 'date-fns/differenceInCalendarDays';
