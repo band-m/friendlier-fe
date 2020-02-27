@@ -70,13 +70,13 @@ describe('auth reducer module', () => {
   });
 
   it('UPDATE_USER does nothing', () => {
-    expect(authReducer(loggedInState, { type: SIGNUP, payload: 'fake promise' }))
+    expect(authReducer(loggedInState, { type: UPDATE_USER, payload: 'fake promise' }))
       .toEqual(loggedInState);
   });
 
   it('UPDATE_USER_PENDING sets updateUserLoading', () => {
     expect(authReducer(loggedInState, { type: UPDATE_USER_PENDING }))
-      .toEqual({ ...loggedInState, updateUserLoading: true});
+      .toEqual({ ...loggedInState, updateUserLoading: true });
   });
 
   it('UPDATE_USER_FULFILLED unsets updateUserLoading and error, sets user', () => {
