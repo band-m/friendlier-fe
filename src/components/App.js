@@ -12,6 +12,7 @@ import { signedIn } from '../data/actions/auth-actions';
 import AddContact from './Contacts/AddContact';
 import ContactList from './Contacts/ContactList';
 import DetailView from './Contacts/ContactDetail/DetailView';
+import DetailForm from './Contacts/ContactDetail/DetailForm';
 import styles from './App.css';
 
 jest.mock('../workers/subscribe-push.js');
@@ -19,6 +20,8 @@ jest.mock('../workers/unsubscribe-push.js');
 
 export default function App() {
   const dispatch = useDispatch();
+  // const [hasDeleted, setHasDeleted] = useState(false);
+
   useEffect(() => {
     dispatch(signedIn());
   }, []);
@@ -26,19 +29,18 @@ export default function App() {
   return (
     <Router>
       <Header />
-      <main className={styles.Main}>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/contacts" component={ContactList} />
-          <Route path="/add" component={AddContact} />
-          <Route path="/about" component={About} />
-          <Route path="/settings" component={Settings} />
-        </Switch>
-        <Route path='/contacts/:id' component={DetailView} />
-        {/* <Route path='/contacts/add' component={AddContact} /> */}
-      </main>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/contacts" component={ContactList} />
+        <Route path="/add" component={AddContact} />
+        <Route path="/edit/:id" component={DetailForm} />
+        <Route path="/about" component={About} />
+        <Route path="/settings" component={Settings} />
+      </Switch>
+      <Route path='/contacts/:id' component={DetailView} />
+      {/* <Route path='/contacts/add' component={AddContact} /> */}
     </Router>
   );
 }
