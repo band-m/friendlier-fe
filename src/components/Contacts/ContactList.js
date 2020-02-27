@@ -15,7 +15,7 @@ export default function ContactList() {
       dispatch(fetchContacts(user._id));
     }
   }, [user]);
-
+  
   const contacts = useSelector(selectContactsList);
 
   let contactList;
