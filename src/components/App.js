@@ -14,7 +14,8 @@ import ContactList from './Contacts/ContactList';
 import DetailView from './Contacts/ContactDetail/DetailView';
 import styles from './App.css';
 
-
+jest.mock('../workers/subscribe-push.js');
+jest.mock('../workers/unsubscribe-push.js');
 
 export default function App() {
   const dispatch = useDispatch();

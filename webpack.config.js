@@ -1,12 +1,14 @@
+const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const CopyPlugin = require('copy-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const webpack = require('webpack');
 
 // eslint-disable-next-line
 module.exports = {
-  entry: './src/index.js',
+  entry: ['@babel/polyfill', './src/index.js'],
   output: {
     filename: 'bundle.[hash].js',
     publicPath: '/'
@@ -27,6 +29,9 @@ module.exports = {
     ]),
     new webpack.ProvidePlugin({
       noUiSlider: 'nouislider'
+    }),
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, 'src/workers/worker.js'),
     })
   ],
   module: {
