@@ -6,6 +6,7 @@ import format from 'date-fns/format';
 import differenceInDays from 'date-fns/differenceInCalendarDays';
 import styles from './ContactDetail/DetailForm.css';
 import parse from 'date-fns/parse';
+import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import { useSelector, useDispatch } from 'react-redux';
 import { myAction, postContactDetails } from '../../data/actions/contact-detail-actions';
 import {
@@ -140,7 +141,6 @@ export default function AddContact() {
     console.log(yellowZone);
     console.log(redZone);
     
-    
     dispatch(myAction(SET_YELLOW_ZONE, yellowZone));
     dispatch(myAction(SET_RED_ZONE, redZone));
   }, [yellowZone, redZone]);
@@ -242,3 +242,26 @@ export default function AddContact() {
     </form>
   );
 }
+
+
+
+
+
+
+if (contact.lastContactedDate) {
+  dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, formatDistanceStrict(contact.createdOn, contact.yellowZoneStartDate);
+}
+dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, formatDistanceStrict(contact.lastContactedDate, contact.yellowZoneStartDate);
+
+
+if (contact.lastContactedDate) {
+  dispatch(myAction(SET_TOTAL_YELLOW_ZONE_DAYS, formatDistanceStrict(contact.createdOn, contact.yellowZoneStartDate);
+}
+dispatch(myAction(SET_TOTAL_YELLOW_ZONE_DAYS, formatDistanceStrict(contact.lastContactedDate, contact.yellowZoneStartDate);
+
+
+if (contact.lastContactedDate) {
+  dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, formatDistanceStrict(contact.createdOn, contact.yellowZoneStartDate);
+}
+dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, formatDistanceStrict(contact.lastContactedDate, contact.yellowZoneStartDate);
+

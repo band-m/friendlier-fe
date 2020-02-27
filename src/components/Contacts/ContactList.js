@@ -6,6 +6,7 @@ import { fetchContacts } from '../../data/actions/contacts-actions';
 import { selectUser } from '../../data/selectors/auth-selector';
 import isFuture from 'date-fns/isFuture';
 import isPast from 'date-fns/isPast';
+import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import styles from './ContactList.css';
 import { SET_CONTACT_CREATED_ON } from '../../data/action-types/action-types';
 
@@ -26,8 +27,14 @@ export default function ContactList() {
   const redZoneContacts = contacts.filter(contact => isFuture(contact.deadlineDate));
   const pastDeadlineContacts = contacts.filter(contact => isPast(contact.deadlineDate));
 
-  const sortedGreen = ()
-  
+  greenZoneContacts.map(contact => {
+    let greenZoneTime;
+    if(contact.lastContactedDate){
+      greenZoneTime = formatDistanceStrict(contact.createdOn, contact.yellowZoneStartDate);
+    }
+    greenZoneTime = formatDistanceStrict(contact.lastContactedDate, contact.yellowZoneStartDate);
+  });
+
   const makeListItems = zone => {
     if(zone.length){
       return zone.map(contact => {
