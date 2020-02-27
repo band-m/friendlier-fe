@@ -17,6 +17,8 @@ import DetailView from './Contacts/ContactDetail/DetailView';
 
 export default function App() {
   const dispatch = useDispatch();
+  // const [hasDeleted, setHasDeleted] = useState(false);
+
   useEffect(() => {
     dispatch(signedIn());
   }, []);

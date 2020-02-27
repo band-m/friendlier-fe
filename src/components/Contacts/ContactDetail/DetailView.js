@@ -3,7 +3,7 @@ import styles from './DetailView.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneContact, fetchContacts } from '../../../data/actions/contact-detail-actions';
 import PropTypes from 'prop-types';
-import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
+import { setContactDetails } from '../../../services/contacts';
 import { useHistory } from 'react-router-dom';
 import { selectUser } from '../../../data/selectors/auth-selector';
 import { deleteContact } from '../../../data/actions/contacts-actions';
@@ -23,7 +23,7 @@ const DetailView = ({ match }) => {
   const deleteOne = contactId => {
     console.log(contactId);
     dispatch(deleteContact(contactId));
-    dispatch(fetchContacts(user._id));
+    // dispatch(fetchContacts(user._id));
     history.replace('/contacts');
   };
 
@@ -58,7 +58,6 @@ const DetailView = ({ match }) => {
     </section>
   );
 };
-
 
 DetailView.propTypes = {
   match: PropTypes.shape({
