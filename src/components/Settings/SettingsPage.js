@@ -1,34 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './SettingsPage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../data/actions/auth-actions';
-import { selectUser } from '../../data/selectors/auth-selector';
+import { selectUser, selectLoggedOut } from '../../data/selectors/auth-selector';
 import subscribePush from '../../workers/subscribe-push';
 import unsubscribePush from '../../workers/unsubscribe-push';
+import { useHistory } from 'react-router-dom';
 
 const SettingsPage = () => {
   const user = useSelector(selectUser);
+  // const loading = useSelector(selectLoading);
+  // const error = useSelector(selectError);
+  const loggedOut = useSelector(selectLoggedOut);
+  const history = useHistory();
+
   let userPushHour = user?.pushHour;
   if(!Number.isInteger(userPushHour)) {
     userPushHour = 18;
   }
   const [password, setPassword] = useState('');
-  const [wantsPush, setWantsPush] = useState(user?.wantsPush || false);
-  const [pushHour, setPushHour] = useState(userPushHour % 12);
-  const [pushIsPM, setPushIsPM] = useState(!!Math.floor(userPushHour / 12));
+  const [wantsPush, setWantsPush] = useState(false);
+  const [pushHour, setPushHour] = useState(0);
+  const [pushIsPM, setPushIsPM] = useState(true);
   const dispatch = useDispatch();
   const hours = Array(12).fill().map((x, i)=>i);
-  const saveSettings = () => {
-    dispatch(updateUser({
-      pushHour: pushHour + 12 * Number(pushIsPM),
-      wantsPush
-    }));
+
+
+  useEffect(() => {
+    if(loggedOut) {
+      history.push('/');
+    }
+  }, [loggedOut]);
+
+  useEffect(() => {
+    if(user) {
+      setWantsPush(user.wantsPush || false);
+      setPushHour(user.pushHour % 12);
+      setPushIsPM(!!Math.floor(user.pushHour / 12));
+    }
+  }, [user?._id]);
+
+  // useEffect(() => {
+  //   if(user) {
+  //     setWantsPush(user.wantsPush || false);
+  //     setPushHour(user.pushHour % 12);
+  //     setPushIsPM(!!Math.floor(userPushHour / 12));
+  //   }
+  // }, [user._id]);
+
+  const saveSettings = async() => {
+    let subscription;
     if(wantsPush) {
-      subscribePush();
+      subscription = await subscribePush();
     }
     else {
       unsubscribePush();
     }
+    dispatch(updateUser({
+      subscription,
+      createDate: new Date(),
+      pushHour: Number(pushHour) + 12 * Number(pushIsPM),
+      wantsPush
+    }));
   };
 
   return (

@@ -12,6 +12,7 @@ import { selectContactDetails } from '../../../data/selectors/contact-detail-sel
 import { selectSelectedContact } from '../../../data/selectors/contacts-selectors';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
+import { deleteContact } from '../../../data/actions/contacts-actions';
 
 const DetailView = ({ match }) => {
   const contact = useSelector(state => selectSelectedContact(state, match.params.id));
@@ -26,10 +27,8 @@ const DetailView = ({ match }) => {
   //     .then(contact => setContact(contact.value));
   // }, [match.params.id]);
 
-  const deleteContact = contactId => {
-    console.log(contactId);
+  const deleteOne = contactId => {
     dispatch(deleteContact(contactId));
-    // dispatch(fetchContacts(user._id));
     history.replace('/contacts');
   };
 
@@ -63,7 +62,7 @@ const DetailView = ({ match }) => {
         {/* <p>Special Dates: {specialDates}</p> */}
       </div>
       <div className={styles.ToolbarBottom}>
-        <FaTrashAlt id="delete" onClick={() => deleteContact(contact._id)} />
+        <FaTrashAlt id="delete" onClick={() => deleteOne(contact._id)} />
         <Link to={`/edit/${contact._id}`}><AiFillEdit id="edit" /></Link>
       </div>
     </section>
