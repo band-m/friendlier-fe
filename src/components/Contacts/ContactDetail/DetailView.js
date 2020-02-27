@@ -28,7 +28,6 @@ const DetailView = ({ match }) => {
   // }, [match.params.id]);
 
   const deleteOne = contactId => {
-    console.log(contactId);
     dispatch(deleteContact(contactId));
     history.replace('/contacts');
   };

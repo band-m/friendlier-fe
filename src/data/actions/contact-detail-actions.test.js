@@ -18,7 +18,9 @@ import {
   SET_NOTIFICATION_RANGE,
   SET_DEADLINE_DATE,
   SET_DEADLINE_OBJECT,
-  SET_CONTACT_CREATED_ON
+  SET_CONTACT_CREATED_ON,
+  SET_DEADLINE_UNIT,
+  SET_DEADLINE_NUMBER
 } from '../action-types/action-types';
 import {
   fetchContacts,
@@ -226,6 +228,24 @@ describe('contact detail actions', () => {
     expect(action).toEqual({
       type: SET_CONTACT_CREATED_ON,
       payload: 'Sept 2 2020'
+    });
+  });
+
+  it('should create a set deadline unit action', () => {
+    const action = myAction(SET_DEADLINE_UNIT, 'months');
+
+    expect(action).toEqual({
+      type: SET_DEADLINE_UNIT,
+      payload: 'months'
+    });
+  });
+
+  it('should create a set deadline number action', () => {
+    const action = myAction(SET_DEADLINE_NUMBER, 3);
+
+    expect(action).toEqual({
+      type: SET_DEADLINE_NUMBER,
+      payload: 3
     });
   });
 });
