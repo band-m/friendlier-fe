@@ -27,9 +27,6 @@ module.exports = {
     new CopyPlugin([
       { from: 'public' },
     ]),
-    new webpack.ProvidePlugin({
-      noUiSlider: 'nouislider'
-    }),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, 'src/workers/worker.js'),
     })
@@ -47,7 +44,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /nouislider/,
+        exclude: /Slider/,
         use: [
           {
             loader: 'style-loader'
@@ -77,7 +74,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: /nouislider/,
+        include: /Slider/,
         use: [
           {
             loader: 'style-loader'
