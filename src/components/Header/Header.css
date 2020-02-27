@@ -1,3 +1,6 @@
+@value colors: '../colors.css';
+@value lightblue, orange, yellow, green, darkblue from colors;
+
 .Header{
   display: flex;
   .Nav{
@@ -29,7 +32,7 @@
         line-height: 1.5;
 
         &:hover, &:active {
-          background-color: goldenrod;
+          background-color: orange;
           color: black;
         }
       }
@@ -51,7 +54,7 @@
     overflow: visible;
     background: black;
   }
-  
+
   .hamburger:hover {
     opacity: 0.7;
   }
@@ -140,7 +143,7 @@ background-color: black;
     }
 
     .Logo{
-      background: midnightblue;
+      background: darkblue;
       color: white;
       height: 20px;
       width: 50px;
