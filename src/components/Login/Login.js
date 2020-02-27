@@ -37,7 +37,6 @@ const Login = () => {
         <button>Login</button>
       </form>
       <p className={styles.center}><Link to="/signup">Sign up</Link></p>
-
     </main>
   );
 };
