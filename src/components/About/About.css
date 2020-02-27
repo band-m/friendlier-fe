@@ -1,23 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=DM+Serif+Display|Hepta+Slab:300,400,600,900|Lato:200,300,400,700|Raleway:100,200,300,400,500,700,900|Rozha+One&display=swap');
+@import url('');
+
+@value colors: '../colors.css';
+@value lightblue, orange, yellow, green, darkblue from colors;
+
+
+body{
+  background-color: lightblue;
+}
+h1, h2, h3, p, ul{
+  color: white;
+}
+img{
+  width:30%;
+  height: auto;
+  display: block;
+  margin: 0 auto !important;
+}
+
 .About{
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 1rem;
-
   h1{
-    font-size: 2rem;
+    font-size: 6rem;
     margin: 0 auto 0.5rem;
+    font-family: 'Rozha One';
   }
   h2{
-    font-size: 1.5rem;
+    font-size: 2rem;
     line-height: 2;
+    font-family: 'Raleway';
+    font-weight: 100;
+    line-height: 2rem;
+    text-align: center;
+    padding: 1rem;
+    
   }
   ul{
     list-style-type: disc;
     list-style-position: inside;
     padding: 0 0 1rem;
-    li{
-
+    padding: 1rem;
+    li {
+      font-family: 'Lato';
+      font-weight: 200;
+      list-style-type: none;
+      padding-left: 3rem;
     }
+    
   }
+  p {
+    font-family: 'Lato';
+    font-weight: 200;
+    padding: .5rem;
+    
+  }
+}
+
+
+.kitTitle {
+  
 }
