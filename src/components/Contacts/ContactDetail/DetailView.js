@@ -6,23 +6,24 @@ import PropTypes from 'prop-types';
 import { setContactDetails, deleteContactDetails } from '../../../services/contacts';
 import { useHistory } from 'react-router-dom';
 import { selectUser } from '../../../data/selectors/auth-selector';
+import { deleteContact } from '../../../data/actions/contacts-actions';
 
 const DetailView = ({ match }) => {
   const [contact, setContact] = useState({});
 
   const history = useHistory();
   const dispatch = useDispatch();
-  // const user = useSelector(selectUser);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(fetchOneContact(match.params.id))
       .then(contact => setContact(contact.value));
-  }, []);
+  }, [match.params.id]);
 
-  const deleteContact = contactId => {
+  const deleteOne = contactId => {
     console.log(contactId);
-    deleteContactDetails(contactId);
     dispatch(deleteContact(contactId));
+    dispatch(fetchContacts(user._id));
     history.replace('/contacts');
   };
 
@@ -53,7 +54,7 @@ const DetailView = ({ match }) => {
 
         {/* <p>Special Dates: {specialDates}</p> */}
       </div>
-      <button id="delete" onClick={() => deleteContact(contact._id)}>Delete Contact</button>
+      <button id="delete" onClick={() => deleteOne(contact._id)}>Delete Contact</button>
     </section>
   );
 };

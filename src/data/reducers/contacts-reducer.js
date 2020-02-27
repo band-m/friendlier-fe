@@ -13,7 +13,7 @@ export default function contactsReducer(state = initialState, action) {
     case SET_CONTACT:
       return { ...state, contactList: [...state.contactList, action.payload] };
     case DELETE_CONTACT:
-      return { ...state, contactList: state.contactList.filter(contact => contact._id !== action.payload._id) };
+      return { ...state, contactList: [...state.contactList.filter(contact => contact._id !== action.payload._id)] };
     default: return state;
   }
 }

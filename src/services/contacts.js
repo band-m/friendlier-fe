@@ -12,5 +12,5 @@ export const setContactDetails = body =>
 export const updateContactDetails = (contactId, body) => 
   request(`/api/v1/contacts/${contactId}`, 'PATCH', body);
 
-export const deleteContactDetails = contactId => 
+export const deleteContactDetail = contactId => 
   request(`/api/v1/contacts/${contactId}`, 'DELETE');
