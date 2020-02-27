@@ -1,4 +1,4 @@
-import { DELETE_CONTACT_FULFILLED, FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED, SET_CONTACT, DELETE_CONTACT } from '../action-types/action-types';
+import { DELETE_CONTACT_FULFILLED, FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED, SET_CONTACT } from '../action-types/action-types';
 
 export const initialState = { contactsLoading: false, contactList: [], error: null };
 
