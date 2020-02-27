@@ -57,7 +57,7 @@ const DetailView = ({ match }) => {
 
       <div className={styles.ToolbarBottom}>
         <FaTrashAlt id="delete" onClick={() => deleteOne(contact._id)} />
-        <ConnectedButton props={slider1, slider2, deadlineObject} />
+        <ConnectedButton slider1={slider1} slider2={slider2} deadlineObject={deadlineObject} id={contact._id} />
         <Link to={`/edit/${contact._id}`}><AiFillEdit id="edit" /></Link>
       </div>
     </section>

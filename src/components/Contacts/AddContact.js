@@ -28,7 +28,9 @@ import {
   SET_DEADLINE_DATE,
   SET_CONTACT_CREATED_ON,
   SET_DEADLINE_NUMBER,
-  SET_DEADLINE_UNIT
+  SET_DEADLINE_UNIT,
+  SET_SLIDER_1,
+  SET_SLIDER_2
 } from '../../data/action-types/action-types';
 import { selectUser } from '../../data/selectors/auth-selector';
 import { setContact } from '../../data/actions/contacts-actions';
@@ -46,6 +48,18 @@ export default function AddContact() {
   const [deadlineObject, setDeadlineObject] = useState({ days: 14, months: 0 });
   const [yellowZone, setYellowZone] = useState();
   const [redZone, setRedZone] = useState();
+
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const details = useSelector(selectContactDetails);
+  const history = useHistory();
+
+  useEffect(() => {
+    if(user) {
+      dispatch(myAction(SET_USER_ID, user._id));
+      dispatch(myAction(SET_CONTACT_CREATED_ON, new Date()));
+    }
+  }, [user]);
 
   // When user moves a slider, set slider
   const update = (render, handle, value, un, percent) => {
@@ -133,8 +147,10 @@ export default function AddContact() {
     }
   }, [notificationOption, numOfDays]);
 
-  // When slider positions change, change yellowZone and redZone
+  // When slider positions change, change yellowZone and redZone and set slider1 and slider2 in contact details
   useEffect(() => {
+    dispatch(myAction(SET_SLIDER_1, slider1));
+    dispatch(myAction(SET_SLIDER_2, slider2));
     setYellowZone(add(new Date(), { days: slider1 }));
     setRedZone(add(new Date(), { days: slider2 }))
   }, [slider1, slider2])
@@ -153,29 +169,6 @@ export default function AddContact() {
       connectors[i].classList.add(classes[i]);
     }
   }, []);
-
-
-
-
-
-
-
-
-
-
-
-
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-  const details = useSelector(selectContactDetails);
-  const history = useHistory();
-
-  useEffect(() => {
-    if(user) {
-      dispatch(myAction(SET_USER_ID, user._id));
-      dispatch(myAction(SET_CONTACT_CREATED_ON, new Date()));
-    }
-  }, [user]);
 
   const handleSubmit = event => {
     event.preventDefault();

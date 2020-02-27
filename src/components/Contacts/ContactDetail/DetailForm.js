@@ -22,7 +22,9 @@ import {
   SET_DEADLINE_UNIT,
   SET_NOTIFICATION_RANGE,
   SET_DEADLINE_DATE,
-  SET_DEADLINE_OBJECT
+  SET_DEADLINE_OBJECT,
+  SET_SLIDER_1,
+  SET_SLIDER_2
 } from '../../../data/action-types/action-types';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import { useHistory } from 'react-router-dom';
@@ -112,8 +114,10 @@ const DetailForm = ({ match }) => {
       }
     }, [notificationRange, commFrequency]);
 
-    // When slider positions change, set yellowZoneStartDate and redZoneStartDate in contact details
+    // When slider positions change, set yellowZoneStartDate, redZoneStartDate, slider1, and slider2 in contact details
     useEffect(() => {
+      dispatch(myAction(SET_SLIDER_1, slider1));
+      dispatch(myAction(SET_SLIDER_2, slider2));
       dispatch(myAction(SET_YELLOW_ZONE, add(compareDate, { days: slider1 })));
       dispatch(myAction(SET_RED_ZONE, add(compareDate, { days: slider2 })));
     }, [slider1, slider2])

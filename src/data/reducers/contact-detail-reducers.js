@@ -14,6 +14,8 @@ const initialState = {
   createdOn: null,
   lastContactedDate: null,
   notificationRange: 3,
+  slider1: 0,
+  slider2: 0,
   yellowZoneStartDate: null,
   redZoneStartDate: null,
   deadlineDate: null,
