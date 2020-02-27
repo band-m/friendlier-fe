@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=DM+Serif+Display|Hepta+Slab:300,400,600,900|Lato:200,300,400,700|Raleway:100,200,300,400,500,700,900|Rozha+One&display=swap');
-@import url('');
 
 @value colors: '../colors.css';
 @value lightblue, orange, yellow, green, darkblue from colors;
@@ -63,3 +62,4 @@ img{
 .kitTitle {
   
 }
+
