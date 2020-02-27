@@ -30,7 +30,7 @@ const Login=() => {
       <img className={styles.logoImage} src='assets/images/logo.png' />
       <h1>Login</h1>
 
-      {/* {error&&<p>{error.message}</p>} */}
+      {error&&<p>{error.message}</p>}
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <div><label htmlFor="email">Email</label><input type="email" name="email" value={email} onChange={({ target }) => setEmail(target.value)} /></div>
