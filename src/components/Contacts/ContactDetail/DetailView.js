@@ -32,13 +32,13 @@ const DetailView = ({ match }) => {
 
   const toggleContactHistory = () => {
     setShowHistory(!showHistory);
-  }
+  };
 
   const contactEvents = connHistory.map(connection => (
     <li key={connection}>
-      <p>{format(new Date(connection), "PPpp")}</p>
+      <p>{format(new Date(connection), 'PPpp')}</p>
     </li>
-  ))
+  ));
 
   return (
     <section className={styles.DetailView}>
@@ -66,7 +66,7 @@ const DetailView = ({ match }) => {
       </div>
 
       <div className={styles.connectionHistory}>
-        <button onClick={toggleContactHistory}>Show contact history</button>
+        <button onClick={toggleContactHistory} className={styles.ShowHistory}>Show contact history</button>
         {showHistory && 
           <ol>
             {contactEvents.length > 0 && contactEvents}

@@ -131,3 +131,13 @@
     margin-bottom: 30px;
   }
 }
+
+.connectionHistory {
+  position: absolute;
+  right: 7vw;
+  top: 12vh;
+}
+
+.showHistory {
+  font-size: 20px;
+}

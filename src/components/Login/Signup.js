@@ -7,22 +7,22 @@ import { selectUser, selectError, selectLoading } from '../../data/selectors/aut
 import spinner from '../../../public/assets/loading_spinner.gif';
 
 
-const Signup=() => {
-  const [email, setEmail]=useState('');
-  const [password, setPassword]=useState('');
-  const [username, setUsername]=useState('');
-  const dispatch=useDispatch();
-  const history=useHistory();
-  const user=useSelector(selectUser);
-  const error=useSelector(selectError);
-  const loading=useSelector(selectLoading);
-  const handleSubmit=event => {
+const Signup = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector(selectUser);
+  const error = useSelector(selectError);
+  const loading = useSelector(selectLoading);
+  const handleSubmit = event => {
     event.preventDefault();
     dispatch(signup(username, email, password));
   };
 
   useEffect(() => {
-    if (user) {
+    if(user) {
       history.push('/about');
     }
   }, [user]);
@@ -30,7 +30,7 @@ const Signup=() => {
   return (
     <main className={styles.login}>
       <h1>Signup</h1>
-      {error&&<p>{error.message}</p>}
+      {error && <p>{error.message}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username</label>
@@ -48,8 +48,8 @@ const Signup=() => {
         </div>
         <button className={styles.signUp}>Signup</button>
       </form>
-      <p className={styles.center}><Link to="/">Login</Link></p>
-      {loading&&<img src={spinner} alt='loading-spinner' />}
+      <p className={styles.center}><Link to="/">To Login</Link></p>
+      {loading && <img src={spinner} alt='loading-spinner' />}
     </main>
   );
 };

@@ -6,15 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser, selectError, selectLoading } from '../../data/selectors/auth-selector';
 import spinner from '../../../public/assets/loading_spinner.gif';
 
-const Login=() => {
-  const [email, setEmail]=useState('');
-  const [password, setPassword]=useState('');
-  const dispatch=useDispatch();
-  const history=useHistory();
-  const user=useSelector(selectUser);
-  const error=useSelector(selectError);
-  const loading=useSelector(selectLoading);
-  const handleSubmit=event => {
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector(selectUser);
+  const error = useSelector(selectError);
+  const loading = useSelector(selectLoading);
+  const handleSubmit = event => {
     event.preventDefault();
     dispatch(login(email, password));
   };
@@ -27,11 +27,11 @@ const Login=() => {
 
   return (
     <main className={styles.login}>
-      {loading&&<img src={spinner} alt='loading-spinner' className={styles.LoadingImage} />}
+      {loading && <img src={spinner} alt='loading-spinner' className={styles.LoadingImage} />}
       <img className={styles.logoImage} src='../../../public/assets/logo-500.png' />
       <h1>Login</h1>
 
-      {error&&<p>{error.message}</p>}
+      {error && <p>{error.message}</p>}
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <div>
@@ -45,7 +45,7 @@ const Login=() => {
         </div>
         <button>Login</button>
       </form>
-      <p className={styles.center}><Link to="/signup">Sign up</Link></p>
+      <p className={styles.center}><Link to="/signup">To Sign up</Link></p>
     </main>
   );
 };
