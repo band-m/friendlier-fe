@@ -97,6 +97,13 @@ export default function ContactList() {
   return (
     <section className={styles.ContactList}>
       <h2>Contact List</h2>
+      <hr style={{
+        color: '#000000',
+        backgroundColor: '#000000',
+        height: .1,
+        width: '25vw',
+        borderColor: '#0e4375'
+      }}/>
       {contacts && <ul className={styles.ContactList}>
         {overdueZoners}
         {redZoners}
