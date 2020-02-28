@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Nouislider from 'nouislider-react';
 import '../../Slider/Slider.css';
 import format from 'date-fns/format';
@@ -123,10 +124,13 @@ const DetailForm = ({ match }) => {
   useEffect(() => {
     dispatch(myAction(SET_YELLOW_ZONE, add(compareDate, { days: slider1 })));
     dispatch(myAction(SET_RED_ZONE, add(compareDate, { days: slider2 })));
-    // dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, differenceInCalendarDays(yellowZoneStartDate, new Date())));
-    // dispatch(myAction(SET_TOTAL_YELLOW_ZONE_DAYS, differenceInCalendarDays(redZoneStartDate, yellowZoneStartDate)));
-    // dispatch(myAction(SET_TOTAL_RED_ZONE_DAYS, differenceInCalendarDays(deadlineDate, redZoneStartDate)));
   }, [slider1, slider2]);
+
+  useEffect(() => {
+    dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, differenceInCalendarDays(yellowZoneStartDate, compareDate)));
+    dispatch(myAction(SET_TOTAL_YELLOW_ZONE_DAYS, differenceInCalendarDays(redZoneStartDate, yellowZoneStartDate)));
+    dispatch(myAction(SET_TOTAL_RED_ZONE_DAYS, differenceInCalendarDays(deadlineDate, redZoneStartDate)));
+  }, [yellowZoneStartDate, redZoneStartDate, deadlineDate]);
 
   // On initial load, add colors to the range connectors
   useEffect(() => {
@@ -201,6 +205,14 @@ const DetailForm = ({ match }) => {
       <button type="submit">Edit contact</button>
     </form>
   );
+};
+
+DetailForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 };
 
 export default DetailForm;

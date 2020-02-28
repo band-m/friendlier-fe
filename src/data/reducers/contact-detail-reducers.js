@@ -19,7 +19,7 @@ const initialState = {
   totalGreenZoneDays: null,
   totalYellowZoneDays: null,
   totalRedZoneDays: null,
-  currentZoneRatio: 0,
+  currentZoneRatio: 5,
   deadlineDate: null,
   deadlineObject: {},
   connHistory: [],
