@@ -24,6 +24,7 @@ export default function ConnectedButton({ slider1, slider2, deadlineObject, id }
       connHistory: [ ...contact.connHistory, new Date() ]
     }
     dispatch(editContactDetails(id, updatedContact));
+    alert('Connection event saved! Great job staying in touch!');
     history.push('/contacts');
   }
 
