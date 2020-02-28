@@ -17,6 +17,10 @@ import {
   SET_DEADLINE_DATE,
   SET_DEADLINE_OBJECT,
   SET_CONTACT_CREATED_ON,
+  SET_TOTAL_GREEN_ZONE_DAYS,
+  SET_TOTAL_RED_ZONE_DAYS,
+  SET_TOTAL_YELLOW_ZONE_DAYS,
+  SET_CURRENT_ZONE_RATIO,
   SET_DEADLINE_UNIT,
   SET_DEADLINE_NUMBER,
   SET_SLIDER_1,
@@ -178,6 +182,50 @@ describe('contact detail reducer', () => {
     });
   });
 
+  it('handles set total green zone days action', () => {
+    const initialState = { totalGreenZoneDays: 1 };
+    const action = {
+      type: SET_TOTAL_GREEN_ZONE_DAYS,
+      payload: 6
+    };
+
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ totalGreenZoneDays: 6 });
+  });
+
+  it('handles set total yellow zone days action', () => {
+    const initialState = { totalYellowZoneDays: 2 };
+    const action = {
+      type: SET_TOTAL_YELLOW_ZONE_DAYS,
+      payload: 9
+    };
+
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ totalYellowZoneDays: 9 });
+  });
+
+  it('handles set total red zone days action', () => {
+    const initialState = { totalRedZoneDays: 3 };
+    const action = {
+      type: SET_TOTAL_RED_ZONE_DAYS,
+      payload: 11
+    };
+
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ totalRedZoneDays: 11 });
+  });
+
+  it('handles set current zone ratio action', () => {
+    const initialState = { currentZoneRatio: 3 };
+    const action = {
+      type: SET_CURRENT_ZONE_RATIO,
+      payload: 0.5
+    };
+
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ currentZoneRatio: 0.5 });
+  });
+
   it('handles set notification range action', () => {
     const action = {
       type: SET_NOTIFICATION_RANGE,
@@ -288,6 +336,10 @@ describe('contact detail reducer', () => {
       phoneNumber: '',
       address: '',
       email: '',
+      currentZoneRatio: 5,
+      totalGreenZoneDays: null,
+      totalRedZoneDays: null,
+      totalYellowZoneDays: null,
       image: '',
       commFrequency: 1,
       createdOn: null,

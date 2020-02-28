@@ -35,8 +35,13 @@ const DetailView = ({ match }) => {
         <h2 className={styles.name}>{firstName} {lastName}</h2>
       </div><br />
 
+<<<<<<< HEAD
       <div className={styles.contactDetailText} >
         <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} {lastContactedDate && format(lastContactedDate, 'PPPP')}</p>
+=======
+      <div>
+        <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} {lastContactedDate && format(new Date(lastContactedDate), 'PPPP')}</p>
+>>>>>>> 320f6dae2d9738c2189b36849a6a004dc0c17262
         <p>Yellow Zone Begins: {yellowZoneStartDate && format(new Date(yellowZoneStartDate), 'PPPP')} </p>
         <p>Red Zone Begins: {redZoneStartDate && format(new Date(redZoneStartDate), 'PPPP')}</p>
         <p>Contact Deadline: {deadlineDate && format(new Date(deadlineDate), 'PPPP')} <span></span></p>

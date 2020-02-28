@@ -4,9 +4,7 @@ exports[`ContactList component matches snapshot 1`] = `
 <section
   className="ContactList"
 >
-  <p>
-    Add your first contact to get started!
-  </p>
+  <ul />
   <Component
     to="/add"
   >
