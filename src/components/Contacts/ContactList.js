@@ -30,10 +30,10 @@ export default function ContactList() {
 
   const contacts = useSelector(selectContactsList);
 
-  const greenZoneContacts = contacts.filter(contact => isFuture(new Date(contact.yellowZoneStartDate)));
-  const yellowZoneContacts = contacts.filter(contact => isFuture(new Date(contact.redZoneStartDate)) && isPast(new Date(contact.yellowZoneStartDate)));
-  const redZoneContacts = contacts.filter(contact => isFuture(new Date(contact.deadlineDate)) && isPast(new Date(contact.redZoneStartDate)));
-  const overdueContacts = contacts.filter(contact => isPast(new Date(contact.redZoneStartDate)));
+  const overdueContacts = contacts.filter(contact => isPast(new Date(contact.deadlineDate)));
+  const redZoneContacts = contacts.filter(contact => !isPast(new Date(contact.deadlineDate)) && isPast(new Date(contact.redZoneStartDate)));
+  const yellowZoneContacts = contacts.filter(contact => !isPast(new Date(contact.redZoneStartDate)) && isPast(new Date(contact.yellowZoneStartDate)));
+  const greenZoneContacts = contacts.filter(contact => !isPast(new Date(contact.yellowZoneStartDate)));
 
   useEffect(() => {
     greenZoneContacts.map(contact => {
@@ -73,12 +73,12 @@ export default function ContactList() {
     a.zoneRatio - b.zoneRatio;
   });
 
-  const makeListItems = zone => {
+  const makeListItems = (zone, backgroundColor, color) => {
     if(zone.length){
       return zone.map(contact => {
         return (
           <Link key={contact._id} to={`/contacts/${contact._id}`}>
-            <li className={styles.commStatus}>
+            <li style={{ backgroundColor, color }} className={styles.commStatus}>
               <span>{contact.firstName} {contact.lastName}</span>
               {/* <span>{statusIcon}</span> */}
             </li>
@@ -88,10 +88,10 @@ export default function ContactList() {
     }
   };
 
-  let greenZoners = makeListItems(sortedGreen);
-  let redZoners = makeListItems(sortedYellow);
-  let yellowZoners = makeListItems(sortedRed);
-  let overdueZoners = makeListItems(overdueContacts);
+  let greenZoners = makeListItems(sortedGreen, '#64cf73', '#0a0a0a');
+  let redZoners = makeListItems(sortedYellow, '#ffe745', '#0a0a0a');
+  let yellowZoners = makeListItems(sortedRed, '#e24b1c', '#0a0a0a');
+  let overdueZoners = makeListItems(overdueContacts, '#000000', '#ffffff');
 
   // let contactList;
   // if(contacts.length) {
