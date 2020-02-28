@@ -20,7 +20,7 @@ const Login=() => {
 
   useEffect(() => {
     if (user) {
-      history.push('/');
+      history.push('/about');
     }
   }, [user]);
 
