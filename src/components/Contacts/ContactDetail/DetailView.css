@@ -1,61 +1,68 @@
+@import url("https://fonts.googleapis.com/css?family=DM+Serif+Display|Hepta+Slab:300,400,600,900|Lato:300,400,700|Raleway:200,300,400,500,700,900|Rozha+One&display=swap");
 
 .DetailView {
-  background: #efd943;
-  height: 100%;
-  width: auto;
+  background: #0e4375;
+  height: 70vh;
+  width: 60vw;
+  margin: auto;
   padding: 1rem;
-  position: relative;
+  position: absolute;
+  right: 70px;
+  top: 90px;
   text-shadow: 2px 4px 3px rgba(0,0,0,0.1);
-
+  border: 2px solid #0e4375;
+  border-radius: 10px;
+  font-family: Lato;
 
   .FullName, .ContactHistory{
     display: flex;
     justify-content: space-around;
-    margin: 2rem;
+    margin: 1rem;
     text-shadow: 2px 4px 3px rgba(0,0,0,0.2);
-
 
     h2{
       text-shadow: 2px 4px 3px rgba(0,0,0,0.2);
-
+      font-size: 1rem;
     }
+
     p{
       margin: 0.75rem 0;
       text-shadow: 2px 4px 3px rgba(0,0,0,0.2);
-
-
     }
+
     button {
       height: 2rem;
       text-shadow: 2px 4px 3px rgba(0,0,0,0.1);
-
-
     }
   }
+
   .ContactFields{
     margin: 0 auto;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
     min-width: 300px;
-
-
+    
     p{
-      margin: 0.75rem 0;
+      margin: 0.75rem 0 0 3rem;
       text-shadow: 2px 4px 3px rgba(0,0,0,0.2);
-      font-size: 1.55rem;
+      font-size: 1.3rem;
 
+      span {
+        color: #f7b82e;
+        margin-left: 15px;
+      }
     }
   }
 
   .ToolbarBottom{
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
+    position: absolute;
+    width: 95%;
+    bottom: 70px;
     font-size: 1.6rem;
     display: flex;
     justify-content: space-around;
-    padding-bottom: 3rem;
-    padding: 1rem;
-
+    padding-top: 90px;
+    
     a{
       color: black;
     }
@@ -78,13 +85,22 @@
 
 .contactDetailText {
   text-shadow: 2px 4px 3px rgba(0,0,0,0.1);
-  font-size: 2rem;
+  font-size: 1.4rem;
+
+  p {
+    margin: 0.75rem 0;
+
+    span {
+      color: #f7b82e;
+      margin-left: 15px;
+    }
+  }
 }
 
 .name {
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: center;
-  padding: 2rem;
+  padding: 0.7rem;
 }
 
 .delete {

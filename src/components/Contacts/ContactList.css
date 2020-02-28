@@ -4,11 +4,13 @@
   display: flex;
   flex-direction: column;
   width: 25vw;
+  max-height: 95vh;
+  overflow: scroll;
   padding: 0;
   display: flex;
   align-items: center;
   background: #f7b82e;
-  justify-content: center;
+  justify-content: flex-start;
   font-family: Raleway;
   border-right: 2px solid #0e4375;
 
@@ -30,13 +32,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
     span {
       color: #0e4375;
       font-size: 1em;
     }
   }
-
+  
   a{
     text-decoration: none;
     margin: 0.75rem auto;
@@ -45,4 +47,8 @@
       font-size: 2rem;
     }
   }
+}
+
+.sortedGreen {
+  background-color: #64cf73;
 }

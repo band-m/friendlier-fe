@@ -78,7 +78,8 @@ export default function ContactList() {
       return zone.map(contact => {
         return (
           <Link key={contact._id} to={`/contacts/${contact._id}`}>
-            <li style={{ backgroundColor, color }} className={styles.commStatus}>
+            <li className={`styles.${zone}`}>    {/* this doesn't seem to work, is there a way to do this? */}
+              <div></div>
               <span>{contact.firstName} {contact.lastName}</span>
               {/* <span>{statusIcon}</span> */}
             </li>
@@ -96,6 +97,13 @@ export default function ContactList() {
   return (
     <section className={styles.ContactList}>
       <h2>Contact List</h2>
+      <hr style={{
+        color: '#000000',
+        backgroundColor: '#000000',
+        height: .1,
+        width: '25vw',
+        borderColor: '#0e4375'
+      }}/>
       {contacts && <ul className={styles.ContactList}>
         {overdueZoners}
         {redZoners}
