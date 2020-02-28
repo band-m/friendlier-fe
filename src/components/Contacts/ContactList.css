@@ -1,35 +1,44 @@
+@import url("https://fonts.googleapis.com/css?family=DM+Serif+Display|Hepta+Slab:300,400,600,900|Lato:300,400,700|Raleway:200,300,400,500,700,900|Rozha+One&display=swap");
+
 .ContactList{
   display: flex;
   flex-direction: column;
+  width: 25vw;
+  max-height: 95vh;
+  overflow: scroll;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  background: #f7b82e;
+  justify-content: flex-start;
+  font-family: Raleway;
+  border-right: 2px solid #0e4375;
 
-  ul{
+  h2 {
     width: 100%;
-    background-color: #EEE;
-    border-top: 0.5px solid #343;
+    margin: 15px;
+    font-size: 25px;
+    text-align: center;
+    color: #0e4375;
+    border-right: 2px solid #0e4375;
+  }
 
-    a{
-      text-decoration: none;
-      text-align: center;
-
-      li{
-        padding: 0.5rem 1rem;
-        border-bottom: 0.5px solid #343;
-        color: #666;
-      }
-
-      .red{
-        background-color: red;
-      }
-
-      .yellow {
-        background-color: yellow;
-      }
-
-      p{
-        padding: 0.25rem;
-      }
+  li {
+    height: 40px;
+    width: 20vw;
+    border-radius: 5px;
+    border: 1px solid #0e4375;
+    background: linear-gradient(#eeeeee, #8fdbf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    span {
+      color: #0e4375;
+      font-size: 1em;
     }
   }
+  
   a{
     text-decoration: none;
     margin: 0.75rem auto;
@@ -38,4 +47,8 @@
       font-size: 2rem;
     }
   }
+}
+
+.sortedGreen {
+  background-color: #64cf73;
 }
