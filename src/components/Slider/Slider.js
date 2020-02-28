@@ -116,7 +116,7 @@ export default function Slider() {
         <label htmlFor='weeks'>Weeks</label>
         <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
         <label htmlFor='months'>Months</label>
-        <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)}/>
+        <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
         <p>Choose your notification range for name:</p>
         <label htmlFor={1}>1</label>
         <input type='radio' name='notificationOptions' id={1} checked={notificationOption === 1} onChange={({ target }) => setNotificationOption(+target.id)} />

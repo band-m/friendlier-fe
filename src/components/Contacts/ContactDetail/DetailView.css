@@ -1,7 +1,7 @@
 
 .DetailView {
   background: #efd943;
-  height: 60vh;
+  height: 100%;
   width: auto;
   padding: 1rem;
   position: relative;
@@ -22,13 +22,13 @@
     p{
       margin: 0.75rem 0;
       text-shadow: 2px 4px 3px rgba(0,0,0,0.2);
-      
+
 
     }
     button {
       height: 2rem;
       text-shadow: 2px 4px 3px rgba(0,0,0,0.1);
-      
+
 
     }
   }
@@ -37,16 +37,16 @@
     text-align: center;
     min-width: 300px;
 
-    
+
     p{
       margin: 0.75rem 0;
       text-shadow: 2px 4px 3px rgba(0,0,0,0.2);
       font-size: 1.55rem;
-      
+
     }
   }
-  .ToolbarBottom{
 
+  .ToolbarBottom{
     bottom: 10px;
     left: 10px;
     right: 10px;
@@ -55,7 +55,7 @@
     justify-content: space-around;
     padding-bottom: 3rem;
     padding: 1rem;
-    
+
     a{
       color: black;
     }
