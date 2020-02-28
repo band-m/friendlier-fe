@@ -19,7 +19,8 @@ import {
   SET_CONTACT_CREATED_ON,
   SET_TOTAL_GREEN_ZONE_DAYS,
   SET_TOTAL_RED_ZONE_DAYS,
-  SET_TOTAL_YELLOW_ZONE_DAYS
+  SET_TOTAL_YELLOW_ZONE_DAYS,
+  SET_CURRENT_ZONE_RATIO,
   SET_DEADLINE_UNIT,
   SET_DEADLINE_NUMBER
 } from '../action-types/action-types';
@@ -208,6 +209,17 @@ describe('contact detail reducer', () => {
 
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({ totalRedZoneDays: 11 });
+  });
+
+  it('handles set current zone ratio action', () => {
+    const initialState = { currentZoneRatio: 3 };
+    const action = {
+      type: SET_CURRENT_ZONE_RATIO,
+      payload: 0.5
+    };
+
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ currentZoneRatio: 0.5 });
   });
 
   it('handles set notification range action', () => {

@@ -3,14 +3,10 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContactsList } from '../../data/selectors/contacts-selectors';
 import { fetchContacts } from '../../data/actions/contacts-actions';
-<<<<<<< HEAD
-import { selectUser } from '../../data/selectors/auth-selector';
 import isFuture from 'date-fns/isFuture';
 import isPast from 'date-fns/isPast';
-import formatDistanceStrict from 'date-fns/formatDistanceStrict';
-=======
+import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 import { selectUser, selectLoggedOut } from '../../data/selectors/auth-selector';
->>>>>>> 32793f2cc23387afdce43965bc361a2905cb94ce
 import styles from './ContactList.css';
 import { SET_CONTACT_CREATED_ON } from '../../data/action-types/action-types';
 
@@ -33,54 +29,61 @@ export default function ContactList() {
 
   const contacts = useSelector(selectContactsList);
 
-<<<<<<< HEAD
-  const greenZoneContacts = contacts.filter(contact => isFuture(contact.yellowZoneStartDate));
-  const yellowZoneContacts = contacts.filter(contact => isFuture(contact.redZoneStartDate));
-  const redZoneContacts = contacts.filter(contact => isFuture(contact.deadlineDate));
-  const pastDeadlineContacts = contacts.filter(contact => isPast(contact.deadlineDate));
+  // const greenZoneContacts = contacts.filter(contact => isFuture(new Date(contact.yellowZoneStartDate)));
+  // const yellowZoneContacts = contacts.filter(contact => isFuture(new Date(contact.redZoneStartDate)) && isPast(new Date(contact.yellowZoneStartDate)));
+  // const redZoneContacts = contacts.filter(contact => isFuture(new Date(contact.deadlineDate)) && isPast(new Date(redZoneStartDate)));
+  // const overdueContacts = contacts.filter(contact => isPast(new Date(contact.deadlineDate)));
 
-  greenZoneContacts.map(contact => {
-    let greenZoneTime;
-    if(contact.lastContactedDate){
-      greenZoneTime = formatDistanceStrict(contact.createdOn, contact.yellowZoneStartDate);
-    }
-    greenZoneTime = formatDistanceStrict(contact.lastContactedDate, contact.yellowZoneStartDate);
-  });
-
-  const makeListItems = zone => {
-    if(zone.length){
-      return zone.map(contact => {
-        return (
-          <Link key={contact._id} to={`/contacts/${contact._id}`}>
-            <li className={styles.commStatus}>
-              <span>{contact.firstName} {contact.lastName}</span>
-              {/* <span>{statusIcon}</span> */}
-            </li>
-          </Link>
-        );
-      });
-    }
-  };
-
-  let greenZoners = makeListItems(greenZoneContacts);
-  let redZoners = makeListItems(yellowZoneContacts);
-  let yellowZoners = makeListItems(redZoneContacts);
-  let pastDeadlineZoners = makeListItems(pastDeadlineContacts);
-
-
-  // let contactList;
-  // if(contacts.length) {
-  //   contactList = contacts.map(contact => {
-  //     return (
-  //       <Link key={contact._id} to={`/contacts/${contact._id}`}>
-  //         <li className={styles.commStatus}>
-  //           <span>{contact.firstName} {contact.lastName}</span>
-  //           {/* <span>{statusIcon}</span> */}
-  //         </li>
-  //       </Link>);
+  // const getRatio = (contacts, zoneDays) => {
+  //   return contacts.map(contact => {
+  //     const daysIntoZone = contact.lastContactedDate ?
+  //       differenceInCalendarDays(contact.lastContactedDate, Date.now()) :
+  //       differenceInCalendarDays(contact.createdOn, Date.now());
+  //     const ratio = daysIntoZone / zoneDays;
   //   });
-  // }
-=======
+  // };
+
+  // SET_CURRENT_ZONE_RATIO
+
+  // yellowZoneContacts.map(contact => {
+  //   const daysIntoZone = contact.lastContactedDate ? 
+  //     differenceInCalendarDays(contact.lastContactedDate, Date.now()) :
+  //     differenceInCalendarDays(contact.createdOn, Date.now());
+  //   const ratio = daysIntoZone / contact.totalYellowZoneDays;
+  // });
+
+  // redZoneContacts.map(contact => {
+  //   const daysIntoZone = contact.lastContactedDate ? 
+  //     differenceInCalendarDays(contact.lastContactedDate, Date.now()) :
+  //     differenceInCalendarDays(contact.createdOn, Date.now());
+  //   const ratio = daysIntoZone / contact.totalRedZoneDays;
+  // });
+
+  // const sortedGreenZoneContacts = greenZoneContacts.sort((a, b) => {
+  //     return new Date(b.)
+  // });
+
+  // const makeListItems = zone => {
+  //   if(zone.length){
+  //     return zone.map(contact => {
+  //       return (
+  //         <Link key={contact._id} to={`/contacts/${contact._id}`}>
+  //           <li className={styles.commStatus}>
+  //             <span>{contact.firstName} {contact.lastName}</span>
+  //             {/* <span>{statusIcon}</span> */}
+  //           </li>
+  //         </Link>
+  //       );
+  //     });
+  //   }
+  // };
+
+  // let greenZoners = makeListItems(sortedGreenZoneContacts);
+  // let redZoners = makeListItems(sortedYellowZoneContacts);
+  // let yellowZoners = makeListItems(sortedRedZoneContacts);
+  // let pastDeadlineZoners = makeListItems(sortedPastDeadlineContacts);
+
+
   let contactList;
   if(contacts.length) {
     contactList = contacts.map(contact => {
@@ -93,7 +96,6 @@ export default function ContactList() {
         </Link>);
     });
   }
->>>>>>> 32793f2cc23387afdce43965bc361a2905cb94ce
 
   return (
     <section className={styles.ContactList}>

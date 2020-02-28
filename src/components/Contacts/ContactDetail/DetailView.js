@@ -11,10 +11,7 @@ import parse from 'date-fns/parse';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import { selectSelectedContact } from '../../../data/selectors/contacts-selectors';
 import { FaTrashAlt } from 'react-icons/fa';
-<<<<<<< HEAD
-=======
 import { AiFillEdit } from 'react-icons/ai';
->>>>>>> 32793f2cc23387afdce43965bc361a2905cb94ce
 import { deleteContact } from '../../../data/actions/contacts-actions';
 
 const DetailView = ({ match }) => {
@@ -29,14 +26,8 @@ const DetailView = ({ match }) => {
   //   dispatch(fetchOneContact(match.params.id))
   //     .then(contact => setContact(contact.value));
   // }, [match.params.id]);
-<<<<<<< HEAD
-  
-  const deleteOne = contactId => {
-    console.log(contactId);
-=======
 
   const deleteOne = contactId => {
->>>>>>> 32793f2cc23387afdce43965bc361a2905cb94ce
     dispatch(deleteContact(contactId));
     history.replace('/contacts');
   };
@@ -72,10 +63,7 @@ const DetailView = ({ match }) => {
       </div>
       <div className={styles.ToolbarBottom}>
         <FaTrashAlt id="delete" onClick={() => deleteOne(contact._id)} />
-<<<<<<< HEAD
-=======
         <Link to={`/edit/${contact._id}`}><AiFillEdit id="edit" /></Link>
->>>>>>> 32793f2cc23387afdce43965bc361a2905cb94ce
       </div>
     </section>
   );

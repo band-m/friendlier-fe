@@ -21,7 +21,8 @@ import {
   SET_CONTACT_CREATED_ON,
   SET_TOTAL_GREEN_ZONE_DAYS,
   SET_TOTAL_YELLOW_ZONE_DAYS,
-  SET_TOTAL_RED_ZONE_DAYS
+  SET_TOTAL_RED_ZONE_DAYS,
+  SET_CURRENT_ZONE_RATIO,
   SET_DEADLINE_UNIT,
   SET_DEADLINE_NUMBER
 } from '../action-types/action-types';
@@ -198,6 +199,15 @@ describe('contact detail actions', () => {
     });
   });
 
+  it('should create a SET_CURRENT_ZONE_RATIO action', () => {
+    const action = myAction(SET_CURRENT_ZONE_RATIO, 2 / 4);
+
+    expect(action).toEqual({
+      type: SET_CURRENT_ZONE_RATIO,
+      payload: 0.5
+    });
+  });
+
   it('should create a set notifiction range action', () => {
     const action = myAction(SET_NOTIFICATION_RANGE, 3);
 
@@ -234,7 +244,6 @@ describe('contact detail actions', () => {
     });
   });
 
-<<<<<<< HEAD
   it('should create a set total green zone days action', () => {
     const action = myAction(SET_TOTAL_GREEN_ZONE_DAYS, '3 weeks');
 
@@ -259,7 +268,9 @@ describe('contact detail actions', () => {
     expect(action).toEqual({
       type: SET_TOTAL_RED_ZONE_DAYS,
       payload: '9 days'
-=======
+    });
+  });
+
   it('should create a set deadline unit action', () => {
     const action = myAction(SET_DEADLINE_UNIT, 'months');
 
@@ -275,7 +286,6 @@ describe('contact detail actions', () => {
     expect(action).toEqual({
       type: SET_DEADLINE_NUMBER,
       payload: 3
->>>>>>> 32793f2cc23387afdce43965bc361a2905cb94ce
     });
   });
 });
