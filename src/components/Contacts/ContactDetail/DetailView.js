@@ -32,10 +32,10 @@ const DetailView = ({ match }) => {
   return (
     <section className={styles.DetailView}>
       <div>
-        <h2>{firstName} {lastName}</h2>
+        <h2 className={styles.name}>{firstName} {lastName}</h2>
       </div><br />
 
-      <div>
+      <div className={styles.contactDetailText} >
         <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} {lastContactedDate && format(lastContactedDate, 'PPPP')}</p>
         <p>Yellow Zone Begins: {yellowZoneStartDate && format(new Date(yellowZoneStartDate), 'PPPP')} </p>
         <p>Red Zone Begins: {redZoneStartDate && format(new Date(redZoneStartDate), 'PPPP')}</p>
@@ -56,9 +56,9 @@ const DetailView = ({ match }) => {
       </div>
 
       <div className={styles.ToolbarBottom}>
-        <FaTrashAlt id="delete" onClick={() => deleteOne(contact._id)} />
+        <FaTrashAlt className={styles.delete} id="delete" onClick={() => deleteOne(contact._id)} />
         <ConnectedButton slider1={slider1} slider2={slider2} deadlineObject={deadlineObject} id={contact._id} />
-        <Link to={`/edit/${contact._id}`}><AiFillEdit id="edit" /></Link>
+        <Link to={`/edit/${contact._id}`}><AiFillEdit className={styles.edit} id="edit" /></Link>
       </div>
     </section>
   );
