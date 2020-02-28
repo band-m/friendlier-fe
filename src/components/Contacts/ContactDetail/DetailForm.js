@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import styles from './DetailForm.css';
 import Nouislider from 'nouislider-react';
 import '../../Slider/Slider.css';
 import format from 'date-fns/format';
-import styles from './DetailForm.css';
 import { useSelector, useDispatch } from 'react-redux';
 import differenceInDays from 'date-fns/differenceInCalendarDays';
 import add from 'date-fns/add';
@@ -52,7 +52,7 @@ const DetailForm = ({ match }) => {
   // When user inputs a number, set deadlineNumber and commFrequency in contact details
   const changeNumOfDaysInput = value => {
     dispatch(myAction(SET_DEADLINE_NUMBER, value));
-    switch(deadlineUnit){
+    switch(deadlineUnit) {
       case 'days':
         return dispatch(myAction(SET_COMM_FREQUENCY, value));
       case 'weeks':
@@ -143,7 +143,7 @@ const DetailForm = ({ match }) => {
         <input type="text" onChange={({ target }) => dispatch(myAction(SET_LAST_NAME, target.value))} name="lastName" placeholder="Last Name" value={lastName} />
       </div>
 
-      <section id='labels'>
+      <section>
         <div>
           <label htmlFor="email">Email</label>
           <label htmlFor="address">Address</label>
@@ -152,9 +152,9 @@ const DetailForm = ({ match }) => {
         </div>
 
         <div>
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_EMAIL, target.value))} id="email" name="email" placeholder="Email address" value={email}/>
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_ADDRESS, target.value))} id="address" name="address" placeholder="Physical Address" value={address}/>
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_PHONE_NUMBER, target.value))} id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value={phoneNumber}/>
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_EMAIL, target.value))} id="email" name="email" placeholder="Email address" value={email} />
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_ADDRESS, target.value))} id="address" name="address" placeholder="Physical Address" value={address} />
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_PHONE_NUMBER, target.value))} id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value={phoneNumber} />
           <input type="date" onChange={({ target }) => dispatch(myAction(SET_BIRTHDATE, target.value))} id="birthdate" name="birthdate" placeholder="Birthdate" value={birthdate ? birthdate.split('T')[0] : ''} />
         </div>
       </section>
@@ -163,16 +163,16 @@ const DetailForm = ({ match }) => {
         <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes" value={notes} ></textarea>
       </section>
 
-      <section className={styles.ContactFrequencyInput} id='slider'>
+      <section id="slider" className={styles.ContactFrequencyInput}>
         <p>Would you like to change your connection settings with {firstName} {lastName}?</p>
         <p>How often do you want to be in contact with {firstName}?</p>
         <div>Every <input type='number' min={1} value={deadlineNumber} onChange={({ target }) => changeNumOfDaysInput(+target.value)} />
           <label htmlFor='days'>Days</label>
-          <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({ target }) => changeNumOfDaysRadio(target)}/>
+          <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
           <label htmlFor='weeks'>Weeks</label>
-          <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({ target }) => changeNumOfDaysRadio(target)}/>
+          <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
           <label htmlFor='months'>Months</label>
-          <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)}/>
+          <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
         </div>
         <div>
           <p>Choose your notification range for {firstName}:</p>
@@ -181,7 +181,7 @@ const DetailForm = ({ match }) => {
           <label htmlFor={2}>2</label>
           <input type='radio' name='notificationOptions' id={2} checked={notificationRange === 2} onChange={({ target }) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} />
           <label htmlFor={3}>3</label>
-          <input type='radio' name='notificationOptions' id={3} checked={notificationRange === 3} onChange={({ target }) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} /><br/><br/><br/>
+          <input type='radio' name='notificationOptions' id={3} checked={notificationRange === 3} onChange={({ target }) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} /><br /><br /><br />
         </div>
         <p>Your connection deadline with name will be on {deadlineDate && format(new Date(deadlineDate), 'PPPP')}</p>
         <p>Your yellow zone will begin on {yellowZoneStartDate && format(new Date(yellowZoneStartDate), 'PPPP')}</p>
