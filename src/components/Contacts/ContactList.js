@@ -78,7 +78,8 @@ export default function ContactList() {
       return zone.map(contact => {
         return (
           <Link key={contact._id} to={`/contacts/${contact._id}`}>
-            <li className={styles.commStatus}>
+            <li>
+              <div></div>
               <span>{contact.firstName} {contact.lastName}</span>
               {/* <span>{statusIcon}</span> */}
             </li>
@@ -93,22 +94,9 @@ export default function ContactList() {
   let yellowZoners = makeListItems(sortedRed);
   let overdueZoners = makeListItems(overdueContacts);
 
-  // let contactList;
-  // if(contacts.length) {
-  //   contactList = contacts.map(contact => {
-  //     return (
-  //       <Link key={contact._id} to={`/contacts/${contact._id}`}>
-  //         <li className={styles.commStatus}>
-  //           <span>{contact.firstName} {contact.lastName}</span>
-  //           {/* <span>{statusIcon}</span> */}
-  //         </li>
-  //       </Link>);
-  //   });
-  // }
-
   return (
     <section className={styles.ContactList}>
-      {contacts && <ul>
+      {contacts && <ul className={styles.ContactList}>
         {overdueZoners}
         {redZoners}
         {yellowZoners}

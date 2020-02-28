@@ -39,3 +39,19 @@
     }
   }
 }
+
+.ContactList {
+  width: 25vw;
+  overflow: scroll;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: unset;
+
+  li {
+    height: 40px;
+    width: 20vw;
+    border-radius: 5px;
+    background: linear-gradient(#eeeeee, rgb(167, 167, 167));
+  }
+}
