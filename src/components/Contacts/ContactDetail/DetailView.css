@@ -1,23 +1,35 @@
+
 .DetailView {
-  background: burlywood;
+  background: #efd943;
   height: 60vh;
   width: auto;
   padding: 1rem;
   position: relative;
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.1);
+
 
   .FullName, .ContactHistory{
     display: flex;
     justify-content: space-around;
     margin: 2rem;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.2);
+
 
     h2{
-      font-size: 1.5rem;
+      text-shadow: 2px 4px 3px rgba(0,0,0,0.2);
+
     }
     p{
       margin: 0.75rem 0;
+      text-shadow: 2px 4px 3px rgba(0,0,0,0.2);
+      
+
     }
     button {
       height: 2rem;
+      text-shadow: 2px 4px 3px rgba(0,0,0,0.1);
+      
+
     }
   }
   .ContactFields{
@@ -25,22 +37,60 @@
     text-align: center;
     min-width: 300px;
 
+    
     p{
       margin: 0.75rem 0;
+      text-shadow: 2px 4px 3px rgba(0,0,0,0.2);
+      font-size: 1.55rem;
+      
     }
   }
   .ToolbarBottom{
-    position: absolute;
+
     bottom: 10px;
     left: 10px;
     right: 10px;
     font-size: 1.6rem;
     display: flex;
-    justify-content: space-between;
-
+    justify-content: space-around;
+    padding-bottom: 3rem;
+    padding: 1rem;
+    
     a{
       color: black;
     }
+
+    button {
+      margin: 0 auto;
+      text-align: center;
+      text-transform: uppercase;
+      padding: 15px 40px;
+      display: inline-block;
+      border-radius: 100px;
+      transition: all 0.2s;
+      font-size: 2.2vw;
+      font-weight: 200;
+    }
   }
 
+}
+
+
+.contactDetailText {
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.1);
+  font-size: 2rem;
+}
+
+.name {
+  font-size: 3rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.delete {
+  color: azure;
+}
+
+.edit {
+  color: azure;
 }
