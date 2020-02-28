@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './Header/Header';
-import Home from './Home/HomePage';
 import About from './About/AboutPage';
 // import Contacts from './Contacts/ContactDetail/ContactDetail';
 import Settings from './Settings/SettingsPage';
@@ -13,7 +12,6 @@ import AddContact from './Contacts/AddContact';
 import ContactList from './Contacts/ContactList';
 import DetailView from './Contacts/ContactDetail/DetailView';
 import DetailForm from './Contacts/ContactDetail/DetailForm';
-import styles from './App.css';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -27,7 +25,7 @@ export default function App() {
     <Router>
       <Header />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={ContactList} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/contacts" component={ContactList} />

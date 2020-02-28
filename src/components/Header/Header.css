@@ -8,15 +8,16 @@
   .Nav{
     a, span{
       color: white;
-      background-color: black;
+      background-color: transparent;
       text-decoration: none;
+      padding: 5px;
     }
   }
 }
 
 @media screen and (max-width: 800px) {
   .Header {
-    background-color: black;
+    background-color: darkblue;
 
     .Nav {
       display: block;
@@ -29,7 +30,7 @@
 
       a, span{
         color: white;
-        background-color: black;
+        background-color: transparent;
         display:block;
         line-height: 1.5;
 
@@ -54,7 +55,7 @@
     border: 0;
     margin: 0;
     overflow: visible;
-    background: black;
+    background: darkblue;
   }
 
   .hamburger:hover {
@@ -135,7 +136,7 @@
 
 @media screen and (min-width: 800px) {
   .Header {
-background-color: black;
+background-color: darkblue;
     flex-direction: row;
     justify-content: space-between;
 
@@ -147,8 +148,10 @@ background-color: black;
     .Logo{
       background: darkblue;
       color: white;
-      height: 20px;
+      height: 50px;
       width: 50px;
+      background-image: url('../../../public/assets/logo-150px.png');
+      background-size: contain;
     }
     .Nav{
       background-color: transparent;
@@ -162,5 +165,12 @@ background-color: black;
         color: white;
       }
     }
+  }
+}
+
+@media screen and (min-width:800px) {
+  .Header .Nav, .Header .Nav a{
+    visibility: visible;
+    display: inline;
   }
 }
