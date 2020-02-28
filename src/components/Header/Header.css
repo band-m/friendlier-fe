@@ -1,9 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=DM+Serif+Display|Hepta+Slab:300,400,600,900|Lato:300,400,700|Raleway:200,300,400,500,700,900|Rozha+One&display=swap'); 
+@import url('https://fonts.googleapis.com/css?family=DM+Serif+Display|Hepta+Slab:300,400,600,900|Lato:300,400,700|Raleway:200,300,400,500,700,900|Rozha+One&display=swap');
 @value colors: '../colors.css';
 @value lightblue, orange, yellow, green, darkblue from colors;
 
+.hidden{
+  display: none;
+  visibility: hidden;
+}
+
 .Header{
   display: flex;
+  div:first-of-type{
+    height:3rem;
+  }
   .Nav{
     a, span{
       color: white;
@@ -19,7 +27,6 @@
     background-color: darkblue;
 
     .Nav {
-      display: block;
       align-items: center;
       justify-content: center;
       padding: 0 0 0.25rem;
@@ -159,10 +166,12 @@ background-color: darkblue;
       align-items: center;
       justify-content: space-evenly;
       padding: 0 1rem;
+
       a {
         padding: 0 1rem;
         color: white;
       }
+      
     }
   }
 }
@@ -170,6 +179,5 @@ background-color: darkblue;
 @media screen and (min-width:800px) {
   .Header .Nav, .Header .Nav a{
     visibility: visible;
-    display: inline;
   }
 }
