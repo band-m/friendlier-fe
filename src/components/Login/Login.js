@@ -20,7 +20,7 @@ const Login=() => {
 
   useEffect(() => {
     if (user) {
-      history.push('/');
+      history.push('/about');
     }
   }, [user]);
 
@@ -33,8 +33,15 @@ const Login=() => {
       {error&&<p>{error.message}</p>}
 
       <form className={styles.form} onSubmit={handleSubmit}>
-        <div><label htmlFor="email">Email</label><input type="email" name="email" value={email} onChange={({ target }) => setEmail(target.value)} /></div>
-        <div><label htmlFor="password">Password</label><input type="password" name="password" value={password} onChange={({ target }) => setPassword(target.value)} /></div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input type="email" name="email" value={email} onChange={({ target }) => setEmail(target.value)} />
+        </div>
+
+        <div>
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" value={password} onChange={({ target }) => setPassword(target.value)} />
+        </div>
         <button>Login</button>
       </form>
       <p className={styles.center}><Link to="/signup">Sign up</Link></p>
