@@ -31,13 +31,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     span {
       color: #0e4375;
       font-size: 1em;
     }
   }
-  
+
   a{
     text-decoration: none;
     margin: 0.75rem auto;
@@ -50,4 +50,8 @@
 
 .sortedGreen {
   background-color: #64cf73;
+}
+
+.ZoneIcon{
+  margin: 0 5px;
 }

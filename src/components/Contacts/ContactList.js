@@ -10,6 +10,9 @@ import styles from './ContactList.css';
 import { SET_CURRENT_ZONE_RATIO } from '../../data/action-types/action-types';
 import { myAction } from '../../data/actions/contact-detail-actions';
 import { Link } from 'react-router-dom';
+import { AiFillAlert } from 'react-icons/ai';
+import { FiAlertOctagon, FiAlertTriangle } from 'react-icons/fi';
+import { FaRegClock } from 'react-icons/fa';
 
 export default function ContactList() {
   const dispatch = useDispatch();
@@ -73,14 +76,19 @@ export default function ContactList() {
     a.zoneRatio - b.zoneRatio;
   });
 
-  const makeListItems = (zone, backgroundColor, color) => {
-    if(zone.length){
+  const makeListItems = (zone, backgroundColor, color, statusIcon) => {
+    if(zone.length) {
       return zone.map(contact => {
         return (
-          <Link key={contact._id} to={`/contacts/${contact._id}`}>
-            <li style={{ background: `linear-gradient(#cccccc, ${backgroundColor})`, color }} className={styles.commStatus}>
-              <span>{contact.firstName} {contact.lastName}</span>
-              {/* <span>{statusIcon}</span> */}
+           <Link key={contact._id} to={`/contacts/${contact._id}`}>
+          <li style={{ background: `linear-gradient(#cccccc, ${backgroundColor})`, color }} className={styles.commStatus}>
+          <span>{contact.firstName} {contact.lastName}</span>
+              <span className={styles.ZoneIcon}>
+                {(statusIcon === 'FaRegClock') && <FaRegClock />}
+                {(statusIcon === 'FiAlertTriangle') && <FiAlertTriangle />}
+                {(statusIcon === 'FiAlertOctagon') && <FiAlertOctagon />}
+                {(statusIcon === 'AiFillAlert') && <AiFillAlert />}
+              </span>
             </li>
           </Link>
         );
@@ -88,10 +96,11 @@ export default function ContactList() {
     }
   };
 
-  let greenZoners = makeListItems(sortedGreen, '#64cf73', '#0a0a0a');
-  let redZoners = makeListItems(sortedYellow, '#ffe745', '#0a0a0a');
-  let yellowZoners = makeListItems(sortedRed, '#e24b1c', '#0a0a0a');
-  let overdueZoners = makeListItems(overdueContacts, '#000000', '#ffffff');
+  let greenZoners = makeListItems(sortedGreen, '#64cf73', '#0a0a0a', 'FaRegClock');
+  let redZoners = makeListItems(sortedRed, '#e24b1c', '#0a0a0a', 'FiAlertOctagon');
+  let yellowZoners = makeListItems(sortedYellow, '#ffe745', '#0a0a0a', 'FiAlertTriangle');
+  let overdueZoners = makeListItems(overdueContacts, '#000000', '#ffffff', 'AiFillAlert');
+
 
   return (
     <section className={styles.ContactList}>
@@ -102,7 +111,7 @@ export default function ContactList() {
         height: .1,
         width: '25vw',
         borderColor: '#0e4375'
-      }}/>
+      }} />
       {contacts && <ul className={styles.ContactList}>
         {overdueZoners}
         {redZoners}
