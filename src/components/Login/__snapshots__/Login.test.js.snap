@@ -6,7 +6,7 @@ exports[`Login component renders Login 1`] = `
 >
   <img
     className="logoImage"
-    src="assets/images/logo.png"
+    src="../../../public/assets/logo-500.png"
   />
   <h1>
     Login

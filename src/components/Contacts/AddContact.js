@@ -32,6 +32,7 @@ import {
 import { selectUser } from '../../data/selectors/auth-selector';
 import { selectContactDetails } from '../../data/selectors/contact-detail-selectors';
 import { useHistory } from 'react-router-dom';
+import useLoggedOutRedirect from '../../hooks/useLoggedOutRedirect';
 
 export default function AddContact() {
   const [slider1, setSlider1] = useState(10);
@@ -50,6 +51,8 @@ export default function AddContact() {
   const details = useSelector(selectContactDetails);
   const history = useHistory();
   const monthDays = differenceInDays((add(new Date(), { months: numOfDays })), new Date());
+
+  useLoggedOutRedirect();
 
   useEffect(() => {
     dispatch(myAction(CLEAR_CONTACT_DETAILS));

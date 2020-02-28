@@ -4,6 +4,8 @@ import styles from './Login.css';
 import { signup } from '../../data/actions/auth-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser, selectError, selectLoading } from '../../data/selectors/auth-selector';
+import spinner from '../../../public/assets/loading_spinner.gif';
+
 
 const Signup=() => {
   const [email, setEmail]=useState('');
@@ -47,7 +49,7 @@ const Signup=() => {
         <button className={styles.signUp}>Signup</button>
       </form>
       <p className={styles.center}><Link to="/">Login</Link></p>
-      {loading&&<img src='../../../public/assets/loading_spinner.gif' alt='loading-spinner' />}
+      {loading&&<img src={spinner} alt='loading-spinner' />}
     </main>
   );
 };

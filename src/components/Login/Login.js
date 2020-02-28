@@ -4,6 +4,7 @@ import styles from './Login.css';
 import { login } from '../../data/actions/auth-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser, selectError, selectLoading } from '../../data/selectors/auth-selector';
+import spinner from '../../../public/assets/loading_spinner.gif';
 
 const Login=() => {
   const [email, setEmail]=useState('');
@@ -19,15 +20,15 @@ const Login=() => {
   };
 
   useEffect(() => {
-    if (user) {
-      history.push('/about');
+    if(user) {
+      history.push('/contacts');
     }
   }, [user]);
 
   return (
     <main className={styles.login}>
-      {loading&&<img src='../../../public/assets/loading_spinner.gif' alt='loading-spinner' className={styles.LoadingImage} />}
-      <img className={styles.logoImage} src='assets/images/logo.png' />
+      {loading&&<img src={spinner} alt='loading-spinner' className={styles.LoadingImage} />}
+      <img className={styles.logoImage} src='../../../public/assets/logo-500.png' />
       <h1>Login</h1>
 
       {error&&<p>{error.message}</p>}
