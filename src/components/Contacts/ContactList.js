@@ -96,6 +96,7 @@ export default function ContactList() {
 
   return (
     <section className={styles.ContactList}>
+      <h2>Contact List</h2>
       {contacts && <ul className={styles.ContactList}>
         {overdueZoners}
         {redZoners}
