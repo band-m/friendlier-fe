@@ -1,6 +1,21 @@
+
 .DetailForm{
   padding: 0.5rem;
 
+  section>div>label
+  {
+    margin-top: 0.4rem;
+    margin-right: 2rem;
+  }
+
+  section>div>input{
+    margin-top: 0.4rem;
+    margin-right: 0;
+  }
+
+  div:first-of-type>input:first-of-type{
+    margin-right: 1.4rem;
+  }
   button {
   margin: 4rem auto 0.5rem;
   display: block;
@@ -50,7 +65,15 @@
       justify-content: space-evenly;
     }
   }
-  .notes{
+  .notes {
     flex-direction: column;
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+    textarea {
+      height: 5rem;
+      max-width: 740px;
+    }
   }
 }
