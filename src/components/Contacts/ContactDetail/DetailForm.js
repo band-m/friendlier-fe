@@ -22,14 +22,15 @@ import {
   SET_DEADLINE_UNIT,
   SET_NOTIFICATION_RANGE,
   SET_DEADLINE_DATE,
-  SET_DEADLINE_OBJECT
+  SET_DEADLINE_OBJECT,
+  SET_SLIDER_1,
+  SET_SLIDER_2
 } from '../../../data/action-types/action-types';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import { useHistory } from 'react-router-dom';
 
 const DetailForm = ({ match }) => {
   const contact = useSelector(selectContactDetails);
-  const details = useSelector(selectContactDetails);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -39,15 +40,13 @@ const DetailForm = ({ match }) => {
 
   const { firstName, lastName, email, address, phoneNumber, birthdate, notes, deadlineNumber, deadlineUnit, deadlineObject, connHistory, lastContactedDate, createdOn, commFrequency, notificationRange, deadlineDate, yellowZoneStartDate, redZoneStartDate } = contact;
 
-
-
   const compareDateString = connHistory.length > 0 ? lastContactedDate : createdOn;
   const compareDate = new Date(compareDateString);
   const yellowZoneNumber = differenceInDays(new Date(yellowZoneStartDate), compareDate);
   const redZoneNumber = differenceInDays(new Date(redZoneStartDate), compareDate);
 
   const [slider1, setSlider1] = useState(yellowZoneNumber);
-  const [slider2, setSlider2] = useState(20);
+  const [slider2, setSlider2] = useState(redZoneNumber);
 
   // When user inputs a number, set deadlineNumber and commFrequency in contact details
   const changeNumOfDaysInput = value => {
@@ -115,8 +114,10 @@ const DetailForm = ({ match }) => {
     }
   }, [notificationRange, commFrequency]);
 
-  // When slider positions change, set yellowZoneStartDate and redZoneStartDate in contact details
+  // When slider positions change, set yellowZoneStartDate, redZoneStartDate, slider1, and slider2 in contact details
   useEffect(() => {
+    dispatch(myAction(SET_SLIDER_1, slider1));
+    dispatch(myAction(SET_SLIDER_2, slider2));
     dispatch(myAction(SET_YELLOW_ZONE, add(compareDate, { days: slider1 })));
     dispatch(myAction(SET_RED_ZONE, add(compareDate, { days: slider2 })));
   }, [slider1, slider2]);
@@ -132,7 +133,7 @@ const DetailForm = ({ match }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(editContactDetails(match.params.id, details));
+    dispatch(editContactDetails(match.params.id, contact));
     history.push('/contacts');
   };
 

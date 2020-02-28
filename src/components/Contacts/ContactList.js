@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContactsList } from '../../data/selectors/contacts-selectors';
 import { fetchContacts } from '../../data/actions/contacts-actions';
 import { selectUser, selectLoggedOut } from '../../data/selectors/auth-selector';
 import styles from './ContactList.css';
+import ConnectedButton from './ConnectedButton';
 
 export default function ContactList() {
   const dispatch = useDispatch();
@@ -32,7 +33,6 @@ export default function ContactList() {
         <Link key={contact._id} to={`/contacts/${contact._id}`}>
           <li className={styles.commStatus}>
             <span>{contact.firstName} {contact.lastName}</span>
-            {/* <span>{statusIcon}</span> */}
           </li>
         </Link>);
     });
