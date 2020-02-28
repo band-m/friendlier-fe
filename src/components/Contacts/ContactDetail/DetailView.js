@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './DetailView.css';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -15,6 +15,7 @@ import ConnectedButton from '../ConnectedButton';
 const DetailView = ({ match }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [showHistory, setShowHistory] = useState(false);
 
   const contact = useSelector(state => selectSelectedContact(state, match.params.id));
 
@@ -22,12 +23,22 @@ const DetailView = ({ match }) => {
 
   dispatch(myAction(SET_CONTACT_DETAILS, contact));
 
-  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate, slider1, slider2, deadlineObject } = contact;
+  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate, slider1, slider2, deadlineObject, connHistory } = contact;
 
   const deleteOne = contactId => {
     dispatch(deleteContact(contactId));
     history.replace('/contacts');
   };
+
+  const toggleContactHistory = () => {
+    setShowHistory(!showHistory);
+  }
+
+  const contactEvents = connHistory.map(connection => (
+    <li key={connection}>
+      <p>{format(new Date(connection), "PPpp")}</p>
+    </li>
+  ))
 
   return (
     <section className={styles.DetailView}>
@@ -52,6 +63,16 @@ const DetailView = ({ match }) => {
         {birthdate && <p>Birthdate: <span>{birthdate.split('T')[0]}</span></p>}
 
         {/* {notes && styleName={styles.Notes}><p>Notes: {notes}</p>} */}
+      </div>
+
+      <div className={styles.connectionHistory}>
+        <button onClick={toggleContactHistory}>Show contact history</button>
+        {showHistory && 
+          <ol>
+            {contactEvents.length > 0 && contactEvents}
+            {contactEvents.length === 0 && <p>No connection events yet! No time like the present! Why don't you give {firstName} a call?</p>}
+          </ol>
+        }
       </div>
 
       <div className={styles.ToolbarBottom}>
