@@ -1,101 +1,100 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Slider component matches snapshot 1`] = `
-<Fragment>
-  <p>
+<article>
+  <div>
     How often do you want to be in contact with name?
-  </p>
-  <p>
-    Every
-  </p>
-  <input
-    min={1}
-    onChange={[Function]}
-    type="number"
-    value={2}
-  />
-  <br />
-  <label
-    htmlFor="days"
-  >
-    Days
-  </label>
-  <input
-    checked={false}
-    id="days"
-    name="deadlineUnit"
-    onChange={[Function]}
-    type="radio"
-  />
-  <label
-    htmlFor="weeks"
-  >
-    Weeks
-  </label>
-  <input
-    checked={true}
-    id="weeks"
-    name="deadlineUnit"
-    onChange={[Function]}
-    type="radio"
-  />
-  <label
-    htmlFor="months"
-  >
-    Months
-  </label>
-  <input
-    checked={false}
-    id="months"
-    name="deadlineUnit"
-    onChange={[Function]}
-    type="radio"
-  />
-  <br />
-  <br />
-  <br />
-  <p>
-    Choose your notification range for name:
-  </p>
-  <label
-    htmlFor={1}
-  >
-    1
-  </label>
-  <input
-    checked={true}
-    id={1}
-    name="notificationOptions"
-    onChange={[Function]}
-    type="radio"
-  />
-  <label
-    htmlFor={2}
-  >
-    2
-  </label>
-  <input
-    checked={false}
-    id={2}
-    name="notificationOptions"
-    onChange={[Function]}
-    type="radio"
-  />
-  <label
-    htmlFor={3}
-  >
-    3
-  </label>
-  <input
-    checked={false}
-    id={3}
-    name="notificationOptions"
-    onChange={[Function]}
-    type="radio"
-  />
-  <br />
-  <br />
-  <br />
+    <p>
+      Every
+    </p>
+    <input
+      min={1}
+      onChange={[Function]}
+      type="number"
+      value={2}
+    />
+    <label
+      htmlFor="days"
+    >
+      Days
+    </label>
+    <input
+      checked={false}
+      id="days"
+      name="deadlineUnit"
+      onChange={[Function]}
+      type="radio"
+    />
+    <label
+      htmlFor="weeks"
+    >
+      Weeks
+    </label>
+    <input
+      checked={true}
+      id="weeks"
+      name="deadlineUnit"
+      onChange={[Function]}
+      type="radio"
+    />
+    <label
+      htmlFor="months"
+    >
+      Months
+    </label>
+    <input
+      checked={false}
+      id="months"
+      name="deadlineUnit"
+      onChange={[Function]}
+      type="radio"
+    />
+    <p>
+      Choose your notification range for name:
+    </p>
+    <label
+      htmlFor={1}
+    >
+      1
+    </label>
+    <input
+      checked={true}
+      id={1}
+      name="notificationOptions"
+      onChange={[Function]}
+      type="radio"
+    />
+    <label
+      htmlFor={2}
+    >
+      2
+    </label>
+    <input
+      checked={false}
+      id={2}
+      name="notificationOptions"
+      onChange={[Function]}
+      type="radio"
+    />
+    <label
+      htmlFor={3}
+    >
+      3
+    </label>
+    <input
+      checked={false}
+      id={3}
+      name="notificationOptions"
+      onChange={[Function]}
+      type="radio"
+    />
+     
+    <br />
+     
+    <br />
+     
+    <br />
+  </div>
   <p>
     Your connection deadline with name will be on 
   </p>
@@ -146,5 +145,5 @@ exports[`Slider component matches snapshot 1`] = `
       ]
     }
   />
-</Fragment>
+</article>
 `;
