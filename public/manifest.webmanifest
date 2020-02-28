@@ -2,14 +2,15 @@
   "short_name": "KIT",
   "name": "KIT: Keep In Touch",
   "description": "Quick, Customizable Communication Reminders Empowering Closer Connections",
+  "categories": ["productivity", "social", "utilities"]
   "icons": [
     {
-      "src": "/images/icons-192.png",
+      "src": "/public/images/icons-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/icons-512.png",
+      "src": "/public/images/icons-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
