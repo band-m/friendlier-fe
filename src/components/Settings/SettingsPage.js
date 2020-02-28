@@ -47,6 +47,7 @@ const SettingsPage = () => {
   }, [user?._id, user?.pushHour]);
 
   const saveSettings = async() => {
+    const offsetHours = Math.floor((new Date).getTimezoneOffset() / 60);
     let subscription;
     if(wantsPush) {
       subscription = await subscribePush();
@@ -67,9 +68,9 @@ const SettingsPage = () => {
       <h1>Account and Settings</h1>
       <h2>Notification Settings</h2>
       <div>
-        Receive daily notifications: 
-        <input type="checkbox" 
-          value={wantsPush} 
+        Receive daily notifications:
+        <input type="checkbox"
+          value={wantsPush}
           onChange={({ target }) => setWantsPush(target.checked) } />
       </div>
       <div>

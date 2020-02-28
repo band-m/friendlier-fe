@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './About.css';
 
 
-const AboutPage=() => {
+const AboutPage = () => {
   return (
     <main className={styles.About}>
       <div className={styles.imageDiv}>
-        <img src='../../../assets/images/logo.png' />
+        <img src='../../../public/assets/logo-500.png' />
       </div>
       <h1 className={styles.kitTitle} >kit</h1>
       <h2>See what everyone&apos;s<br />talking about.</h2>
