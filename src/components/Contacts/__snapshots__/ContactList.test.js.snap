@@ -4,7 +4,12 @@ exports[`ContactList component matches snapshot 1`] = `
 <section
   className="ContactList"
 >
-  <ul />
+  <h2>
+    Contact List
+  </h2>
+  <ul
+    className="ContactList"
+  />
   <Component
     to="/add"
   >
