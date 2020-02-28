@@ -122,7 +122,7 @@ export default function AddContact() {
     dispatch(myAction(SET_DEADLINE_UNIT, deadlineUnit));
     dispatch(myAction(SET_DEADLINE_OBJECT, deadlineObject));
     setDeadline(add(new Date(), deadlineObject));
-  }, [deadlineObject])
+  }, [deadlineObject]);
 
   // When deadline changes, set deadlineDate in contact details
   useEffect(() => {
@@ -157,11 +157,11 @@ export default function AddContact() {
     dispatch(myAction(SET_SLIDER_1, slider1));
     dispatch(myAction(SET_SLIDER_2, slider2));
     setYellowZone(add(new Date(), { days: slider1 }));
-    setRedZone(add(new Date(), { days: slider2 }))
-  }, [slider1, slider2])
+    setRedZone(add(new Date(), { days: slider2 }));
+  }, [slider1, slider2]);
 
   // When yellowZone or redZone change, set yellowZoneStartDate and redZoneStartDate in contact details
-  useEffect(() => {  
+  useEffect(() => {
     dispatch(myAction(SET_YELLOW_ZONE, yellowZone));
     dispatch(myAction(SET_RED_ZONE, redZone));
   }, [yellowZone, redZone]);
@@ -181,7 +181,7 @@ export default function AddContact() {
     dispatch(postContactDetails(details));
     history.push('/contacts');
   };
-  
+
   return (
     <form className={styles.DetailForm} onSubmit={handleSubmit}>
       <div>
@@ -195,7 +195,6 @@ export default function AddContact() {
           <label htmlFor="address">Address</label>
           <label htmlFor="phoneNumber">Phone Number</label>
           <label htmlFor="birthdate">Birthdate</label>
-          <label htmlFor="notes">Notes</label>
         </div>
 
         <div>
@@ -205,36 +204,41 @@ export default function AddContact() {
           {
             /* <input type="text" onChange={({ target }) => dispatch(myAction(SET_IMAGE, target.value))} id="image" name="image" value={image || ''} placeholder="First Name"/> */}
           <input type="date" onChange={({ target }) => dispatch(myAction(SET_BIRTHDATE, target.value))} id="birthdate" name="birthdate" placeholder="Birthdate" />
+          </div>
+      </section>
+      <section className={styles.notes}><label htmlFor="notes">Notes</label>
           <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes"></textarea>
+          </section>
           {
             /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */}
+
+
+      <section id='slider' className={styles.ContactFrequencyInput}>
+        <p>How often do you want to be in contact?</p>
+        <div>
+          Every
+          <input type='number' min={1} value={deadlineNumber} onChange={({ target }) => changeNumOfDaysInput(+target.value)} /><br />
+          <label htmlFor='days'>Days</label>
+          <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
+          <label htmlFor='weeks'>Weeks</label>
+          <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
+          <label htmlFor='months'>Months</label>
+          <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)} /><br /><br /><br />
         </div>
+        <div>
+          <p>Choose your notification range:</p>
+          <label htmlFor={1}>1</label>
+          <input type='radio' name='notificationOptions' id={1} checked={notificationOption === 1} onChange={({ target }) => setNotificationOption(+target.id)} />
+          <label htmlFor={2}>2</label>
+          <input type='radio' name='notificationOptions' id={2} checked={notificationOption === 2} onChange={({ target }) => setNotificationOption(+target.id)} />
+          <label htmlFor={3}>3</label>
+          <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({ target }) => setNotificationOption(+target.id)} /><br /><br /><br />
+        </div>
+        <p>Your connection deadline will be {deadline && format(deadline, 'PPPP', new Date())}</p>
+        <p>Your yellow zone will begin on {yellowZone && format(yellowZone, 'PPPP')}</p>
+        <p>Your red zone will begin on {redZone && format(redZone, 'PPPP')}</p>
       </section>
-
-      <section id='slider'>
-      <p>How often do you want to be in contact with name?</p>
-      <p>Every</p>
-      <input type='number' min={1} value={deadlineNumber} onChange={({target}) => changeNumOfDaysInput(+target.value)} /><br/>
-      <label htmlFor='days'>Days</label>
-      <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
-      <label htmlFor='weeks'>Weeks</label>
-      <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
-      <label htmlFor='months'>Months</label>
-      <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({target}) => changeNumOfDaysRadio(target)}/><br/><br/><br/>
-
-      <p>Choose your notification range for name:</p>
-      <label htmlFor={1}>1</label>
-      <input type='radio' name='notificationOptions' id={1} checked={notificationOption === 1} onChange={({target}) => setNotificationOption(+target.id)} />
-      <label htmlFor={2}>2</label>
-      <input type='radio' name='notificationOptions' id={2} checked={notificationOption === 2} onChange={({target}) => setNotificationOption(+target.id)} />
-      <label htmlFor={3}>3</label>
-      <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({target}) => setNotificationOption(+target.id)} /><br/><br/><br/>
-
-      <p>Your connection deadline with name will be on {deadline && format(deadline, "PPPP", new Date())}</p>
-      <p>Your yellow zone will begin on {yellowZone && format(yellowZone, "PPPP")}</p>
-      <p>Your red zone will begin on {redZone && format(redZone, "PPPP")}</p>
-      </section>
-      <Nouislider style={{ margin: '25px' }} onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
+      <Nouislider style={{ margin: '40px 0' }} onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
 
       <button type="submit">Create a new contact</button>
     </form>
