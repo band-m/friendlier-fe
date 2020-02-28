@@ -2,19 +2,18 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContactsList } from '../../data/selectors/contacts-selectors';
 import { fetchContacts } from '../../data/actions/contacts-actions';
-import isFuture from 'date-fns/isFuture';
 import isPast from 'date-fns/isPast';
 import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
-import { selectUser, selectLoggedOut } from '../../data/selectors/auth-selector';
 import styles from './ContactList.css';
 import { SET_CURRENT_ZONE_RATIO } from '../../data/action-types/action-types';
 import { myAction } from '../../data/actions/contact-detail-actions';
 import { Link } from 'react-router-dom';
+import useLoggedOutRedirect from '../../hooks/useLoggedOutRedirect';
+import { selectUser } from '../../data/selectors/auth-selector';
 
 export default function ContactList() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const loggedOut = useSelector(selectLoggedOut);
 
   useEffect(() => {
     if(user) {
@@ -22,11 +21,7 @@ export default function ContactList() {
     }
   }, [user]);
 
-  useEffect(() => {
-    if(loggedOut) {
-      history.push('/');
-    }
-  }, [loggedOut]);
+  useLoggedOutRedirect();
 
   const contacts = useSelector(selectContactsList);
 

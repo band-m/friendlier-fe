@@ -19,8 +19,8 @@ const Login=() => {
   };
 
   useEffect(() => {
-    if (user) {
-      history.push('/about');
+    if(user) {
+      history.push('/contacts');
     }
   }, [user]);
 

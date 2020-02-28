@@ -6,14 +6,11 @@ import { selectUser, selectLoggedOut } from '../../data/selectors/auth-selector'
 import subscribePush from '../../workers/subscribe-push';
 import unsubscribePush from '../../workers/unsubscribe-push';
 import { useHistory } from 'react-router-dom';
+import useLoggedOutRedirect from '../../hooks/useLoggedOutRedirect';
 
 const SettingsPage = () => {
   const user = useSelector(selectUser);
-  // const loading = useSelector(selectLoading);
-  // const error = useSelector(selectError);
-  const loggedOut = useSelector(selectLoggedOut);
-  const history = useHistory();
-
+  useLoggedOutRedirect();
   let userPushHour = user?.pushHour;
   if(!Number.isInteger(userPushHour)) {
     userPushHour = 18;
@@ -26,12 +23,6 @@ const SettingsPage = () => {
   const hours = Array(12).fill().map((x, i)=>i);
   const offsetHours = Math.floor((new Date).getTimezoneOffset() / 60);
   console.log(offsetHours, 'offset');
-
-  useEffect(() => {
-    if(loggedOut) {
-      history.push('/');
-    }
-  }, [loggedOut]);
 
   useEffect(() => {
     if(user) {
