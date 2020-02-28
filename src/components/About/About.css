@@ -18,7 +18,7 @@ img{
   display: block;
   margin: 0 auto !important;
 }
-
+:first-of-type
 .About{
   display: flex;
   flex-direction: column;
@@ -55,7 +55,7 @@ img{
       list-style-type: none;
       padding-left: 3rem;
     }
-    
+
   }
   p {
     font-family: 'Lato';
@@ -68,6 +68,5 @@ img{
 
 
 .kitTitle {
-  
-}
 
+}

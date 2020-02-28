@@ -26,13 +26,13 @@ const Header = () => {
         </Link>
       </div>
       {burgerToggled &&
-      <nav className={styles.Nav}>
-        {!user && <Link to="/" className={styles.HomeLink}><span>Home</span></Link>}
-        {user && <Link to="/contacts"><span>Contact List</span></Link>}
-        <Link to="/about"><span>About</span></Link>
-        {user && <Link to="/settings"><span>Settings</span></Link>}
-        {user && <span onClick={handleLogoutClick} className={styles.LogoutButton}>Logout</span>}
-      </nav>}
+        <nav className={styles.Nav}>
+          {!user && <Link to="/" className={styles.HomeLink}><span>Home</span></Link>}
+          {user && <Link to="/contacts"><span>Contact List</span></Link>}
+          <Link to="/about"><span>About</span></Link>
+          {user && <Link to="/settings"><span>Settings</span></Link>}
+          {user && <span onClick={handleLogoutClick} className={styles.LogoutButton}>Logout</span>}
+        </nav>}
     </header>
   );
 };
