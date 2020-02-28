@@ -51,7 +51,7 @@ exports[`Login component renders Login 1`] = `
     <Component
       to="/signup"
     >
-      Sign up
+      To Sign up
     </Component>
   </p>
 </main>
