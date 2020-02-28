@@ -11,7 +11,6 @@ export default function ContactList() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const loggedOut = useSelector(selectLoggedOut);
-  const history = useHistory();
 
   useEffect(() => {
     if(user) {
