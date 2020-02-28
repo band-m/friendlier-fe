@@ -22,7 +22,8 @@ import {
   SET_DEADLINE_UNIT,
   SET_DEADLINE_NUMBER,
   SET_SLIDER_1,
-  SET_SLIDER_2
+  SET_SLIDER_2,
+  CLEAR_CONTACT_DETAILS
 } from '../action-types/action-types';
 import {
   fetchContacts,
@@ -266,6 +267,14 @@ describe('contact detail actions', () => {
     expect(action).toEqual({
       type: SET_SLIDER_2,
       payload: 15
+    });
+  });
+
+  it('creates a clear contact details action', () => {
+    const action = myAction(CLEAR_CONTACT_DETAILS);
+    
+    expect(action).toEqual({
+      type: CLEAR_CONTACT_DETAILS
     });
   });
 });

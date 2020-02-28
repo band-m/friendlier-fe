@@ -20,7 +20,8 @@ import {
   SET_DEADLINE_UNIT,
   SET_DEADLINE_NUMBER,
   SET_SLIDER_1,
-  SET_SLIDER_2
+  SET_SLIDER_2,
+  CLEAR_CONTACT_DETAILS
 } from '../action-types/action-types';
 
 import contactDetailReducer from './contact-detail-reducers';
@@ -271,5 +272,37 @@ describe('contact detail reducer', () => {
     const initialState = { slider2: 10 };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({ slider2: 15 });
+  });
+
+  it('handles a clear contact details action', () => {
+    const action = {
+      type: CLEAR_CONTACT_DETAILS
+    };
+
+    const initialState = { userId: 12345, firstName: 'Dan', lastName: 'Meloy' };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({
+      userId: '',
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      address: '',
+      email: '',
+      image: '',
+      commFrequency: 1,
+      createdOn: null,
+      lastContactedDate: null,
+      notificationRange: 3,
+      slider1: 0,
+      slider2: 0,
+      yellowZoneStartDate: null,
+      redZoneStartDate: null,
+      deadlineDate: null,
+      deadlineObject: {},
+      connHistory: [],
+      birthdate: '',
+      specialDates: [],
+      notes: '',
+    });
   });
 });
