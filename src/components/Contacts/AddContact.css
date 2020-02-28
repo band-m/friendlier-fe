@@ -25,3 +25,137 @@
     flex-direction: column;
   }
 }
+
+
+@import url("https://fonts.googleapis.com/css?family=DM+Serif+Display|Hepta+Slab:300,400,600,900|Lato:300,400,700|Raleway:200,300,400,500,700,900|Rozha+One&display=swap");
+
+.formWrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.DetailForm {
+  padding: 0.5rem;
+
+  section>div>label {
+    margin-top: 0.4rem;
+    margin-right: 2rem;
+  }
+
+  section>div>input {
+    margin-top: 0.4rem;
+    margin-right: 0;
+  }
+
+  div:first-of-type>input:first-of-type {
+    margin-right: 1.4rem;
+  }
+
+  button {
+    margin: 4rem auto 0.5rem;
+    display: block;
+    margin-top: 0;
+    position: relative;
+  }
+
+  .Column {
+    flex-direction: column;
+    display: block;
+  }
+
+  p {
+    margin: 0.3rem 0;
+  }
+
+  input[type="number"] {
+    display: inline;
+    margin: 0 0.5rem;
+    width: 1.6rem;
+    height: 0.7rem;
+  }
+
+  >:first-child {
+    align-items: center;
+    min-width: 300px;
+    text-align: center;
+  }
+
+  .ContactFrequencyInput {
+    flex-direction: row;
+    margin-top: 0.5rem;
+
+    div {
+      flex-direction: row;
+      justify-content: center;
+    }
+
+  }
+
+  section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-width: 360px;
+    flex-wrap: wrap;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+  }
+
+  .notes {
+    flex-direction: column;
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+
+    textarea {
+      height: 5rem;
+      max-width: 740px;
+    }
+  }
+}
+
+.DetailForm {
+  width: 65vw;
+  height: 75vh;
+  margin-top: 5vh;
+  padding: 2em;
+  background: #0e4375;
+  border-radius: 10px;
+  font-family: Lato;
+  color: white;
+
+  button {
+    margin: 4rem auto 0.5rem;
+    margin-top: 0;
+    position: absolute;
+    right: 22vw;
+    top: 15vh;
+    height: 25px;
+    width: 20vw;
+    border-radius: 3px;
+    background: green;
+  }
+
+  section {
+    justify-content: flex-start;
+  }
+
+  .ContactFrequencyInput {
+    width: 55vw;
+
+    p {
+      margin: 1rem;
+
+      span {
+        color: #f7b82e;
+      }
+    }
+  }
+}
