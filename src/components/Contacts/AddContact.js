@@ -32,6 +32,7 @@ import {
 import { selectUser } from '../../data/selectors/auth-selector';
 import { selectContactDetails } from '../../data/selectors/contact-detail-selectors';
 import { useHistory } from 'react-router-dom';
+import useLoggedOutRedirect from '../../hooks/useLoggedOutRedirect';
 
 export default function AddContact() {
   const [slider1, setSlider1] = useState(10);
@@ -50,6 +51,8 @@ export default function AddContact() {
   const details = useSelector(selectContactDetails);
   const history = useHistory();
   const monthDays = differenceInDays((add(new Date(), { months: numOfDays })), new Date());
+
+  useLoggedOutRedirect();
 
   useEffect(() => {
     dispatch(myAction(CLEAR_CONTACT_DETAILS));
@@ -217,31 +220,31 @@ export default function AddContact() {
       {
         /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */}
       <section id='slider' className={styles.ContactFrequencyInput}>
-      <div className={styles.Column}><p>How often do you want to be in contact?</p>
-        <div>
+        <div className={styles.Column}><p>How often do you want to be in contact?</p>
+          <div>
           Every
-          <input type='number' min={1} value={deadlineNumber} onChange={({ target }) => changeNumOfDaysInput(+target.value)} /><br />
-          <label htmlFor='days'>Days</label>
-          <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
-          <label htmlFor='weeks'>Weeks</label>
-          <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
-          <label htmlFor='months'>Months</label>
-          <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)} /><br /><br /><br />
-        </div>
+            <input type='number' min={1} value={deadlineNumber} onChange={({ target }) => changeNumOfDaysInput(+target.value)} /><br />
+            <label htmlFor='days'>Days</label>
+            <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
+            <label htmlFor='weeks'>Weeks</label>
+            <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
+            <label htmlFor='months'>Months</label>
+            <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)} /><br /><br /><br />
+          </div>
 
-        <div>
-          <p>Choose your notification range:</p>
-          <label htmlFor={1}>1</label>
-          <input type='radio' name='notificationOptions' id={1} checked={notificationOption === 1} onChange={({ target }) => setNotificationOption(+target.id)} />
-          <label htmlFor={2}>2</label>
-          <input type='radio' name='notificationOptions' id={2} checked={notificationOption === 2} onChange={({ target }) => setNotificationOption(+target.id)} />
-          <label htmlFor={3}>3</label>
-          <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({ target }) => setNotificationOption(+target.id)} /><br /><br /><br />
-        </div>
+          <div>
+            <p>Choose your notification range:</p>
+            <label htmlFor={1}>1</label>
+            <input type='radio' name='notificationOptions' id={1} checked={notificationOption === 1} onChange={({ target }) => setNotificationOption(+target.id)} />
+            <label htmlFor={2}>2</label>
+            <input type='radio' name='notificationOptions' id={2} checked={notificationOption === 2} onChange={({ target }) => setNotificationOption(+target.id)} />
+            <label htmlFor={3}>3</label>
+            <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({ target }) => setNotificationOption(+target.id)} /><br /><br /><br />
+          </div>
 
-        <p>Your connection deadline will be {deadline && format(deadline, 'PPPP', new Date())}</p>
-        <p>Your yellow zone will begin on {yellowZone && format(yellowZone, 'PPPP')}</p>
-        <p>Your red zone will begin on {redZone && format(redZone, 'PPPP')}</p>
+          <p>Your connection deadline will be {deadline && format(deadline, 'PPPP', new Date())}</p>
+          <p>Your yellow zone will begin on {yellowZone && format(yellowZone, 'PPPP')}</p>
+          <p>Your red zone will begin on {redZone && format(redZone, 'PPPP')}</p>
         </div>
       </section>
       <Nouislider style={{ margin: '40px 0' }} onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />

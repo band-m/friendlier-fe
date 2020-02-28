@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContactsList } from '../../data/selectors/contacts-selectors';
 import { fetchContacts } from '../../data/actions/contacts-actions';
-import isFuture from 'date-fns/isFuture';
 import isPast from 'date-fns/isPast';
 import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
-import { selectUser, selectLoggedOut } from '../../data/selectors/auth-selector';
 import styles from './ContactList.css';
 import { SET_CURRENT_ZONE_RATIO } from '../../data/action-types/action-types';
 import { myAction } from '../../data/actions/contact-detail-actions';
 import { Link } from 'react-router-dom';
+import useLoggedOutRedirect from '../../hooks/useLoggedOutRedirect';
+import { selectUser } from '../../data/selectors/auth-selector';
 import { AiFillAlert } from 'react-icons/ai';
 import { FiAlertOctagon, FiAlertTriangle } from 'react-icons/fi';
 import { FaRegClock } from 'react-icons/fa';
@@ -17,7 +17,6 @@ import { FaRegClock } from 'react-icons/fa';
 export default function ContactList() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const loggedOut = useSelector(selectLoggedOut);
 
   useEffect(() => {
     if(user) {
@@ -25,11 +24,7 @@ export default function ContactList() {
     }
   }, [user]);
 
-  useEffect(() => {
-    if(loggedOut) {
-      history.push('/');
-    }
-  }, [loggedOut]);
+  useLoggedOutRedirect();
 
   const contacts = useSelector(selectContactsList);
 
@@ -80,9 +75,9 @@ export default function ContactList() {
     if(zone.length) {
       return zone.map(contact => {
         return (
-           <Link key={contact._id} to={`/contacts/${contact._id}`}>
-          <li style={{ background: `linear-gradient(#cccccc, ${backgroundColor})`, color }} className={styles.commStatus}>
-          <span>{contact.firstName} {contact.lastName}</span>
+          <Link key={contact._id} to={`/contacts/${contact._id}`}>
+            <li style={{ background: `linear-gradient(#cccccc, ${backgroundColor})`, color }} className={styles.commStatus}>
+              <span>{contact.firstName} {contact.lastName}</span>
               <span className={styles.ZoneIcon}>
                 {(statusIcon === 'FaRegClock') && <FaRegClock />}
                 {(statusIcon === 'FiAlertTriangle') && <FiAlertTriangle />}

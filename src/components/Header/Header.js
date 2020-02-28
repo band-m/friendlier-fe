@@ -27,7 +27,7 @@ const Header = () => {
       </div>
 
       <nav className={`${styles.Nav} ${burgerToggled && styles.hidden }`}>
-        {!user && <Link to="/" className={styles.HomeLink}><span>Home</span></Link>}
+        {!user && <Link to="/login" className={styles.HomeLink}><span>Login/Signup</span></Link>}
         {user && <Link to="/contacts"><span>Contact List</span></Link>}
         <Link to="/about"><span>About</span></Link>
         {user && <Link to="/settings"><span>Settings</span></Link>}
