@@ -217,7 +217,7 @@ export default function AddContact() {
       {
         /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */}
       <section id='slider' className={styles.ContactFrequencyInput}>
-        <p>How often do you want to be in contact?</p>
+      <div className={styles.Column}><p>How often do you want to be in contact?</p>
         <div>
           Every
           <input type='number' min={1} value={deadlineNumber} onChange={({ target }) => changeNumOfDaysInput(+target.value)} /><br />
@@ -228,6 +228,7 @@ export default function AddContact() {
           <label htmlFor='months'>Months</label>
           <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)} /><br /><br /><br />
         </div>
+
         <div>
           <p>Choose your notification range:</p>
           <label htmlFor={1}>1</label>
@@ -237,9 +238,11 @@ export default function AddContact() {
           <label htmlFor={3}>3</label>
           <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({ target }) => setNotificationOption(+target.id)} /><br /><br /><br />
         </div>
+
         <p>Your connection deadline will be {deadline && format(deadline, 'PPPP', new Date())}</p>
         <p>Your yellow zone will begin on {yellowZone && format(yellowZone, 'PPPP')}</p>
         <p>Your red zone will begin on {redZone && format(redZone, 'PPPP')}</p>
+        </div>
       </section>
       <Nouislider style={{ margin: '40px 0' }} onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
 

@@ -175,8 +175,9 @@ const DetailForm = ({ match }) => {
       </section>
 
       <section id="slider" className={styles.ContactFrequencyInput}>
-        <p>Would you like to change your connection settings with {firstName} {lastName}?</p>
+        <div className={styles.Column}><p>Would you like to change your connection settings with {firstName} {lastName}?</p>
         <p>How often do you want to be in contact with {firstName}?</p>
+
         <div>Every <input type='number' min={1} value={deadlineNumber} onChange={({ target }) => changeNumOfDaysInput(+target.value)} />
           <label htmlFor='days'>Days</label>
           <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
@@ -184,6 +185,7 @@ const DetailForm = ({ match }) => {
           <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
           <label htmlFor='months'>Months</label>
           <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
+        </div>
         </div>
         <div>
           <p>Choose your notification range for {firstName}:</p>
@@ -200,7 +202,7 @@ const DetailForm = ({ match }) => {
 
       </section>
 
-      <Nouislider style={{ margin: '40px 0' }} range={{ min: 0, max: commFrequency }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
+      <Nouislider style={{ margin: '20px 20px 80px' }} range={{ min: 0, max: commFrequency }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
 
       <button type="submit">Confirm Changes</button>
     </form>
