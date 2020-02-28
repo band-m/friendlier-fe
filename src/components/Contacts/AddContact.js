@@ -30,7 +30,8 @@ import {
   SET_DEADLINE_NUMBER,
   SET_DEADLINE_UNIT,
   SET_SLIDER_1,
-  SET_SLIDER_2
+  SET_SLIDER_2,
+  CLEAR_CONTACT_DETAILS
 } from '../../data/action-types/action-types';
 import { selectUser } from '../../data/selectors/auth-selector';
 import { setContact } from '../../data/actions/contacts-actions';
@@ -53,6 +54,10 @@ export default function AddContact() {
   const user = useSelector(selectUser);
   const details = useSelector(selectContactDetails);
   const history = useHistory();
+
+  useEffect(() => {
+    dispatch(myAction(CLEAR_CONTACT_DETAILS));
+  }, []);
 
   useEffect(() => {
     if(user) {

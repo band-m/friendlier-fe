@@ -15,7 +15,6 @@ export default function ConnectedButton({ slider1, slider2, deadlineObject, id }
   const dispatch = useDispatch();
 
   const addConnectionEvent = () => {
-    dispatch(myAction(SET_CONTACT_DETAILS, contact));
     dispatch(myAction(SET_LAST_CONTACTED_DATE, new Date()));
     dispatch(myAction(SET_YELLOW_ZONE, add(new Date(), { days: slider1 })));
     dispatch(myAction(SET_RED_ZONE, add(new Date(), { days: slider2 })));

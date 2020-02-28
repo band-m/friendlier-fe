@@ -34,7 +34,6 @@ export default function ContactList() {
         <Link key={contact._id} to={`/contacts/${contact._id}`}>
           <li className={styles.commStatus}>
             <span>{contact.firstName} {contact.lastName}</span>
-            <ConnectedButton slider1={contact.slider1} slider2={contact.slider2} deadlineObject={contact.deadlineObject} id={contact._id} />
           </li>
         </Link>);
     });
