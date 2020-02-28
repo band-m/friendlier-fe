@@ -110,3 +110,24 @@
 .edit {
   color: azure;
 }
+
+.connectionHistory {
+  margin-top: 50px;
+
+  p {
+    margin: 10px;
+  }
+
+  button {
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all 0.2s;
+    font-size: .5vw;
+    font-weight: 200;
+    margin-bottom: 30px;
+  }
+}
