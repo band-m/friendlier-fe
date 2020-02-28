@@ -27,7 +27,7 @@ const Login=() => {
   return (
     <main className={styles.login}>
       {loading&&<img src='../../../public/assets/loading_spinner.gif' alt='loading-spinner' className={styles.LoadingImage} />}
-      <img className={styles.logoImage} src='assets/images/logo.png' />
+      <img className={styles.logoImage} src='../../../public/assets/logo-500.png' />
       <h1>Login</h1>
 
       {error&&<p>{error.message}</p>}
