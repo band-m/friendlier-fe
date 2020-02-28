@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   background: #f7b82e;
-  justify-content: center;
+  justify-content: flex-start;
   font-family: Raleway;
   border-right: 2px solid #0e4375;
 
