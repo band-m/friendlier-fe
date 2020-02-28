@@ -78,7 +78,7 @@ export default function ContactList() {
       return zone.map(contact => {
         return (
           <Link key={contact._id} to={`/contacts/${contact._id}`}>
-            <li style={{ backgroundColor, color }} className={styles.commStatus}>
+            <li style={{ background: `linear-gradient(#cccccc, ${backgroundColor})`, color }} className={styles.commStatus}>
               <span>{contact.firstName} {contact.lastName}</span>
               {/* <span>{statusIcon}</span> */}
             </li>
