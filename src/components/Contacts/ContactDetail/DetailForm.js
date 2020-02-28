@@ -148,64 +148,66 @@ const DetailForm = ({ match }) => {
   };
 
   return (
-    <form className={styles.DetailForm} onSubmit={handleSubmit}>
-      <div>
-        <input type="text" onChange={({ target }) => dispatch(myAction(SET_FIRST_NAME, target.value))} name="firstName" placeholder="First Name" value={firstName} />
-        <input type="text" onChange={({ target }) => dispatch(myAction(SET_LAST_NAME, target.value))} name="lastName" placeholder="Last Name" value={lastName} />
-      </div>
-
-      <section>
+    <section className={styles.formWrapper}>
+      <form className={styles.DetailForm} onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
-          <label htmlFor="address">Address</label>
-          <label htmlFor="phoneNumber">Phone Number</label>
-          <label htmlFor="birthdate">Birthdate</label>
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_FIRST_NAME, target.value))} name="firstName" placeholder="First Name" value={firstName} />
+          <input type="text" onChange={({ target }) => dispatch(myAction(SET_LAST_NAME, target.value))} name="lastName" placeholder="Last Name" value={lastName} />
         </div>
 
-        <div>
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_EMAIL, target.value))} id="email" name="email" placeholder="Email address" value={email} />
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_ADDRESS, target.value))} id="address" name="address" placeholder="Physical Address" value={address} />
-          <input type="text" onChange={({ target }) => dispatch(myAction(SET_PHONE_NUMBER, target.value))} id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value={phoneNumber} />
-          <input type="date" onChange={({ target }) => dispatch(myAction(SET_BIRTHDATE, target.value))} id="birthdate" name="birthdate" placeholder="Birthdate" value={birthdate ? birthdate.split('T')[0] : ''} />
-        </div>
-      </section>
+        <section>
+          <div className={styles.TopSection}>
+            <label htmlFor="email">Email</label>
+            <label htmlFor="address">Address</label>
+            <label htmlFor="phoneNumber">Phone Number</label>
+            <label htmlFor="birthdate">Birthdate</label>
+          </div>
 
-      <section className={styles.notes}><label htmlFor="notes">Notes</label>
-        <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes" value={notes} ></textarea>
-      </section>
+          <div>
+            <input type="text" onChange={({ target }) => dispatch(myAction(SET_EMAIL, target.value))} id="email" name="email" placeholder="Email address" value={email} />
+            <input type="text" onChange={({ target }) => dispatch(myAction(SET_ADDRESS, target.value))} id="address" name="address" placeholder="Physical Address" value={address} />
+            <input type="text" onChange={({ target }) => dispatch(myAction(SET_PHONE_NUMBER, target.value))} id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value={phoneNumber} />
+            <input type="date" onChange={({ target }) => dispatch(myAction(SET_BIRTHDATE, target.value))} id="birthdate" name="birthdate" placeholder="Birthdate" value={birthdate ? birthdate.split('T')[0] : ''} />
+          </div>
+        </section>
 
-      <section id="slider" className={styles.ContactFrequencyInput}>
-        <div className={styles.Column}><p>Would you like to change your connection settings with {firstName} {lastName}?</p>
-        <p>How often do you want to be in contact with {firstName}?</p>
+        <section className={styles.notes}><label htmlFor="notes">Notes</label>
+          <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes" value={notes} ></textarea>
+        </section>
 
-        <div>Every <input type='number' min={1} value={deadlineNumber} onChange={({ target }) => changeNumOfDaysInput(+target.value)} />
-          <label htmlFor='days'>Days</label>
-          <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
-          <label htmlFor='weeks'>Weeks</label>
-          <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
-          <label htmlFor='months'>Months</label>
-          <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
-        </div>
-        </div>
-        <div>
-          <p>Choose your notification range for {firstName}:</p>
-          <label htmlFor={1}>1</label>
-          <input type='radio' name='notificationOptions' id={1} checked={notificationRange === 1} onChange={({ target }) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} />
-          <label htmlFor={2}>2</label>
-          <input type='radio' name='notificationOptions' id={2} checked={notificationRange === 2} onChange={({ target }) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} />
-          <label htmlFor={3}>3</label>
-          <input type='radio' name='notificationOptions' id={3} checked={notificationRange === 3} onChange={({ target }) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} /><br /><br /><br />
-        </div>
-        <p>Your connection deadline with name will be on {deadlineDate && format(new Date(deadlineDate), 'PPPP')}</p>
-        <p>Your yellow zone will begin on {yellowZoneStartDate && format(new Date(yellowZoneStartDate), 'PPPP')}</p>
-        <p>Your red zone will begin on {redZoneStartDate && format(new Date(redZoneStartDate), 'PPPP')}</p>
+        <section id="slider" className={styles.ContactFrequencyInput}>
+          <div className={styles.Column}><p>Would you like to change your connection settings with {firstName} {lastName}?</p>
+            <p>How often do you want to be in contact with {firstName}?</p>
 
-      </section>
+            <div>Every <input type='number' min={1} value={deadlineNumber} onChange={({ target }) => changeNumOfDaysInput(+target.value)} />
+              <label htmlFor='days'>Days</label>
+              <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
+              <label htmlFor='weeks'>Weeks</label>
+              <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
+              <label htmlFor='months'>Months</label>
+              <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
+            </div>
+          </div>
+          <div className={styles.Range}>
+            <p>Choose your notification range for {firstName}:</p>
+            <label htmlFor={1}>1</label>
+            <input type='radio' name='notificationOptions' id={1} checked={notificationRange === 1} onChange={({ target }) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} />
+            <label htmlFor={2}>2</label>
+            <input type='radio' name='notificationOptions' id={2} checked={notificationRange === 2} onChange={({ target }) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} />
+            <label htmlFor={3}>3</label>
+            <input type='radio' name='notificationOptions' id={3} checked={notificationRange === 3} onChange={({ target }) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} /><br /><br /><br />
+          </div>
+          <p>Your connection deadline with name will be on <span>{deadlineDate && format(new Date(deadlineDate), 'PPPP')}</span></p>
+          <p>Your yellow zone will begin on <span>{yellowZoneStartDate && format(new Date(yellowZoneStartDate), 'PPPP')}</span></p>
+          <p>Your red zone will begin on <span>{redZoneStartDate && format(new Date(redZoneStartDate), 'PPPP')}</span></p>
 
-      <Nouislider style={{ margin: '20px 20px 80px' }} range={{ min: 0, max: commFrequency }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
+        </section>
 
-      <button type="submit">Confirm Changes</button>
-    </form>
+        <Nouislider style={{ margin: '20px 20px 80px' }} range={{ min: 0, max: commFrequency }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
+
+        <button type="submit">Confirm Changes</button>
+      </form>
+    </section>
   );
 };
 
