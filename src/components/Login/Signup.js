@@ -21,7 +21,7 @@ const Signup=() => {
 
   useEffect(() => {
     if (user) {
-      history.push('/');
+      history.push('/about');
     }
   }, [user]);
 
