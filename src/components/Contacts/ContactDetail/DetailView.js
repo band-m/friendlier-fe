@@ -70,7 +70,7 @@ const DetailView = ({ match }) => {
         {showHistory && 
           <ol className={styles.Ol}>
             {contactEvents.length > 0 && contactEvents}
-            {contactEvents.length === 0 && <p>No connection events yet! No time like the present! Try giving {firstName} a call?</p>}
+            {contactEvents.length === 0 && <><p>No connection events yet!</p> <p> No time like the present!</p><p> Try giving {firstName} a call?</p></>}
           </ol>
         }
       </div>
