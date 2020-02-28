@@ -1,6 +1,31 @@
+@import url("https://fonts.googleapis.com/css?family=DM+Serif+Display|Hepta+Slab:300,400,600,900|Lato:300,400,700|Raleway:200,300,400,500,700,900|Rozha+One&display=swap");
+
 .ContactList{
   display: flex;
   flex-direction: column;
+  width: 25vw;
+  overflow: scroll;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Lato;
+
+  li {
+    height: 40px;
+    width: 20vw;
+    border-radius: 5px;
+    background: linear-gradient(#8fdbf6, #0e4375);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      color: rgb(230, 230, 230);
+      font-size: 1.5em;
+    }
+  }
 
   ul{
     width: 100%;
@@ -37,21 +62,5 @@
     button{
       font-size: 2rem;
     }
-  }
-}
-
-.ContactList {
-  width: 25vw;
-  overflow: scroll;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: unset;
-
-  li {
-    height: 40px;
-    width: 20vw;
-    border-radius: 5px;
-    background: linear-gradient(#eeeeee, rgb(167, 167, 167));
   }
 }
