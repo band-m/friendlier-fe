@@ -78,7 +78,7 @@ export default function ContactList() {
       return zone.map(contact => {
         return (
           <Link key={contact._id} to={`/contacts/${contact._id}`}>
-            <li>
+            <li className={`styles.${zone}`}>    {/* this doesn't seem to work, is there a way to do this? */}
               <div></div>
               <span>{contact.firstName} {contact.lastName}</span>
               {/* <span>{statusIcon}</span> */}
