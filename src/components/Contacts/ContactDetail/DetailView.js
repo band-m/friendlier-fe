@@ -36,23 +36,22 @@ const DetailView = ({ match }) => {
       </div><br />
 
       <div className={styles.contactDetailText}>
-        <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} {lastContactedDate && format(new Date(lastContactedDate), 'PPPP')}</p>
-        <p>Yellow Zone Begins: {yellowZoneStartDate && format(new Date(yellowZoneStartDate), 'PPPP')} </p>
-        <p>Red Zone Begins: {redZoneStartDate && format(new Date(redZoneStartDate), 'PPPP')}</p>
-        <p>Contact Deadline: {deadlineDate && format(new Date(deadlineDate), 'PPPP')} <span></span></p>
+        <p>Last Contacted: {!lastContactedDate && <span>No contact history yet</span>} <span>{lastContactedDate && format(new Date(lastContactedDate), 'PPPP')}</span></p>
+        <p>Yellow Zone Begins: <span>{yellowZoneStartDate && format(new Date(yellowZoneStartDate), 'PPPP')}</span></p>
+        <p>Red Zone Begins: <span>{redZoneStartDate && format(new Date(redZoneStartDate), 'PPPP')}</span></p>
+        <p>Contact Deadline: <span>{deadlineDate && format(new Date(deadlineDate), 'PPPP')}</span></p>
       </div><br />
 
       <div className={styles.ContactFields}>
-        {email &&
-          <div><p>Email</p> <p>{email}</p></div>}
+        {email && <p>Email: <span>{email}</span></p>}
 
-        {address && <div><p>Address</p><p>{address}</p></div>}
+        {address && <p>Address: <span>{address}</span></p>}
 
-        {phoneNumber && <div><p>Phone Number</p> <p>{phoneNumber}</p></div>}
+        {phoneNumber && <p>Phone Number: <span>{phoneNumber}</span></p>}
 
-        {birthdate && <div><p>Birthdate</p><p>{birthdate.split('T')[0]}</p></div>}
+        {birthdate && <p>Birthdate: <span>{birthdate.split('T')[0]}</span></p>}
 
-        {notes && <div styleName={styles.Notes}><p>Notes</p><p>{notes}</p></div>}
+        {/* {notes && styleName={styles.Notes}><p>Notes: {notes}</p>} */}
       </div>
 
       <div className={styles.ToolbarBottom}>
