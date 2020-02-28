@@ -23,7 +23,7 @@ const DetailView = ({ match }) => {
 
   dispatch(myAction(SET_CONTACT_DETAILS, contact));
 
-  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, notes, deadlineDate, yellowZoneStartDate, redZoneStartDate, slider1, slider2, deadlineObject, connHistory } = contact;
+  const { firstName, lastName, lastContactedDate, email, phoneNumber, address, birthdate, deadlineDate, yellowZoneStartDate, redZoneStartDate, slider1, slider2, deadlineObject, connHistory } = contact;
 
   const deleteOne = contactId => {
     dispatch(deleteContact(contactId));
@@ -32,13 +32,13 @@ const DetailView = ({ match }) => {
 
   const toggleContactHistory = () => {
     setShowHistory(!showHistory);
-  }
+  };
 
   const contactEvents = connHistory.map(connection => (
     <li key={connection}>
-      <p>{format(new Date(connection), "PPpp")}</p>
+      <p>{format(new Date(connection), 'PPpp')}</p>
     </li>
-  ))
+  ));
 
   return (
     <section className={styles.DetailView}>
@@ -66,11 +66,11 @@ const DetailView = ({ match }) => {
       </div>
 
       <div className={styles.connectionHistory}>
-        <button onClick={toggleContactHistory}>Show contact history</button>
+        <button onClick={toggleContactHistory} className={styles.ShowHistory}>Show contact history</button>
         {showHistory && 
-          <ol>
+          <ol className={styles.Ol}>
             {contactEvents.length > 0 && contactEvents}
-            {contactEvents.length === 0 && <p>No connection events yet! No time like the present! Why don't you give {firstName} a call?</p>}
+            {contactEvents.length === 0 && <p>No connection events yet! No time like the present! Try giving {firstName} a call?</p>}
           </ol>
         }
       </div>
