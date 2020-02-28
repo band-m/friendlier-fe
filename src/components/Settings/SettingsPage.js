@@ -24,6 +24,8 @@ const SettingsPage = () => {
   const [pushIsPM, setPushIsPM] = useState(true);
   const dispatch = useDispatch();
   const hours = Array(12).fill().map((x, i)=>i);
+  const offsetHours = Math.floor((new Date).getTimezoneOffset() / 60);
+  console.log(offsetHours, 'offset');
 
   useEffect(() => {
     if(loggedOut) {
@@ -34,13 +36,17 @@ const SettingsPage = () => {
   useEffect(() => {
     if(user) {
       setWantsPush(user.wantsPush || false);
-      setPushHour(user.pushHour % 12);
-      setPushIsPM(!!Math.floor(user.pushHour / 12));
     }
-  }, [user?._id]);
+  }, [user?._id, user?.wantsPush]);
+
+  useEffect(() => {
+    if(user) {
+      setPushHour((user.pushHour - offsetHours + 24) % 12);
+      setPushIsPM(!!Math.floor(((user.pushHour - offsetHours) % 24) / 12));
+    }
+  }, [user?._id, user?.pushHour]);
 
   const saveSettings = async() => {
-    const offsetHours = Math.floor((new Date).getTimezoneOffset() / 60);
     let subscription;
     if(wantsPush) {
       subscription = await subscribePush();
