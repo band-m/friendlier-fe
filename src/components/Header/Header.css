@@ -19,6 +19,9 @@
       text-decoration: none;
       padding: 5px;
     }
+    span {
+      font-family: 'Raleway';
+    }
   }
 }
 
