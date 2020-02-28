@@ -47,7 +47,6 @@ const DetailForm = ({ match }) => {
 
   const compareDateString = connHistory.length > 0 ? lastContactedDate : createdOn;
   const compareDate = new Date(compareDateString);
-  const monthDays = differenceInDays((add(compareDate, { months: commFrequency })), compareDate);
   const yellowZoneNumber = differenceInDays(new Date(yellowZoneStartDate), compareDate);
   const redZoneNumber = differenceInDays(new Date(redZoneStartDate), compareDate);
 
@@ -57,6 +56,7 @@ const DetailForm = ({ match }) => {
   // When user inputs a number, set deadlineNumber and commFrequency in contact details
   const changeNumOfDaysInput = value => {
     dispatch(myAction(SET_DEADLINE_NUMBER, value));
+    const monthDays = differenceInDays((add(compareDate, { months: value })), compareDate);
     switch(deadlineUnit) {
       case 'days':
         return dispatch(myAction(SET_COMM_FREQUENCY, value));
@@ -70,6 +70,7 @@ const DetailForm = ({ match }) => {
   // When user selects a days/weeks/months radio, set deadlineUnit and commFrequency in contact details
   const changeNumOfDaysRadio = target => {
     dispatch(myAction(SET_DEADLINE_UNIT, target.id));
+    const monthDays = differenceInDays((add(compareDate, { months: deadlineNumber })), compareDate);
     switch(target.id) {
       case 'days':
         return dispatch(myAction(SET_COMM_FREQUENCY, deadlineNumber));

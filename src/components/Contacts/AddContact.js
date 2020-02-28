@@ -50,7 +50,6 @@ export default function AddContact() {
   const user = useSelector(selectUser);
   const details = useSelector(selectContactDetails);
   const history = useHistory();
-  const monthDays = differenceInDays((add(new Date(), { months: numOfDays })), new Date());
 
   useLoggedOutRedirect();
 
@@ -77,6 +76,7 @@ export default function AddContact() {
   // When user inputs a number, change deadlineNumber and numOfDays
   const changeNumOfDaysInput = value => {
     setDeadlineNumber(value);
+    const monthDays = differenceInDays((add(new Date(), { months: value })), new Date());
     switch(deadlineUnit) {
       case 'days':
         return setNumOfDays(value);
@@ -90,6 +90,7 @@ export default function AddContact() {
   // When user selects a days/weeks/months radio, change deadlineUnit and numOfDays
   const changeNumOfDaysRadio = target => {
     setDeadlineUnit(target.id);
+    const monthDays = differenceInDays((add(new Date(), { months: deadlineNumber })), new Date());
     switch(target.id) {
       case 'days':
         return setNumOfDays(deadlineNumber);
