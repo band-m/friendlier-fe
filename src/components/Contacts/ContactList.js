@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContactsList } from '../../data/selectors/contacts-selectors';
 import { fetchContacts } from '../../data/actions/contacts-actions';
-import isFuture from 'date-fns/isFuture';
 import isPast from 'date-fns/isPast';
 import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 import { selectUser, selectLoggedOut } from '../../data/selectors/auth-selector';
