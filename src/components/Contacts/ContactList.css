@@ -31,14 +31,11 @@
     align-items: center;
     justify-content: center;
 
-
     span {
       color: #0e4375;
       font-size: 1em;
     }
   }
-
-
 
   a{
     text-decoration: none;
