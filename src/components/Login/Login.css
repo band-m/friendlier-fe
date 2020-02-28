@@ -1,4 +1,7 @@
-.Login{
+@import url('https://fonts.googleapis.com/css?family=DM+Serif+Display|Hepta+Slab:300,400,600,900|Lato:200,300,400,700|Raleway:100,200,300,400,500,700,900|Rozha+One&display=swap');
+
+.login{
+
   .LoadingImage{
     margin: 0 auto;
     position: absolute;
@@ -11,6 +14,11 @@
     padding: 1rem 0;
     margin: 1rem auto;
     text-align: center;
+    font-size: 15vw;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    font-family: 'Rozha One';
+    text-transform: lowercase;
+
   }
 
   form{
@@ -38,8 +46,80 @@
 .center {
   margin: 0 auto;
   text-align: center;
-
+  text-transform: uppercase;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all 0.2s;
+  
+  background-color: white;
+  font-family: 'Raleway';
+  
   a{
     text-decoration: none;
+    color: black;
+    
   }
+}
+
+.center:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  font-weight: 500; 
+}
+
+.form {
+  font-family: 'Raleway';
+  text-transform: lowercase;
+  font-weight: 300;
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+
+  button {
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all 0.2s;
+    font-size: 2.2vw;
+    font-weight: 200;
+  }
+
+  button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    font-weight: 500; 
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    font-weight: 500; 
+  }
+}
+
+.logoImage {
+  width:25%;
+  height: auto;
+  display: block;
+  margin: 0 auto !important;
+}
+
+.signUp {
+  margin: 0 auto;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all 0.2s;
+  font-size: 2.2vw;
+  font-weight: 200;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  font-weight: 500; 
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  font-weight: 500; 
 }

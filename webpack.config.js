@@ -28,7 +28,8 @@ module.exports = {
       { from: 'public' },
     ]),
     new ServiceWorkerWebpackPlugin({
-      entry: path.join(__dirname, 'src/workers/worker.js'),
+      // eslint-disable-next-line
+      entry: path.join(__dirname, '/public/worker.js'),
     })
   ],
   module: {

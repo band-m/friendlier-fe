@@ -5,14 +5,12 @@ import add from 'date-fns/add';
 import format from 'date-fns/format';
 import differenceInDays from 'date-fns/differenceInCalendarDays';
 import styles from './ContactDetail/DetailForm.css';
-import parse from 'date-fns/parse';
 import { useSelector, useDispatch } from 'react-redux';
 import { myAction, postContactDetails } from '../../data/actions/contact-detail-actions';
 import {
   SET_USER_ID,
   SET_FIRST_NAME,
   SET_LAST_NAME,
-  // SET_IMAGE,
   SET_NOTES,
   SET_BIRTHDATE,
   SET_RED_ZONE,
@@ -21,17 +19,17 @@ import {
   SET_EMAIL,
   SET_ADDRESS,
   SET_PHONE_NUMBER,
-  SET_SPECIAL_DATES,
-  SET_CONTACT_DETAILS,
   SET_DEADLINE_OBJECT,
   SET_NOTIFICATION_RANGE,
   SET_DEADLINE_DATE,
   SET_CONTACT_CREATED_ON,
   SET_DEADLINE_NUMBER,
-  SET_DEADLINE_UNIT
+  SET_DEADLINE_UNIT,
+  SET_SLIDER_1,
+  SET_SLIDER_2,
+  CLEAR_CONTACT_DETAILS
 } from '../../data/action-types/action-types';
 import { selectUser } from '../../data/selectors/auth-selector';
-import { setContact } from '../../data/actions/contacts-actions';
 import { selectContactDetails } from '../../data/selectors/contact-detail-selectors';
 import { useHistory } from 'react-router-dom';
 
@@ -47,8 +45,25 @@ export default function AddContact() {
   const [yellowZone, setYellowZone] = useState();
   const [redZone, setRedZone] = useState();
 
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const details = useSelector(selectContactDetails);
+  const history = useHistory();
+  const monthDays = differenceInDays((add(new Date(), { months: numOfDays })), new Date());
+
+  useEffect(() => {
+    dispatch(myAction(CLEAR_CONTACT_DETAILS));
+  }, []);
+
+  useEffect(() => {
+    if(user) {
+      dispatch(myAction(SET_USER_ID, user._id));
+      dispatch(myAction(SET_CONTACT_CREATED_ON, new Date()));
+    }
+  }, [user]);
+
   // When user moves a slider, set slider
-  const update = (render, handle, value, un, percent) => {
+  const update = (handle, value) => {
     if(handle === 0) {
       setSlider1(Math.floor(value[0]));
     } else {
@@ -65,7 +80,6 @@ export default function AddContact() {
       case 'weeks':
         return setNumOfDays(value * 7);
       case 'months':
-        const monthDays = differenceInDays((add(new Date(), { months: value })), new Date());
         return setNumOfDays(monthDays);
     }
   };
@@ -79,7 +93,6 @@ export default function AddContact() {
       case 'weeks':
         return setNumOfDays(deadlineNumber * 7);
       case 'months':
-        const monthDays = differenceInDays((add(new Date(), { months: deadlineNumber })), new Date());
         return setNumOfDays(monthDays);
     }
   };
@@ -103,7 +116,7 @@ export default function AddContact() {
     dispatch(myAction(SET_DEADLINE_UNIT, deadlineUnit));
     dispatch(myAction(SET_DEADLINE_OBJECT, deadlineObject));
     setDeadline(add(new Date(), deadlineObject));
-  }, [deadlineObject])
+  }, [deadlineObject]);
 
   // When deadline changes, set deadlineDate in contact details
   useEffect(() => {
@@ -133,17 +146,31 @@ export default function AddContact() {
     }
   }, [notificationOption, numOfDays]);
 
-  // When slider positions change, change yellowZone and redZone
+  // When slider positions change, change yellowZone and redZone and set slider1 and slider2 in contact details
   useEffect(() => {
+    dispatch(myAction(SET_SLIDER_1, slider1));
+    dispatch(myAction(SET_SLIDER_2, slider2));
     setYellowZone(add(new Date(), { days: slider1 }));
-    setRedZone(add(new Date(), { days: slider2 }))
-  }, [slider1, slider2])
+    setRedZone(add(new Date(), { days: slider2 }));
+  }, [slider1, slider2]);
 
   // When yellowZone or redZone change, set yellowZoneStartDate and redZoneStartDate in contact details
-  useEffect(() => {  
+  useEffect(() => {
     dispatch(myAction(SET_YELLOW_ZONE, yellowZone));
     dispatch(myAction(SET_RED_ZONE, redZone));
   }, [yellowZone, redZone]);
+
+  // below is probably for edit form, not this one.  Keeping in here just in case
+
+  // useEffect(() => {
+  //     if (!contact.lastContactedDate) {
+  // dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, differenceInCalendarDays(contact.createdOn, contact.yellowZoneStartDate)));
+  // dispatch(myAction(SET_TOTAL_YELLOW_ZONE_DAYS, differenceInCalendarDays(contact.createdOn, contact.redZoneStartDate)));
+  // dispatch(myAction(SET_TOTAL_RED_ZONE_DAYS, differenceInCalendarDays(contact.createdOn, contact.deadlineDate)));
+  //     } else {
+  //       dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, differenceInCalendarDays(contact.lastContactedDate, contact.yellowZoneStartDate));
+  //     }
+  // }, [numOfDays, yellowZone, redZone]);
 
   // On initial load, add colors to the range connectors
   useEffect(() => {
@@ -154,36 +181,12 @@ export default function AddContact() {
     }
   }, []);
 
-
-
-
-
-
-
-
-
-
-
-
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-  const details = useSelector(selectContactDetails);
-  const history = useHistory();
-
-  useEffect(() => {
-    if(user) {
-      dispatch(myAction(SET_USER_ID, user._id));
-      dispatch(myAction(SET_CONTACT_CREATED_ON, new Date()));
-    }
-  }, [user]);
-
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(setContact(details));
     dispatch(postContactDetails(details));
     history.push('/contacts');
   };
-  
+
   return (
     <form className={styles.DetailForm} onSubmit={handleSubmit}>
       <div>
@@ -197,7 +200,6 @@ export default function AddContact() {
           <label htmlFor="address">Address</label>
           <label htmlFor="phoneNumber">Phone Number</label>
           <label htmlFor="birthdate">Birthdate</label>
-          <label htmlFor="notes">Notes</label>
         </div>
 
         <div>
@@ -207,38 +209,63 @@ export default function AddContact() {
           {
             /* <input type="text" onChange={({ target }) => dispatch(myAction(SET_IMAGE, target.value))} id="image" name="image" value={image || ''} placeholder="First Name"/> */}
           <input type="date" onChange={({ target }) => dispatch(myAction(SET_BIRTHDATE, target.value))} id="birthdate" name="birthdate" placeholder="Birthdate" />
-          <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes"></textarea>
-          {
-            /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */}
         </div>
       </section>
-
-      <section id='slider'>
-      <p>How often do you want to be in contact with name?</p>
-      <p>Every</p>
-      <input type='number' min={1} value={deadlineNumber} onChange={({target}) => changeNumOfDaysInput(+target.value)} /><br/>
-      <label htmlFor='days'>Days</label>
-      <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
-      <label htmlFor='weeks'>Weeks</label>
-      <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({target}) => changeNumOfDaysRadio(target)}/>
-      <label htmlFor='months'>Months</label>
-      <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({target}) => changeNumOfDaysRadio(target)}/><br/><br/><br/>
-
-      <p>Choose your notification range for name:</p>
-      <label htmlFor={1}>1</label>
-      <input type='radio' name='notificationOptions' id={1} checked={notificationOption === 1} onChange={({target}) => setNotificationOption(+target.id)} />
-      <label htmlFor={2}>2</label>
-      <input type='radio' name='notificationOptions' id={2} checked={notificationOption === 2} onChange={({target}) => setNotificationOption(+target.id)} />
-      <label htmlFor={3}>3</label>
-      <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({target}) => setNotificationOption(+target.id)} /><br/><br/><br/>
-
-      <p>Your connection deadline with name will be on {deadline && format(deadline, "PPPP", new Date())}</p>
-      <p>Your yellow zone will begin on {yellowZone && format(yellowZone, "PPPP")}</p>
-      <p>Your red zone will begin on {redZone && format(redZone, "PPPP")}</p>
+      <section className={styles.notes}><label htmlFor="notes">Notes</label>
+        <textarea type="text" onChange={({ target }) => dispatch(myAction(SET_NOTES, target.value))} id="notes" name="notes"></textarea>
       </section>
-      <Nouislider style={{ margin: '25px' }} onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
+      {
+        /* <input type="date" onChange={({ target }) => dispatch(myAction(SET_SPECIAL_DATES, target.value))} id="specialDates" name="specialDates" value={specialDates || ''} placeholder="First Name"/> */}
+      <section id='slider' className={styles.ContactFrequencyInput}>
+      <div className={styles.Column}><p>How often do you want to be in contact?</p>
+        <div>
+          Every
+          <input type='number' min={1} value={deadlineNumber} onChange={({ target }) => changeNumOfDaysInput(+target.value)} /><br />
+          <label htmlFor='days'>Days</label>
+          <input type='radio' id='days' name='deadlineUnit' checked={deadlineUnit === 'days'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
+          <label htmlFor='weeks'>Weeks</label>
+          <input type='radio' id='weeks' name='deadlineUnit' checked={deadlineUnit === 'weeks'} onChange={({ target }) => changeNumOfDaysRadio(target)} />
+          <label htmlFor='months'>Months</label>
+          <input type='radio' id='months' name='deadlineUnit' checked={deadlineUnit === 'months'} onChange={({ target }) => changeNumOfDaysRadio(target)} /><br /><br /><br />
+        </div>
+
+        <div>
+          <p>Choose your notification range:</p>
+          <label htmlFor={1}>1</label>
+          <input type='radio' name='notificationOptions' id={1} checked={notificationOption === 1} onChange={({ target }) => setNotificationOption(+target.id)} />
+          <label htmlFor={2}>2</label>
+          <input type='radio' name='notificationOptions' id={2} checked={notificationOption === 2} onChange={({ target }) => setNotificationOption(+target.id)} />
+          <label htmlFor={3}>3</label>
+          <input type='radio' name='notificationOptions' id={3} checked={notificationOption === 3} onChange={({ target }) => setNotificationOption(+target.id)} /><br /><br /><br />
+        </div>
+
+        <p>Your connection deadline will be {deadline && format(deadline, 'PPPP', new Date())}</p>
+        <p>Your yellow zone will begin on {yellowZone && format(yellowZone, 'PPPP')}</p>
+        <p>Your red zone will begin on {redZone && format(redZone, 'PPPP')}</p>
+        </div>
+      </section>
+      <Nouislider style={{ margin: '40px 0' }} onSlide={update} range={{ min: 0, max: numOfDays }} start={[slider1, slider2]} margin={1} tooltips={[true, true]} connect={[true, true, true]} step={1} pips={{ mode: 'steps', density: 4 }} />
 
       <button type="submit">Create a new contact</button>
     </form>
   );
 }
+
+
+
+
+
+
+
+
+
+// if (!contact.lastContactedDate) {
+//   dispatch(myAction(SET_TOTAL_YELLOW_ZONE_DAYS, differenceInCalendarDays(contact.createdOn, contact.yellowZoneStartDate);
+// }
+// dispatch(myAction(SET_TOTAL_YELLOW_ZONE_DAYS, differenceInCalendarDays(contact.lastContactedDate, contact.yellowZoneStartDate);
+
+
+// if (!contact.lastContactedDate) {
+//   dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, differenceInCalendarDays(contact.createdOn, contact.yellowZoneStartDate);
+// }
+// dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, differenceInCalendarDays(contact.lastContactedDate, contact.yellowZoneStartDate);

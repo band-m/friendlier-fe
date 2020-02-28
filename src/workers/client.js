@@ -9,7 +9,7 @@ else {
 
 async function run() {
   console.log('Registering service worker');
-  const registration = await navigator.serviceWorker.register('/src/workers/worker.js', { scope: '/src/workers/' })
+  const registration = await navigator.serviceWorker.register('/worker.js', { scope: '/' })
     .then(registration);
   console.log('Registered service worker');
 }

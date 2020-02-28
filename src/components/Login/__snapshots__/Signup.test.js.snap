@@ -2,7 +2,7 @@
 
 exports[`Signup component renders Signup 1`] = `
 <main
-  className="Login"
+  className="login"
 >
   <h1>
     Signup
@@ -49,7 +49,9 @@ exports[`Signup component renders Signup 1`] = `
         value=""
       />
     </div>
-    <button>
+    <button
+      className="signUp"
+    >
       Signup
     </button>
   </form>

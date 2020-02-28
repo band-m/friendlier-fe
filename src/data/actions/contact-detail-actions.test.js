@@ -19,8 +19,15 @@ import {
   SET_DEADLINE_DATE,
   SET_DEADLINE_OBJECT,
   SET_CONTACT_CREATED_ON,
+  SET_TOTAL_GREEN_ZONE_DAYS,
+  SET_TOTAL_YELLOW_ZONE_DAYS,
+  SET_TOTAL_RED_ZONE_DAYS,
+  SET_CURRENT_ZONE_RATIO,
   SET_DEADLINE_UNIT,
-  SET_DEADLINE_NUMBER
+  SET_DEADLINE_NUMBER,
+  SET_SLIDER_1,
+  SET_SLIDER_2,
+  CLEAR_CONTACT_DETAILS
 } from '../action-types/action-types';
 import {
   fetchContacts,
@@ -195,6 +202,15 @@ describe('contact detail actions', () => {
     });
   });
 
+  it('should create a SET_CURRENT_ZONE_RATIO action', () => {
+    const action = myAction(SET_CURRENT_ZONE_RATIO, 2 / 4);
+
+    expect(action).toEqual({
+      type: SET_CURRENT_ZONE_RATIO,
+      payload: 0.5
+    });
+  });
+
   it('should create a set notifiction range action', () => {
     const action = myAction(SET_NOTIFICATION_RANGE, 3);
 
@@ -231,6 +247,33 @@ describe('contact detail actions', () => {
     });
   });
 
+  it('should create a set total green zone days action', () => {
+    const action = myAction(SET_TOTAL_GREEN_ZONE_DAYS, '3 weeks');
+
+    expect(action).toEqual({
+      type: SET_TOTAL_GREEN_ZONE_DAYS,
+      payload: '3 weeks'
+    });
+  });
+
+  it('should create a set total yellow zone days action', () => {
+    const action = myAction(SET_TOTAL_YELLOW_ZONE_DAYS, '4 months');
+
+    expect(action).toEqual({
+      type: SET_TOTAL_YELLOW_ZONE_DAYS,
+      payload: '4 months'
+    });
+  });
+
+  it('should create a set total red zone days action', () => {
+    const action = myAction(SET_TOTAL_RED_ZONE_DAYS, '9 days');
+
+    expect(action).toEqual({
+      type: SET_TOTAL_RED_ZONE_DAYS,
+      payload: '9 days'
+    });
+  });
+
   it('should create a set deadline unit action', () => {
     const action = myAction(SET_DEADLINE_UNIT, 'months');
 
@@ -246,6 +289,32 @@ describe('contact detail actions', () => {
     expect(action).toEqual({
       type: SET_DEADLINE_NUMBER,
       payload: 3
+    });
+  });
+
+  it('should create a set slider 1 action', () => {
+    const action = myAction(SET_SLIDER_1, 15);
+
+    expect(action).toEqual({
+      type: SET_SLIDER_1,
+      payload: 15
+    });
+  });
+
+  it('should create a set slider 1 action', () => {
+    const action = myAction(SET_SLIDER_2, 15);
+
+    expect(action).toEqual({
+      type: SET_SLIDER_2,
+      payload: 15
+    });
+  });
+
+  it('creates a clear contact details action', () => {
+    const action = myAction(CLEAR_CONTACT_DETAILS);
+    
+    expect(action).toEqual({
+      type: CLEAR_CONTACT_DETAILS
     });
   });
 });
