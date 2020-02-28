@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContactsList } from '../../data/selectors/contacts-selectors';
 import { fetchContacts } from '../../data/actions/contacts-actions';
@@ -8,8 +8,12 @@ import isPast from 'date-fns/isPast';
 import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 import { selectUser, selectLoggedOut } from '../../data/selectors/auth-selector';
 import styles from './ContactList.css';
+<<<<<<< HEAD
 import { SET_CONTACT_CREATED_ON, SET_RED_ZONE, SET_CURRENT_ZONE_RATIO } from '../../data/action-types/action-types';
 import { myAction } from '../../data/actions/contact-detail-actions';
+=======
+import ConnectedButton from './ConnectedButton';
+>>>>>>> aab881654d6ec6504f5fd1573ecd061b6213a9be
 
 export default function ContactList() {
   const dispatch = useDispatch();
@@ -30,6 +34,7 @@ export default function ContactList() {
 
   const contacts = useSelector(selectContactsList);
 
+<<<<<<< HEAD
   const greenZoneContacts = contacts.filter(contact => isFuture(new Date(contact.yellowZoneStartDate)));
   const yellowZoneContacts = contacts.filter(contact => isFuture(new Date(contact.redZoneStartDate)) && isPast(new Date(contact.yellowZoneStartDate)));
   const redZoneContacts = contacts.filter(contact => isFuture(new Date(contact.deadlineDate)) && isPast(new Date(contact.redZoneStartDate)));
@@ -50,6 +55,17 @@ export default function ContactList() {
         differenceInCalendarDays(contact.yellowZoneStartDate, Date.now());
       const ratio = daysIntoZone / contact.totalYellowZoneDays;
       dispatch(myAction(SET_CURRENT_ZONE_RATIO, ratio));
+=======
+  let contactList;
+  if(contacts.length) {
+    contactList = contacts.map(contact => {
+      return (
+        <Link key={contact._id} to={`/contacts/${contact._id}`}>
+          <li className={styles.commStatus}>
+            <span>{contact.firstName} {contact.lastName}</span>
+          </li>
+        </Link>);
+>>>>>>> aab881654d6ec6504f5fd1573ecd061b6213a9be
     });
 
     redZoneContacts.map(contact => {

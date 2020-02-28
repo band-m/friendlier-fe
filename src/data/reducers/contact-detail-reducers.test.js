@@ -22,7 +22,10 @@ import {
   SET_TOTAL_YELLOW_ZONE_DAYS,
   SET_CURRENT_ZONE_RATIO,
   SET_DEADLINE_UNIT,
-  SET_DEADLINE_NUMBER
+  SET_DEADLINE_NUMBER,
+  SET_SLIDER_1,
+  SET_SLIDER_2,
+  CLEAR_CONTACT_DETAILS
 } from '../action-types/action-types';
 
 import contactDetailReducer from './contact-detail-reducers';
@@ -118,13 +121,14 @@ describe('contact detail reducer', () => {
   it('handles set last contacted action', () => {
     const action = {
       type: SET_LAST_CONTACTED_DATE,
-      payload: 5
+      payload: 'Sept 2 2020'
     };
 
-    const initialState = { lastContactedDate: 1 };
+    const initialState = { lastContactedDate: 'August 20 2020', connHistory: ['July 4 2020', 'August 20 2020'] };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({
-      lastContactedDate: 5
+      lastContactedDate: 'Sept 2 2020',
+      connHistory: ['July 4 2020', 'August 20 2020', 'Sept 2 2020']
     });
   });
 
@@ -294,5 +298,59 @@ describe('contact detail reducer', () => {
     const initialState = { deadlineNumber: 1 };
     const newState = contactDetailReducer(initialState, action);
     expect(newState).toEqual({ deadlineNumber: 3 });
+  });
+
+  it('handles set slider 1 action', () => {
+    const action = {
+      type: SET_SLIDER_1,
+      payload: 15
+    };
+
+    const initialState = { slider1: 10 };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ slider1: 15 });
+  });
+
+  it('handles set slider 2 action', () => {
+    const action = {
+      type: SET_SLIDER_2,
+      payload: 15
+    };
+
+    const initialState = { slider2: 10 };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({ slider2: 15 });
+  });
+
+  it('handles a clear contact details action', () => {
+    const action = {
+      type: CLEAR_CONTACT_DETAILS
+    };
+
+    const initialState = { userId: 12345, firstName: 'Dan', lastName: 'Meloy' };
+    const newState = contactDetailReducer(initialState, action);
+    expect(newState).toEqual({
+      userId: '',
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      address: '',
+      email: '',
+      image: '',
+      commFrequency: 1,
+      createdOn: null,
+      lastContactedDate: null,
+      notificationRange: 3,
+      slider1: 0,
+      slider2: 0,
+      yellowZoneStartDate: null,
+      redZoneStartDate: null,
+      deadlineDate: null,
+      deadlineObject: {},
+      connHistory: [],
+      birthdate: '',
+      specialDates: [],
+      notes: '',
+    });
   });
 });
