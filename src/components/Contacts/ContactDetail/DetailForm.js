@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './DetailForm.css';
 import Nouislider from 'nouislider-react';
 import '../../Slider/Slider.css';
@@ -23,11 +24,15 @@ import {
   SET_NOTIFICATION_RANGE,
   SET_DEADLINE_DATE,
   SET_DEADLINE_OBJECT,
+  SET_TOTAL_GREEN_ZONE_DAYS,
+  SET_TOTAL_YELLOW_ZONE_DAYS,
+  SET_TOTAL_RED_ZONE_DAYS,
   SET_SLIDER_1,
   SET_SLIDER_2
 } from '../../../data/action-types/action-types';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import { useHistory } from 'react-router-dom';
+import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 
 const DetailForm = ({ match }) => {
   const contact = useSelector(selectContactDetails);
@@ -42,6 +47,7 @@ const DetailForm = ({ match }) => {
 
   const compareDateString = connHistory.length > 0 ? lastContactedDate : createdOn;
   const compareDate = new Date(compareDateString);
+  const monthDays = differenceInDays((add(compareDate, { months: commFrequency })), compareDate);
   const yellowZoneNumber = differenceInDays(new Date(yellowZoneStartDate), compareDate);
   const redZoneNumber = differenceInDays(new Date(redZoneStartDate), compareDate);
 
@@ -57,7 +63,6 @@ const DetailForm = ({ match }) => {
       case 'weeks':
         return dispatch(myAction(SET_COMM_FREQUENCY, value * 7));
       case 'months':
-        const monthDays = differenceInDays((add(compareDate, { months: value })), compareDate);
         return dispatch(myAction(SET_COMM_FREQUENCY, monthDays));
     }
   };
@@ -71,7 +76,6 @@ const DetailForm = ({ match }) => {
       case 'weeks':
         return dispatch(myAction(SET_COMM_FREQUENCY, deadlineNumber * 7));
       case 'months':
-        const monthDays = differenceInDays((add(compareDate, { months: deadlineNumber })), compareDate);
         return dispatch(myAction(SET_COMM_FREQUENCY, monthDays));
     }
   };
@@ -114,13 +118,19 @@ const DetailForm = ({ match }) => {
     }
   }, [notificationRange, commFrequency]);
 
-  // When slider positions change, set yellowZoneStartDate, redZoneStartDate, slider1, and slider2 in contact details
+  // When slider positions change, set yellowZoneStartDate and redZoneStartDate in contact details
   useEffect(() => {
     dispatch(myAction(SET_SLIDER_1, slider1));
     dispatch(myAction(SET_SLIDER_2, slider2));
     dispatch(myAction(SET_YELLOW_ZONE, add(compareDate, { days: slider1 })));
     dispatch(myAction(SET_RED_ZONE, add(compareDate, { days: slider2 })));
   }, [slider1, slider2]);
+
+  useEffect(() => {
+    dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, differenceInCalendarDays(yellowZoneStartDate, compareDate)));
+    dispatch(myAction(SET_TOTAL_YELLOW_ZONE_DAYS, differenceInCalendarDays(redZoneStartDate, yellowZoneStartDate)));
+    dispatch(myAction(SET_TOTAL_RED_ZONE_DAYS, differenceInCalendarDays(deadlineDate, redZoneStartDate)));
+  }, [yellowZoneStartDate, redZoneStartDate, deadlineDate]);
 
   // On initial load, add colors to the range connectors
   useEffect(() => {
@@ -195,6 +205,14 @@ const DetailForm = ({ match }) => {
       <button type="submit">Confirm Changes</button>
     </form>
   );
+};
+
+DetailForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 };
 
 export default DetailForm;

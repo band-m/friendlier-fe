@@ -19,6 +19,10 @@ import {
   SET_DEADLINE_DATE,
   SET_DEADLINE_OBJECT,
   SET_CONTACT_CREATED_ON,
+  SET_TOTAL_GREEN_ZONE_DAYS,
+  SET_TOTAL_YELLOW_ZONE_DAYS,
+  SET_TOTAL_RED_ZONE_DAYS,
+  SET_CURRENT_ZONE_RATIO,
   SET_DEADLINE_UNIT,
   SET_DEADLINE_NUMBER,
   SET_SLIDER_1,
@@ -198,6 +202,15 @@ describe('contact detail actions', () => {
     });
   });
 
+  it('should create a SET_CURRENT_ZONE_RATIO action', () => {
+    const action = myAction(SET_CURRENT_ZONE_RATIO, 2 / 4);
+
+    expect(action).toEqual({
+      type: SET_CURRENT_ZONE_RATIO,
+      payload: 0.5
+    });
+  });
+
   it('should create a set notifiction range action', () => {
     const action = myAction(SET_NOTIFICATION_RANGE, 3);
 
@@ -231,6 +244,33 @@ describe('contact detail actions', () => {
     expect(action).toEqual({
       type: SET_CONTACT_CREATED_ON,
       payload: 'Sept 2 2020'
+    });
+  });
+
+  it('should create a set total green zone days action', () => {
+    const action = myAction(SET_TOTAL_GREEN_ZONE_DAYS, '3 weeks');
+
+    expect(action).toEqual({
+      type: SET_TOTAL_GREEN_ZONE_DAYS,
+      payload: '3 weeks'
+    });
+  });
+
+  it('should create a set total yellow zone days action', () => {
+    const action = myAction(SET_TOTAL_YELLOW_ZONE_DAYS, '4 months');
+
+    expect(action).toEqual({
+      type: SET_TOTAL_YELLOW_ZONE_DAYS,
+      payload: '4 months'
+    });
+  });
+
+  it('should create a set total red zone days action', () => {
+    const action = myAction(SET_TOTAL_RED_ZONE_DAYS, '9 days');
+
+    expect(action).toEqual({
+      type: SET_TOTAL_RED_ZONE_DAYS,
+      payload: '9 days'
     });
   });
 
