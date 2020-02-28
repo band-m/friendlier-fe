@@ -80,10 +80,9 @@ export default function ContactList() {
     if(zone.length) {
       return zone.map(contact => {
         return (
-          <Link key={contact._id} to={`/contacts/${contact._id}`}>
-            <li className={`styles.${zone}`}> {/* this doesn't seem to work, is there a way to do this? */}
-              <div></div>
-              <span>{contact.firstName} {contact.lastName} </span>
+           <Link key={contact._id} to={`/contacts/${contact._id}`}>
+          <li style={{ background: `linear-gradient(#cccccc, ${backgroundColor})`, color }} className={styles.commStatus}>
+          <span>{contact.firstName} {contact.lastName}</span>
               <span className={styles.ZoneIcon}>
                 {(statusIcon === 'FaRegClock') && <FaRegClock />}
                 {(statusIcon === 'FiAlertTriangle') && <FiAlertTriangle />}
