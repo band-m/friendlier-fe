@@ -9,6 +9,9 @@
 
 .Header{
   display: flex;
+  div:first-of-type{
+    height:3rem;
+  }
   .Nav{
     a, span{
       color: white;
@@ -24,7 +27,6 @@
     background-color: darkblue;
 
     .Nav {
-      display: block;
       align-items: center;
       justify-content: center;
       padding: 0 0 0.25rem;
@@ -164,10 +166,12 @@ background-color: darkblue;
       align-items: center;
       justify-content: space-evenly;
       padding: 0 1rem;
+
       a {
         padding: 0 1rem;
         color: white;
       }
+      
     }
   }
 }
@@ -175,6 +179,5 @@ background-color: darkblue;
 @media screen and (min-width:800px) {
   .Header .Nav, .Header .Nav a{
     visibility: visible;
-    display: inline;
   }
 }
