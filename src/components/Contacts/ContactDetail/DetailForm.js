@@ -22,10 +22,14 @@ import {
   SET_DEADLINE_UNIT,
   SET_NOTIFICATION_RANGE,
   SET_DEADLINE_DATE,
-  SET_DEADLINE_OBJECT
+  SET_DEADLINE_OBJECT,
+  SET_TOTAL_GREEN_ZONE_DAYS,
+  SET_TOTAL_YELLOW_ZONE_DAYS,
+  SET_TOTAL_RED_ZONE_DAYS
 } from '../../../data/action-types/action-types';
 import { selectContactDetails } from '../../../data/selectors/contact-detail-selectors';
 import { useHistory } from 'react-router-dom';
+import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 
 const DetailForm = ({ match }) => {
   const contact = useSelector(selectContactDetails);  
@@ -119,6 +123,9 @@ const DetailForm = ({ match }) => {
   useEffect(() => {
     dispatch(myAction(SET_YELLOW_ZONE, add(compareDate, { days: slider1 })));
     dispatch(myAction(SET_RED_ZONE, add(compareDate, { days: slider2 })));
+    // dispatch(myAction(SET_TOTAL_GREEN_ZONE_DAYS, differenceInCalendarDays(yellowZoneStartDate, new Date())));
+    // dispatch(myAction(SET_TOTAL_YELLOW_ZONE_DAYS, differenceInCalendarDays(redZoneStartDate, yellowZoneStartDate)));
+    // dispatch(myAction(SET_TOTAL_RED_ZONE_DAYS, differenceInCalendarDays(deadlineDate, redZoneStartDate)));
   }, [slider1, slider2]);
 
   // On initial load, add colors to the range connectors
