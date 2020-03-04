@@ -3,9 +3,6 @@
 .ContactList{
   display: flex;
   flex-direction: column;
-  width: 25vw;
-  height: 94vh;
-  overflow: scroll;
   padding: 0;
   display: flex;
   align-items: center;
@@ -13,6 +10,8 @@
   justify-content: flex-start;
   font-family: Raleway;
   border-right: 2px solid #0e4375;
+  overflow: visible;
+
 
   h2 {
     width: 100%;
@@ -20,12 +19,11 @@
     font-size: 25px;
     text-align: center;
     color: #0e4375;
-    border-right: 2px solid #0e4375;
   }
 
   li {
     height: 40px;
-    width: 20vw;
+    width: 80vw;
     border-radius: 5px;
     border: 1px solid #0e4375;
     display: flex;
@@ -48,8 +46,50 @@
   }
 }
 
-.sortedGreen {
-  background-color: #64cf73;
+
+
+@media screen and (min-width:900px){
+  .ContactList{
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    height: 94vh;
+    padding: 0;
+    overflow: visible;
+
+
+    h2 {
+      width: 100%;
+      margin: 15px;
+      font-size: 25px;
+      text-align: center;
+      color: #0e4375;
+    }
+
+    li {
+      height: 40px;
+      width: 20vw;
+      border-radius: 5px;
+      border: 1px solid #0e4375;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      span {
+        color: #0e4375;
+        font-size: 1em;
+      }
+    }
+
+    a{
+      text-decoration: none;
+      margin: 0.75rem auto;
+
+      button{
+        font-size: 2rem;
+      }
+    }
+  }
 }
 
 .ZoneIcon{
