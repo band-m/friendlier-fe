@@ -144,3 +144,7 @@
 .showHistory {
   font-size: 20px;
 }
+
+.Column {
+  flex-direction: column !important;
+}
