@@ -190,7 +190,7 @@ const DetailForm = ({ match }) => {
             </div>
           </div>
           <div className={styles.Range}>
-            <p>Choose your notification range for {firstName}:</p>
+            Choose your notification range for {firstName}:
             <label htmlFor={1}>1</label>
             <input type='radio' name='notificationOptions' id={1} checked={notificationRange === 1} onChange={({ target }) => dispatch(myAction(SET_NOTIFICATION_RANGE, +target.id))} />
             <label htmlFor={2}>2</label>

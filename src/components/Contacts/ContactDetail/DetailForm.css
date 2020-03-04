@@ -3,23 +3,25 @@
 @value lightblue, orange, yellow, green, darkblue from colors;
 
 .formWrapper {
-  height: 100vh;
-  width: 100vw;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
 .DetailForm{
+  line-height: 1.4;
   padding: 0.5rem;
 
   section>div {
     label {
-    margin: 0.7rem 0 0;
+    margin: 0;
   }
 
   input{
     margin: 0.4rem 0.3rem 0;
+  }
+  input[type="radio"]{
+    margin: 0.25rem 0.15rem 0;
   }
 
 }
@@ -40,7 +42,7 @@
     display: block;
   }
   p{
-    margin: 0.3rem 0;
+    margin: 0 0;
   }
 
   input[type="number"]{
@@ -61,7 +63,8 @@
     margin-top: 0.5rem;
 
     div{
-    text-align:center;
+      flex-direction:row;
+      justify-content: center;
     }
 
   }
@@ -73,14 +76,16 @@
     flex-wrap: wrap;
 
     div{
-      display: block;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
     }
   }
   .notes {
     flex-direction: column;
 
     label {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0;
     }
     textarea {
       height: 5rem;
@@ -90,9 +95,9 @@
 }
 
 .DetailForm {
-  width: 65vw;
-  height: 75vh;
-  margin-top: 5vh;
+  width: auto;
+  height: auto;
+  margin-top: 1rem;
   padding: 2em;
   background: #0e4375;
   border-radius: 10px;
@@ -102,9 +107,7 @@
   button {
     margin: 4rem auto 0.5rem;
     margin-top: 0;
-    position: absolute;
-    right: 22vw;
-    top: 15vh;
+
     height: 25px;
     width: 125px;
     border-radius: 3px;
@@ -112,14 +115,14 @@
   }
 
   section {
-    justify-content: flex-start;
+    justify-content: space-evenly;
   }
 
   .ContactFrequencyInput {
     width: 55vw;
 
     p {
-      margin: 1rem;
+      margin: 0;
 
       span {
         color: #f7b82e;
@@ -127,7 +130,6 @@
     }
   }
 }
-
 #slider div{
   display:block;
 
