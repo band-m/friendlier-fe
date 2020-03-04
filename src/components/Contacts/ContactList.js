@@ -107,7 +107,7 @@ export default function ContactList() {
         width: '25vw',
         borderColor: '#0e4375'
       }} />
-      {contacts && <ul className={styles.ContactList}>
+      {contacts && <ul>
         {overdueZoners}
         {redZoners}
         {yellowZoners}
