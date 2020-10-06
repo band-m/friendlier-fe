@@ -74,8 +74,6 @@ const SettingsPage = () => {
         </select>
       </div>
 
-      <h2>User Info</h2>
-      <div><label htmlFor="username">Username</label></div>
       <h2>Change Password</h2>
       <div><label htmlFor="password">Password</label><input type="password" name="password" value={password} onChange={({ target }) => setPassword(target.value)} /></div>
       <button onClick={saveSettings}>Save Settings</button>

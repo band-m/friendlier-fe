@@ -18,9 +18,7 @@ exports[`ContactList component matches snapshot 1`] = `
       }
     }
   />
-  <ul
-    className="ContactList"
-  />
+  <ul />
   <Component
     to="/add"
   >
