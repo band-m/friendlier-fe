@@ -19,7 +19,7 @@ export default function ContactList() {
   const user = useSelector(selectUser);
 
   useEffect(() => {
-    if(user) {
+    if (user) {
       dispatch(fetchContacts(user._id));
     }
   }, [user]);
@@ -43,36 +43,28 @@ export default function ContactList() {
     });
 
     yellowZoneContacts.map(contact => {
-      const daysIntoZone = contact.lastContactedDate ?
-        differenceInCalendarDays(contact.yellowZoneStartDate, Date.now()) :
-        differenceInCalendarDays(contact.yellowZoneStartDate, Date.now());
+      const daysIntoZone = differenceInCalendarDays(contact.yellowZoneStartDate, Date.now());
       const ratio = daysIntoZone / contact.totalYellowZoneDays;
       dispatch(myAction(SET_CURRENT_ZONE_RATIO, ratio));
     });
 
     redZoneContacts.map(contact => {
-      const daysIntoZone = contact.lastContactedDate ?
-        differenceInCalendarDays(contact.redZoneStartDate, Date.now()) :
-        differenceInCalendarDays(contact.redZoneStartDate, Date.now());
+      const daysIntoZone = differenceInCalendarDays(contact.redZoneStartDate, Date.now());
       const ratio = daysIntoZone / contact.totalRedZoneDays;
       dispatch(myAction(SET_CURRENT_ZONE_RATIO, ratio));
     });
   }, []);
 
-  const sortedGreen = greenZoneContacts.sort((a, b) => {
+  const sortedZoneContacts = contacts => contacts.sort((a, b) => {
     a.zoneRatio - b.zoneRatio;
   });
 
-  const sortedYellow = yellowZoneContacts.sort((a, b) => {
-    a.zoneRatio - b.zoneRatio;
-  });
-
-  const sortedRed = redZoneContacts.sort((a, b) => {
-    a.zoneRatio - b.zoneRatio;
-  });
+  const sortedGreen = sortedZoneContacts(greenZoneContacts);
+  const sortedYellow = sortedZoneContacts(yellowZoneContacts);
+  const sortedRed = sortedZoneContacts(redZoneContacts);
 
   const makeListItems = (zone, backgroundColor, color, statusIcon) => {
-    if(zone.length) {
+    if (zone.length) {
       return zone.map(contact => {
         return (
           <Link key={contact._id} to={`/contacts/${contact._id}`}>
